@@ -1,3 +1,3 @@
-import NotFound from '@/pages/404';
+import Homepage from '@/pages/Homepage';
 
-export default NotFound;
+export default Homepage;
