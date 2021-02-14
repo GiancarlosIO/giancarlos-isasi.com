@@ -41,7 +41,7 @@
     "./**/*.{ts,tsx}": [
       "eslint . --ext .ts,.tsx --fix"
     ],
-    "./**/*.{css}": [
+    "./**/*.css": [
       "prettier --write"
     ]
   },
