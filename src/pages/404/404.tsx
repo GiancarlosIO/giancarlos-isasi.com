@@ -1,13 +1,12 @@
-import styles from '../styles/Home.module.css';
+import styles from './NotFound.module.css';
 import Building from '@/icons/Building';
 
-import './404.css';
-
-const a = 'asdasd';
+import { SVGCss } from './404.styles';
 
 export default function Home() {
   return (
     <div className={styles.container}>
+      <SVGCss />
       <h1 className={styles.title}>Mr. N</h1>
       <p className={styles.subtitle}>Website under construction</p>
       <Building className={styles.building} />
