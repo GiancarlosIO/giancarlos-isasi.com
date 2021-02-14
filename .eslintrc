@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "prettier/react",
+    "prettier/@typescript-eslint"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "printWidth": 80,
+        "jsxBracketSameLine": false,
+        "trailingComma": "all",
+        "arrowParens": "avoid",
+        "endOfLine": "lf"
+      }
+    ]
+  }
+}

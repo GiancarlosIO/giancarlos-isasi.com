@@ -1,11 +1,11 @@
-import * as React from "react"
+import * as React from 'react';
 
 function Building(props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 834 938" {...props}>
       <style>
         {
-          ".st0{fill:#2fbdf4}.st1{fill:#09c}.st4{display:inline;fill:#2fbdf4}.st5{fill:#f36}.st6{fill:#23a4cc}.st8{fill:#d8d8d8}.st9{fill:#f43a16}.st10{fill:#c4c4c6}.st11{fill:#fff}.st12{fill:#bababa}.st14,.st15{display:none;fill:#f3ad7c}.st15{fill:#c78143}.st17{fill:#f2be19}.st20,.st21{fill:none;stroke:#ce9e15;stroke-width:5;stroke-miterlimit:10}.st21{stroke:#f2be19}.st22{fill:#5b5b5b}.st23{fill:#848484}.st24{fill:#ce9e15}.st26{opacity:.23;fill:#686868}.st28{fill:#5ad8ff}.st29{fill:#686868}"
+          '.st0{fill:#2fbdf4}.st1{fill:#09c}.st4{display:inline;fill:#2fbdf4}.st5{fill:#f36}.st6{fill:#23a4cc}.st8{fill:#d8d8d8}.st9{fill:#f43a16}.st10{fill:#c4c4c6}.st11{fill:#fff}.st12{fill:#bababa}.st14,.st15{display:none;fill:#f3ad7c}.st15{fill:#c78143}.st17{fill:#f2be19}.st20,.st21{fill:none;stroke:#ce9e15;stroke-width:5;stroke-miterlimit:10}.st21{stroke:#f2be19}.st22{fill:#5b5b5b}.st23{fill:#848484}.st24{fill:#ce9e15}.st26{opacity:.23;fill:#686868}.st28{fill:#5ad8ff}.st29{fill:#686868}'
         }
       </style>
       <g id="Layer_1">
@@ -75,10 +75,7 @@ function Building(props) {
           className="st9"
           d="M454.4 844.8h21l7.2-2.4 3 8.2-8.6 3.7-25.5-.7z"
         />
-        <path
-          className="st8"
-          d="M627.1 519l-71.4 264.3h16L640.3 519z"
-        />
+        <path className="st8" d="M627.1 519l-71.4 264.3h16L640.3 519z" />
         <path
           className="st9"
           d="M440.7 886.7l42 1 13.4-8.1 3.6 10-14.5 13.2h-49.8z"
@@ -115,10 +112,7 @@ function Building(props) {
           className="st6"
           d="M617.9 534.5s-.7 7.8 3.2 6.6c3.9-1.2 1.8-9.4 3.1-10.3 1.3-1 2 0 1.4 2.5-.5 2.5-.4 2.5.5 2.8.9.3 2.8-3.5 2.9-5.1 0-1.7 1.3-2 2-1.4.7.5-.6 2.5-.3 3s.9.5.9.5l3.6-14H622l-4.1 15.4zM637.1 559.8c-2.9.8-2.5 1.9-1.4 1.8s.2-.7 1.6-.6c1.4.1 1.3-.5 1.3.6-.1 1.1-.5 1 .8.6s.3-1.9 1.7-1c1.4.9-1.3.9 1.4.9s2.4-.5 3.1-.9c.8-.4-.6-.5-.9-1.3s-1.3-.9-2.3-.6-2.3-.1-2.5.4c-.1.4-1.8.7-1.8.3s-1-.2-1-.2z"
         />
-        <path
-          className="st17"
-          d="M247.2 841l62.8-39 80 32.3-64 39.7z"
-        />
+        <path className="st17" d="M247.2 841l62.8-39 80 32.3-64 39.7z" />
         <path className="st9" d="M247.2 828l62.8-39 80 32.3-64 39.7z" />
         <path fill="#d62209" d="M256.2 827.6l54.9-34.1 70 28.3-56 34.7z" />
         <path className="st17" d="M247.2 828v13l78.8 33v-13z" />
@@ -127,10 +121,7 @@ function Building(props) {
           className="st20"
           d="M256.2 827.6V183.7l46.4-7.7 8.5 617.5zM311.1 793.5l70 28.3V183.7l-78.5-7.7z"
         />
-        <path
-          className="st21"
-          d="M325.1 856.5L322 194l-65.8-10.3v643.9z"
-        />
+        <path className="st21" d="M325.1 856.5L322 194l-65.8-10.3v643.9z" />
         <path className="st21" d="M322 194l59.1-10.3v638.1l-56 34.7z" />
         <path
           className="st20"
@@ -144,33 +135,15 @@ function Building(props) {
           className="st22"
           d="M399.7 181.5c0 6.9-36.3 12.5-81 12.5-44.8 0-81-5.6-81-12.5s36.3-12.5 81-12.5c44.7-.1 81 5.5 81 12.5z"
         />
-        <ellipse
-          className="st23"
-          cx={318.6}
-          cy={161.7}
-          rx={81}
-          ry={12.5}
-        />
-        <path
-          className="st17"
-          d="M249.5 163.1l107.8 5 26.2-10.8-93.2-5.7z"
-        />
+        <ellipse className="st23" cx={318.6} cy={161.7} rx={81} ry={12.5} />
+        <path className="st17" d="M249.5 163.1l107.8 5 26.2-10.8-93.2-5.7z" />
         <path className="st24" d="M249.5 163.1V74l41.1-5.7-.3 83.3z" />
         <path className="st20" d="M756.5 200.5l-597.2-37.4" />
-        <path
-          className="st21"
-          d="M55.7 121.1l662.5 28 43.5-17.9-647.2-31.1z"
-        />
+        <path className="st21" d="M55.7 121.1l662.5 28 43.5-17.9-647.2-31.1z" />
         <path className="st24" d="M357.3 168.1V76.5L249.5 74v89.1z" />
         <path fill="#fcc62b" d="M383.5 157.3l-1-87-25.2 6.2v91.6z" />
-        <path
-          className="st23"
-          d="M377.3 139.1l-.6-45.5-13.1 3.3v47.9z"
-        />
-        <path
-          className="st17"
-          d="M249.5 74l107.8 2.5 25.2-6.2-91.9-2z"
-        />
+        <path className="st23" d="M377.3 139.1l-.6-45.5-13.1 3.3v47.9z" />
+        <path className="st17" d="M249.5 74l107.8 2.5 25.2-6.2-91.9-2z" />
         <path
           className="st23"
           d="M317.5 95.5c0 8.2-6.6 14.9-14.9 14.9-5.4 0-10.1-2.9-12.7-7.2-1.3-2.2-2.1-4.9-2.1-7.7 0-8.2 6.6-14.9 14.9-14.9 4 0 7.6 1.5 10.2 4.1.5.5 1 1 1.5 1.6 1.9 2.6 3.1 5.7 3.1 9.2z"
@@ -189,14 +162,8 @@ function Building(props) {
           className="st21"
           d="M55.7 121.1L186 103.5l70.2 26L387 113.2l125.6 27.2 158.2-13.6 47.4 22.3"
         />
-        <path
-          className="st21"
-          d="M114.5 100.1v59.7l-60.8 31.9v-70.6z"
-        />
-        <path
-          className="st22"
-          d="M14.3 122.7l117.4 6.4 27.6-33.9-99-3.6z"
-        />
+        <path className="st21" d="M114.5 100.1v59.7l-60.8 31.9v-70.6z" />
+        <path className="st22" d="M14.3 122.7l117.4 6.4 27.6-33.9-99-3.6z" />
         <path
           className="st23"
           d="M14.3 122.7v79.6l115.7 6.4 1.7-79.6zM304.3 72.4l7-22.6h10.2l5.1 22.6z"
@@ -208,10 +175,7 @@ function Building(props) {
             className="st28"
             d="M484 469.7c0 5.1-1 9.7-2.7 13.5-2.6-4.4-6.1-7.1-10-7.1-3.9 0-7.4 2.7-10 7.1-1.6-3.8-2.7-8.4-2.7-13.5 0-12.3 5.7-22.3 12.6-22.3 7.1 0 12.8 10 12.8 22.3z"
           />
-          <path
-            className="st23"
-            d="M440.5 205.2l65.5 2.6v34.5h-66.7z"
-          />
+          <path className="st23" d="M440.5 205.2l65.5 2.6v34.5h-66.7z" />
           <path
             className="st29"
             d="M449.8 242.3L449 388l9.8-4.5V242.3zM488.5 242.3v141.2l9 6.8v-148zM468.4 421v8.7h10.9v-9.4z"
@@ -267,7 +231,7 @@ function Building(props) {
         </g>
       </g>
     </svg>
-  )
+  );
 }
 
-export default Building
+export default Building;
