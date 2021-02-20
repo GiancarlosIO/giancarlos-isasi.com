@@ -1,5 +1,13 @@
-import Document, { DocumentContext } from 'next/document';
+import Document, {
+  DocumentContext,
+  Html,
+  Head,
+  Main,
+  NextScript,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+
+import { isProduction } from '@/constants/env';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -24,5 +32,24 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+  render() {
+    return (
+      <Html>
+        <Head />
+        <body>
+          {isProduction && (
+            <noscript
+              dangerouslySetInnerHTML={{
+                __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDHPLNZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+              }}
+            />
+          )}
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
