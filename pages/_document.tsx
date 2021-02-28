@@ -7,6 +7,8 @@ import Document, {
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
+import { isProduction } from '@/constants/env';
+
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
@@ -31,7 +33,6 @@ export default class MyDocument extends Document {
       sheet.seal();
     }
   }
-
   render() {
     return (
       <Html>
@@ -43,6 +44,14 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
+          {isProduction && (
+            <noscript
+              dangerouslySetInnerHTML={{
+                __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDHPLNZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+              }}
+            />
+          )}
           <Main />
           <NextScript />
         </body>
