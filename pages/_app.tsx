@@ -4,11 +4,13 @@ import { isProduction } from '@/constants/env';
 
 import Favicons from '@/components/Favicons';
 
+import { ThemeProvider } from '@/theme';
+
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <React.Fragment>
+    <ThemeProvider>
       <Head>
         {isProduction && (
           <React.Fragment>
@@ -41,7 +43,7 @@ function MyApp({ Component, pageProps }) {
         <Favicons />
       </Head>
       <Component {...pageProps} />
-    </React.Fragment>
+    </ThemeProvider>
   );
 }
 
