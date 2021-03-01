@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 const ContainerWrapper = styled.div`
-  max-width: 1100px;
+  width: calc(100% - 32px);
+  ${props => props.theme.breakpoints.mediaSm()} {
+    max-width: 1100px;
+  }
 `;
 
 const Container: React.FC<{
