@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
             />
           </React.Fragment>
         )}
-        <title>Mr. -N</title>
+        <title>Giancarlos Isasi (-N)</title>
         <meta
           name="description"
           content="Hi, I'm Giancarlos Isasi (Mr N), a Frontend engineer with experience in web performance optimización and javascript tooling."
