@@ -53,7 +53,7 @@ export const ThemeProvider: React.FC = props => {
   React.useEffect(() => {
     const currentTheme = window.localStorage.getItem(localStorageKey) as Theme;
     // sync react state with localstorage
-    if (themeVariant !== currentTheme) {
+    if (currentTheme && themeVariant !== currentTheme) {
       setTheme(currentTheme);
     }
 
