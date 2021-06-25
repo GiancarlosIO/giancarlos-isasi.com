@@ -33,7 +33,6 @@ const playSwitchSound = (value: Theme) => {
 };
 
 export const ThemeProvider: React.FC = props => {
-  const isInitialRenderRef = React.useRef(true);
   const [themeVariant, setTheme] = React.useState<Theme>('light');
 
   const setThemeVariation = (value: Theme) => {
@@ -53,14 +52,9 @@ export const ThemeProvider: React.FC = props => {
 
   React.useEffect(() => {
     const currentTheme = window.localStorage.getItem(localStorageKey) as Theme;
-    // don't play the sound in the initial render
-    if (isInitialRenderRef.current) {
-      isInitialRenderRef.current = false;
-      console.log({ themeVariant });
-
-      if (themeVariant !== currentTheme) {
-        setTheme(currentTheme);
-      }
+    // sync react state with localstorage
+    if (themeVariant !== currentTheme) {
+      setTheme(currentTheme);
     }
 
     document.body.className = currentTheme || themeVariant;
