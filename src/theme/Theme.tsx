@@ -23,19 +23,47 @@ type State = {
 };
 const ThemeContext = React.createContext<State | undefined>(undefined);
 
+const localStorageKey = '__MRN_THEME_PAGE';
+
+const playSwitchSound = (value: Theme) => {
+  const audioType = value === 'light' ? 'switch-off' : 'switch-on';
+  const audio = new Audio(`/sounds/${audioType}.mp3`);
+  audio.volume = 0.3;
+  audio.play();
+};
+
 export const ThemeProvider: React.FC = props => {
+  const isInitialRenderRef = React.useRef(true);
   const [themeVariant, setTheme] = React.useState<Theme>('light');
 
   const setThemeVariation = (value: Theme) => {
+    window.localStorage.setItem(localStorageKey, value);
     setTheme(value);
   };
 
   const toggleTheme = () => {
-    setTheme(value => (value === 'light' ? 'dark' : 'light'));
+    setTheme(value => {
+      const newValue = value === 'light' ? 'dark' : 'light';
+      playSwitchSound(newValue);
+      window.localStorage.setItem(localStorageKey, newValue);
+
+      return newValue;
+    });
   };
 
   React.useEffect(() => {
-    document.body.className = themeVariant;
+    const currentTheme = window.localStorage.getItem(localStorageKey) as Theme;
+    // don't play the sound in the initial render
+    if (isInitialRenderRef.current) {
+      isInitialRenderRef.current = false;
+      console.log({ themeVariant });
+
+      if (themeVariant !== currentTheme) {
+        setTheme(currentTheme);
+      }
+    }
+
+    document.body.className = currentTheme || themeVariant;
   }, [themeVariant]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
