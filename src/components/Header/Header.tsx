@@ -1,30 +1,36 @@
 import Link from '@/components/Link';
 
+const links = [
+  {
+    url: '/blog',
+    label: 'Blog',
+  },
+  {
+    url: '/about',
+    label: 'Sobre mí',
+  },
+  {
+    url: '/contact',
+    label: 'Contáctame',
+  },
+];
+
 const Header = props => {
   return (
     <header className="pt-6 flex justify-between items-center">
       <Link href="/" className="text-3xl rounded-lg inline">
-        <span className="font-reggae text-white">-N</span>
+        <span className="font-reggae text-purple-500">-N</span>
       </Link>
       <div>
-        <Link
-          href="/blog"
-          className="transition duration-300 ease-in-out transition-colors hover:bg-purple-900 mr-2"
-        >
-          <span>Blog</span>
-        </Link>
-        <Link
-          href="/about"
-          className="transition duration-300 ease-in-out transition-colors hover:bg-purple-900 mr-2"
-        >
-          <span>Sobre mí</span>
-        </Link>
-        <Link
-          href="/contact"
-          className="transition duration-300 ease-in-out transition-colors hover:bg-purple-900"
-        >
-          <span>Contáctame</span>
-        </Link>
+        {links.map(link => (
+          <Link
+            key={link.url}
+            href={link.url}
+            className="mr-2 text-purple-500 font-bold duration-300 ease-in-out transition-colors hover:text-purple-800"
+          >
+            <span>{link.label}</span>
+          </Link>
+        ))}
       </div>
     </header>
   );

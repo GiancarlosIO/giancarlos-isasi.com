@@ -1,5 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
+import { appWithTranslation } from 'next-i18next';
+
 import { isProduction } from '@/constants/env';
 
 import Favicons from '@/components/Favicons';
@@ -47,4 +49,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);
