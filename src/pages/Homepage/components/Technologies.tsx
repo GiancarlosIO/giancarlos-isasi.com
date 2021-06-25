@@ -50,7 +50,16 @@ const images = [
 
 const Technologies = props => {
   return (
-    <div className="w-full h-full flex flex-row flex-wrap relative mt-12 lg:mt-0">
+    <motion.div
+      animate={{
+        opacity: [0, 0.5, 1],
+      }}
+      transition={{
+        duration: 1,
+        ease: 'easeIn',
+      }}
+      className="w-full h-full flex flex-row flex-wrap relative mt-12 lg:mt-0"
+    >
       {images.map((image, index) => (
         <motion.div
           animate={{
@@ -62,7 +71,7 @@ const Technologies = props => {
             ease: 'easeInOut',
             times: [1, 0.8, 0.4, 0.3, 0.2, 0.1, 0],
             loop: Infinity,
-            repeatDelay: 1 * index,
+            // repeatDelay: 0.5 * index,
           }}
           key={image.url}
           className="p-4 w-1/2 flex justify-center"
@@ -77,7 +86,7 @@ const Technologies = props => {
           />
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

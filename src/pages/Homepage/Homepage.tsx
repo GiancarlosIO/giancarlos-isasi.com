@@ -47,7 +47,7 @@ const Homepage = () => {
       <div>
         <Container className="">
           <Header />
-          <HeroSection className="sm:py-3 xl:py-10 mx-auto">
+          <HeroSection className="sm:py-3 xl:py-10 mx-auto text-gray-800">
             <div>
               <motion.div
                 initial="exit"
