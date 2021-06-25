@@ -70,7 +70,7 @@ const Technologies = props => {
             duration: 4,
             ease: 'easeInOut',
             times: [1, 0.8, 0.4, 0.3, 0.2, 0.1, 0],
-            loop: Infinity,
+            repeat: Infinity,
             // repeatDelay: 0.5 * index,
           }}
           key={image.url}

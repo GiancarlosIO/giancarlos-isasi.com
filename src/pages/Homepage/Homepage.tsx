@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import Container from '@/components/Container';
 
 import { Technologies } from './components';
+import { ArticleList } from './sections';
 
 const HeroSection = styled.section`
   display: grid;
@@ -43,18 +44,18 @@ const Homepage = () => {
   const { t } = useTranslation('homepage');
 
   return (
-    <div>
+    <div className="dark:bg-gray-800">
       <div>
-        <Container className="">
+        <Container>
           <Header />
-          <HeroSection className="sm:py-3 xl:py-10 mx-auto text-gray-800">
+          <HeroSection className="sm:py-3 xl:py-10 mx-auto text-gray-800 dark:text-white">
             <div>
               <motion.div
                 initial="exit"
                 animate="enter"
                 variants={getVariantsWithDelay(0)}
               >
-                <h1 className="xl:mt-12 text-3xl font-bold">
+                <section className="xl:mt-12 text-3xl font-bold">
                   <span>{t('GRETTINGS')}</span> <br />
                   <span>{t('IAM')}</span>{' '}
                   <a
@@ -62,11 +63,13 @@ const Homepage = () => {
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <span className="text-blue-600">{t('FULL_NAME')}</span>
+                    <h1 className="inline-block text-blue-600">
+                      {t('FULL_NAME')}
+                    </h1>
                   </a>
                   {', '}
                   <span>{t('BIO_1')}</span>
-                </h1>
+                </section>
               </motion.div>
               <motion.div
                 initial="exit"
@@ -88,8 +91,12 @@ const Homepage = () => {
             </div>
           </HeroSection>
         </Container>
+        <div className="bg-purple-800 text-white">
+          <Container>
+            <ArticleList />
+          </Container>
+        </div>
       </div>
-      <Container>Blog</Container>
     </div>
   );
 };

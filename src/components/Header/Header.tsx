@@ -1,5 +1,7 @@
 import Link from '@/components/Link';
 
+import { useTheme } from '@/theme';
+
 const links = [
   {
     url: '/blog',
@@ -16,11 +18,16 @@ const links = [
 ];
 
 const Header = props => {
+  const { toggleTheme } = useTheme();
+
   return (
     <header className="pt-6 flex justify-between items-center">
       <Link href="/" className="text-3xl rounded-lg inline">
         <span className="font-reggae text-purple-500">-N</span>
       </Link>
+      <button type="button" onClick={() => toggleTheme()}>
+        change theme
+      </button>
       <div>
         {links.map(link => (
           <Link

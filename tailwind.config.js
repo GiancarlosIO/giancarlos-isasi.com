@@ -1,7 +1,7 @@
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
   mode: 'jit',
-  darkMode: true, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     fontFamily: {
       reggae: [
