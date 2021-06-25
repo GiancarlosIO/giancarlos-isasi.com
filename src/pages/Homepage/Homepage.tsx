@@ -13,14 +13,13 @@ const HeroSection = styled.section`
   justify-items: center;
 
   @media (min-width: 1024px) {
-    grid-template-columns: auto 426px;
-    grid-template-rows: 20rem;
+    grid-template-columns: 700px auto;
     column-gap: 2rem;
     justify-items: start;
   }
 `;
 
-const Homepage = props => {
+const Homepage = () => {
   const { t } = useTranslation('homepage');
 
   return (
@@ -31,26 +30,23 @@ const Homepage = props => {
           <Header />
           <HeroSection className="sm:py-3 xl:py-10 mx-auto">
             <div className="">
-              <h1 className="xl:mt-12 text-2xl font-bold">
+              <h1 className="xl:mt-12 text-3xl font-bold">
                 <span>{t('GRETTINGS')}</span> <br />
-                <span className="text-blue-600">
-                  {t('IAM')} {t('FULL_NAME')}
-                </span>
+                <span>{t('IAM')}</span>{' '}
+                <a
+                  href="https://twitter.com/MrNexusZGT"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <span className="text-blue-600">{t('FULL_NAME')}</span>
+                </a>
+                {', '}
+                <span>{t('BIO_1')}</span>
               </h1>
-              <p
-                className="mt-4 font-lg"
-                dangerouslySetInnerHTML={{
-                  __html: t('BIO'),
-                }}
-              />
+
+              <p className="mt-8 font-bold text-2xl">{t('DESCRIPTION_1')}</p>
+              <p className="mt-8 font-bold text-2xl">{t('DESCRIPTION_2')}</p>
             </div>
-            {/* <div className="mt-4 lg:mt-0 lg:justify-self-end">
-              <img
-                className="w-auto h-full rounded max-h-80"
-                src="https://camo.githubusercontent.com/ce00948324d9e3916e58d7fbf02aefba981cc878b2f0bdd2465b10d32c4e986c/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f785541376264704c78516873535164796f672f67697068792e676966"
-                alt="Mr. -N"
-              />
-            </div> */}
           </HeroSection>
         </Container>
       </div>

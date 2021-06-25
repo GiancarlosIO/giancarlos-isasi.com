@@ -4,5 +4,7 @@
   "IAM": "Soy",
   "FULL_NAME": "Giancarlos Isasi",
   "JOB_TITLE": "Lead Frontend Developer en @crehana",
-  "BIO": "Un Frontend Engineer que convierte ideas en código usando como arma principal Reactjs. Mis temas favoritas son: experiencia de desarrollo, web performance y escalabilidad."
+  "BIO_1": "un Frontend Engineer que convierte ideas en código usando principalmente Javascript y Golang.",
+  "DESCRIPTION_1": "En vez de crear un tipico portafolio, este sitio almacenará todos mis aprendizajes en forma de artículos, snippets, ejemplos, boilerplates, links y demás.",
+  "DESCRIPTION_2": "La memoría es frágil así que mi yo del futuro agradecerá el tener un espacio como este."
 }
