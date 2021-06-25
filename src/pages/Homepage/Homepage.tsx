@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 import Header from '@/components/Header';
 import Container from '@/components/Container';
 
-import { MrN } from './components';
+import { Technologies } from './components';
 
 const HeroSection = styled.section`
   display: grid;
@@ -16,7 +16,7 @@ const HeroSection = styled.section`
   justify-items: center;
 
   @media (min-width: 1024px) {
-    grid-template-columns: 700px auto;
+    grid-template-columns: 650px auto;
     column-gap: 2rem;
     justify-items: start;
   }
@@ -44,7 +44,6 @@ const Homepage = () => {
 
   return (
     <div>
-      {/* <div className="bg-gradient-to-r from-green-400 to-blue-500"> */}
       <div>
         <Container className="">
           <Header />
@@ -84,7 +83,9 @@ const Homepage = () => {
                 <p className="mt-8 font-bold text-2xl">{t('DESCRIPTION_2')}</p>
               </motion.div>
             </div>
-            <div className="items-center">{/* <MrN /> */}</div>
+            <div className="w-full">
+              <Technologies />
+            </div>
           </HeroSection>
         </Container>
       </div>
