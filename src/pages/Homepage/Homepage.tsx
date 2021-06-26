@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { useTranslation } from 'next-i18next';
-import { MDXRemote } from 'next-mdx-remote';
 
 import Header from '@/components/Header';
 import Container from '@/components/Container';
