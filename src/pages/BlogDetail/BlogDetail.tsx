@@ -1,7 +1,9 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { MDXProvider } from '@mdx-js/react';
+import { MDXProvider, MDXProviderProps } from '@mdx-js/react';
 
 import { StaticCodeSnippet, Header, Container } from '@/components';
+
+import { H2, P, Ul, Ol, Anchor } from '@/components/MDXComponents';
 
 export type BlogDetailProps = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -12,8 +14,13 @@ export type BlogDetailProps = {
   };
 };
 
-const components = {
+const components: MDXProviderProps['components'] = {
   code: StaticCodeSnippet,
+  p: P,
+  h2: H2,
+  ul: Ul,
+  ol: Ol,
+  a: Anchor,
 };
 
 const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
@@ -22,8 +29,10 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
       <Container>
         <Header />
         <MDXProvider components={components}>
-          <div>
-            <h1>{data.title}</h1>
+          <div className="font-medium">
+            <h1 className="font-bold text-4xl text-center my-10">
+              {data.title}
+            </h1>
             <MDXRemote {...source} />
           </div>
         </MDXProvider>

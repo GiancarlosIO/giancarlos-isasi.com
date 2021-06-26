@@ -30,7 +30,7 @@ const Header = props => {
     <div className="relative">
       <div style={{ height: 53 }} />
       <header
-        className="fixed top-0 z-50 w-full flex justify-between items-center dark:bg-gray-800"
+        className="fixed top-0 z-50 w-full flex justify-between items-center bg-white dark:bg-gray-800"
         style={{
           width: 1100,
         }}

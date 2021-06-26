@@ -43,38 +43,40 @@ const StaticCodeSnippet: React.FC<{ children: string; className: string }> = ({
   const themeEditor = theme === 'light' ? themeLight : themeDark;
 
   return (
-    <div className="my-20 p-4 bg-gray-100 dark:bg-gray-800">
-      <Highlight
-        {...defaultProps}
-        theme={{
-          ...themeEditor,
-          plain: {
-            ...themeEditor.plain,
-            backgroundColor: '',
-            overflow: 'hidden',
-            fontWeight: 'bold',
-          },
-        }}
-        code={children.trim()}
-        language={language}
-      >
-        {({ className, style, tokens, getLineProps, getTokenProps }) => {
-          return (
-            <Pre className={className} style={style}>
-              {tokens.map((line, i) => (
-                <Line key={i} {...getLineProps({ line, key: i })}>
-                  {/* <LineNo>{i + 1}</LineNo> */}
-                  <LineContent>
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
-                  </LineContent>
-                </Line>
-              ))}
-            </Pre>
-          );
-        }}
-      </Highlight>
+    <div className="mb-8">
+      <div className="p-2 bg-gray-100 dark:bg-gray-900 rounded-md">
+        <Highlight
+          {...defaultProps}
+          theme={{
+            ...themeEditor,
+            plain: {
+              ...themeEditor.plain,
+              backgroundColor: '',
+              overflow: 'hidden',
+              fontWeight: 'bold',
+            },
+          }}
+          code={children.trim()}
+          language={language}
+        >
+          {({ className, style, tokens, getLineProps, getTokenProps }) => {
+            return (
+              <Pre className={className} style={style}>
+                {tokens.map((line, i) => (
+                  <Line key={i} {...getLineProps({ line, key: i })}>
+                    {/* <LineNo>{i + 1}</LineNo> */}
+                    <LineContent>
+                      {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token, key })} />
+                      ))}
+                    </LineContent>
+                  </Line>
+                ))}
+              </Pre>
+            );
+          }}
+        </Highlight>
+      </div>
     </div>
   );
 };
