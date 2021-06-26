@@ -6,9 +6,9 @@ export const createMediaRule = (pixels: string) =>
 
 export const theme = {
   breakpoints: {
-    sm: '768px',
-    md: '1024px',
-    lg: '1440px',
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
     mediaSm: () => createMediaRule(theme.breakpoints.sm),
     mediaMd: () => createMediaRule(theme.breakpoints.md),
     mediaLg: () => createMediaRule(theme.breakpoints.lg),

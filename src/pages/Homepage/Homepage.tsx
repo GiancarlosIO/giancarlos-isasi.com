@@ -17,7 +17,7 @@ const HeroSection = styled.section`
   grid-template-rows: auto auto;
   justify-items: center;
 
-  @media (min-width: 1024px) {
+  ${props => props.theme.breakpoints.mediaLg()} {
     grid-template-columns: 650px auto;
     column-gap: 2rem;
     justify-items: start;
@@ -26,8 +26,10 @@ const HeroSection = styled.section`
 
 const InnerMain = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  column-gap: 96px;
+  ${props => props.theme.breakpoints.mediaLg()} {
+    grid-template-columns: 2fr 1fr;
+    column-gap: 96px;
+  }
 `;
 
 const transition = {
@@ -70,7 +72,7 @@ const Homepage = ({ postList }) => {
                   animate="enter"
                   variants={getVariantsWithDelay(0)}
                 >
-                  <section className="xl:mt-12 text-3xl font-bold">
+                  <section className="xl:mt-12 text-lg md:text-2xl lg:text-3xl font-bold">
                     <span>{t('GRETTINGS')}</span> <br />
                     <span>{t('IAM')}</span>{' '}
                     <a
@@ -91,7 +93,7 @@ const Homepage = ({ postList }) => {
                   animate="enter"
                   variants={getVariantsWithDelay(0.3)}
                 >
-                  <p className="mt-8 font-bold text-2xl">
+                  <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
                     {t('DESCRIPTION_1')}
                   </p>
                 </motion.div>
@@ -100,12 +102,12 @@ const Homepage = ({ postList }) => {
                   animate="enter"
                   variants={getVariantsWithDelay(0.5)}
                 >
-                  <p className="mt-8 font-bold text-2xl">
+                  <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
                     {t('DESCRIPTION_2')}
                   </p>
                 </motion.div>
               </div>
-              <div className="w-full">
+              <div className="w-full hidden lg:block">
                 <Technologies />
               </div>
             </HeroSection>

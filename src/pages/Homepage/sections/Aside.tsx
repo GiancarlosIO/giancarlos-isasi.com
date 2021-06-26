@@ -7,7 +7,7 @@ const Aside: React.FC = () => {
   const { t } = useTranslation();
   const { categories } = usePageContext();
   return (
-    <aside className="h-full">
+    <aside className="h-full mt-6 lg:mt-0">
       <div className="sticky top-8">
         <h2 className="font-bold text-sm text-purple-500 mb-6">
           {t('CATEGORIES_SECTION_TITLE').toUpperCase()}:

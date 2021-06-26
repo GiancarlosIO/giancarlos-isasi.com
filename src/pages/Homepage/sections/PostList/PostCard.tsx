@@ -11,9 +11,9 @@ const ArticleCard: React.FC<PostPreview> = ({
 }) => {
   const url = `/blog/${slug}`;
   return (
-    <article className="py-6 flex flex-row gap-4 dark:text-white">
+    <article className="py-2 lg:py-6 mb-4 lg:mb-0 flex flex-row gap-4 dark:text-white">
       <div>
-        <h3 className="font-bold text-xl transition-colors duration-300 ease-in-out hover:text-blue-600 ">
+        <h3 className="font-bold lg:text-xl transition-colors duration-300 ease-in-out hover:text-blue-600 ">
           <Link href={url}>{title}</Link>
         </h3>
         <span className="font-bold text-sm text-gray-500">{createdAt}</span>
