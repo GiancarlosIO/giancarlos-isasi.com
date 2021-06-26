@@ -59,7 +59,7 @@ const Homepage = ({ postList }) => {
         url: '/blog/?categories=typescript',
       }))}
     >
-      <div className="text-gray-800 dark:text-white dark:bg-gray-800 ">
+      <div className="text-gray-800 dark:text-white dark:bg-gray-800">
         <div>
           <Container>
             <Header />
