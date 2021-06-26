@@ -2,21 +2,200 @@
 title: "Golang Gorm Cheatsheet!"
 contentPreview: "Esta es una colección de snippets usando uno de los más famosos ORMs en golang: GORM.
 Incluye cosas como"
-createdAt: "2020-12-06"
+createdAt: "26/06/2021"
 ---
 
-Esta es una colección de snippets usando uno de los más famosos ORMs en golang: GORM.
-```tsx
-import React, { useState } from "react";
-function Example() {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
+Esta es una collección del código repetitivo que suelo usar dentro de mis proyectos personales. La lista irá crecimiento conforme vaya descubriendo
+nuevas cosas.<br/>Puedes revisar la documentación completa en [gorm.io](https://gorm.io/).
+
+## ¿Cómo instalar GORM?
+```bash
+go get gorm.io/gorm
+```
+
+## ¿Cómo actualizar GORM?
+Similar a la instalación pero con el flag "-u" de update.
+```bash
+go get -u gorm.io/gorm
+```
+
+## Crear un simple modelo
+```go
+package models
+
+import (
+	"gorm.io/gorm"
+)
+
+type struct Article {
+  gorm.Model
+  Title string
+}
+```
+
+## Simple CRUD
+```go
+package main
+import (
+	"gorm.io/gorm"
+)
+
+type Article struct {
+  gorm.Model
+  Title string
+}
+
+// create
+article := Article{ Title: "My new article" }
+db.Create(&article)
+
+// Get All
+articles := []Article{}
+db.Find(&articles)
+
+// Get one
+id := 1
+db.First(&article, id)
+
+// Update
+article.Title = "Article title updated!"
+db.Save(&article)
+
+// Delete
+db.Delete(&article)
+db.Where("id = ?", "2").Delete(&article)
+```
+
+## Agregar validaciones de campo requerido a una tabla (Validations)
+```go
+package models
+import (
+	"gorm.io/gorm"
+)
+
+type Article struct {
+  gorm.Model
+  ShortDescription string `binding:"required"`
+  ShortDescription string `binding:"required"`
+}
+```
+
+## Crear modelos con relación Many-to-Many con referencia mutua
+El nombre de la tabla intermedia será **article_categories**.
+```go
+package models
+
+import (
+	"gorm.io/gorm"
+)
+
+type struct Article {
+  gorm.Model
+  Categories   []*Category     `gorm:"many2many:article_categories"`
+}
+
+type Category struct {
+  gorm.Model
+  Articles      []*Article     `gorm:"many2many:article_categories"`
+}
+```
+
+## Obtener data de las relaciones entre tablas (Eager Loading)
+Tomando como ejemplo la relación many-to-many, podemos usar el siguiente código para
+obtener los artículos junto a las categorías de cada uno.
+```go
+articles := []models.Article{}
+db.Preload("Categories").Find(&articles)
+```
+
+
+## Crear registro con relación many-to-many sin crear sus registros asociados (Skip Auto Create/Update)
+Para many-to-many, GORM hará un upsert (update o insert si el registro no existe) antes de crear la
+tabla intermedia de referencias. Para omitir este paso podemos usar lo siguiente Omit.
+```go
+article = models.Article{ Title: "My new article" }
+category := models.Category{ ID: 1 } // Nuestra db tiene una categoría con el ID 1
+article.Categories = append(article.Categories, category)
+
+r := db.Omit("Categories.*").Create(&article)
+```
+En este ejemplo, nosotros sabemos que nuestra DB tiene un registro Categoría con ID 1.
+Por lo tanto, no es necesario que GORM intente crear una nueva categoría, **simplemente buscamos
+associar el nuevo artículo con la categoría existente.**
+
+
+## Obtener un registro por id (GetById)
+Existen diferentes formas. Usando First:
+```go
+article := models.Article{}
+
+db.First(&article, 10);
+db.First(&article, "10");
+db.First(&article, "id = ?", "10");
+```
+Usando Where:
+```go
+article := models.Article{}
+
+db.Where("id = ?", id).First(&article);
+```
+
+## Ordenar resultado por un field (OrderBy)
+En este caso ordenamos los resultados usando el campo created_at de la tabla Articles.
+```go
+articles := []models.Article{}
+db.Order("created_at desc").Find(&articles)
+db.Order("created_at asc").Find(&articles)
+```
+
+## Obtener la cantidad total de registros que tiene una tabla (Count)
+```go
+count := 0
+db.Model(&models.Article).Count(&count)
+```
+
+## Verificar si el registro fue encontrado (ErrRecordNotFound)
+```go
+import (
+  "errors"
+  "fmt"
+  "gorm.io/gorm"
+)
+
+name := "design"
+category := models.Category{}
+
+r := db.Where("name = ?", name).First(&category)
+
+if r.Error != nil {
+  if !errors.Is(r.Error, gorm.ErrRecordNotFound) {
+    fmt.Printf("category with name %s doesn't exists", name)
+  }
+}
+```
+
+## Modificar el contenido antes de guardar en la base de datos (BeforeCreate Hook)
+```go
+package models
+import (
+  "gorm.io/gorm"
+  "github.com/gosimple/slug"
+)
+
+type Category struct {
+  gorm.Model
+  Name string
+  Slug string
+  Url string
+}
+
+func (sc *Category) BeforeCreate(tx *gorm.DB) error {
+	slg := slug.Make(sc.Name)
+	url := fmt.Sprintf("/%s/", slg)
+
+	sc.Slug = slg
+	sc.Url = url
+
+	return nil
 }
 ```

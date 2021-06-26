@@ -51,7 +51,7 @@ const StaticCodeSnippet: React.FC<{ children: string; className: string }> = ({
             ...themeEditor,
             plain: {
               ...themeEditor.plain,
-              backgroundColor: '',
+              backgroundColor: 'transparent',
               overflow: 'hidden',
               fontWeight: 'bold',
             },
