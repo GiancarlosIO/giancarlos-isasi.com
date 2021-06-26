@@ -53,6 +53,10 @@ export const getBlogContent = async ({
 
   return {
     source: mdxSource,
-    frontMatter: d,
+    data: {
+      createdAt: data.createdAt,
+      title: data.title,
+      slug,
+    },
   };
 };
