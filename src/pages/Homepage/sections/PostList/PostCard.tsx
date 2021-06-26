@@ -2,13 +2,9 @@ import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-type ArticleProps = {
-  title: string;
-  contentPreview: string;
-  slug: string;
-};
+import { PostPreview } from '@/types';
 
-const ArticleCard: React.FC<ArticleProps> = ({
+const ArticleCard: React.FC<PostPreview> = ({
   title,
   contentPreview,
   slug,

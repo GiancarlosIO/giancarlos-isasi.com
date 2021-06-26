@@ -3,6 +3,7 @@ export type PostPreview = {
   slug: string;
   contentPreview: string;
   id: number;
+  createdAt: string;
 };
 
 export type Category = {
