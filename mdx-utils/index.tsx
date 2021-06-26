@@ -6,30 +6,53 @@ import { serialize } from 'next-mdx-remote/serialize';
 
 const postDirectory = join(process.cwd(), 'posts');
 
-export const getBlogListSource = async () => {
-  const files = readdirSync(postDirectory);
-  const sources = files.map(file => {
-    const s = readFileSync(join(postDirectory, file), 'utf-8');
+type Locale = string;
+export const getBlogListSource = async (locale: Locale) => {
+  const folders = readdirSync(postDirectory);
+  const sources = folders.map(folder => {
+    const file = join(postDirectory, folder, `index-${locale}.mdx`);
+    const s = readFileSync(file, 'utf-8');
     const { data } = matter(s);
-    return data;
+
+    return {
+      ...data,
+      slug: folder,
+    };
   });
 
   return sources;
 };
 
-export const getBlogContent = async (slug: string) => {
-  const s = readFileSync(join(postDirectory, slug), 'utf-8');
+export const getBlogSlugs = () => {
+  return readdirSync(postDirectory);
+};
+
+export const getBlogContent = async ({
+  slug,
+  locale,
+}: {
+  slug: string;
+  locale: Locale;
+}) => {
+  const s = readFileSync(
+    join(postDirectory, slug, `index-${locale}.mdx`),
+    'utf-8',
+  );
   const { content, data } = matter(s);
+  const d = {
+    ...data,
+    slug,
+  };
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [],
       rehypePlugins: [],
     },
-    scope: data,
+    scope: d,
   });
 
   return {
     source: mdxSource,
-    frontMatter: data,
+    frontMatter: d,
   };
 };
