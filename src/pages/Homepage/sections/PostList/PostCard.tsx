@@ -5,20 +5,22 @@ import Image from 'next/image';
 type ArticleProps = {
   title: string;
   contentPreview: string;
-  url: string;
+  slug: string;
 };
 
 const ArticleCard: React.FC<ArticleProps> = ({
   title,
   contentPreview,
-  url,
+  slug,
+  createdAt,
 }) => {
   return (
     <article className="py-4 flex flex-row gap-4 dark:text-white">
       <div>
         <h3 className="font-bold text-xl mb-4 transition-colors duration-300 ease-in-out hover:text-blue-600 ">
-          <Link href={url}>{title}</Link>
+          <Link href={`/blog/${slug}`}>{title}</Link>
         </h3>
+        {createdAt}
         <p className="mb-2">{contentPreview}</p>
         <button className="font-bold text-white py-1 px-2 bg-blue-600 rounded">
           Leer más

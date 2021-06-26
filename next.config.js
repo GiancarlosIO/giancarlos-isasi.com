@@ -1,7 +1,7 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { i18n } = require('./next-i18next.config');
 
-module.exports = {
+const config = {
   i18n,
   webpack: config => {
     config.resolve.plugins = [
@@ -14,3 +14,5 @@ module.exports = {
     return config;
   },
 };
+
+module.exports = config;

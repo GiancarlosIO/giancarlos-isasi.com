@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ArticlePreview, Category } from '@/types';
+import { PostPreview, Category } from '@/types';
 
 type State = {
-  articles: ArticlePreview[];
+  posts: PostPreview[];
   categories: Category[];
 };
 
@@ -10,13 +10,13 @@ const HomepageContext = React.createContext<State | undefined>(undefined);
 
 export const HomepageContextProvider: React.FC<State> = ({
   children,
-  articles,
+  posts,
   categories,
 }) => {
   return (
     <HomepageContext.Provider
       value={{
-        articles,
+        posts,
         categories,
       }}
     >

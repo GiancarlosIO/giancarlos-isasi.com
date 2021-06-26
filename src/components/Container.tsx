@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import clsx from 'clsx';
 
 const ContainerWrapper = styled.div`
   width: calc(100% - 32px);
@@ -11,7 +12,7 @@ const Container: React.FC<{
   className?: string;
 }> = props => {
   return (
-    <ContainerWrapper className={`mx-auto ${props.className}`}>
+    <ContainerWrapper className={clsx('mx-auto', props.className)}>
       {props.children}
     </ContainerWrapper>
   );

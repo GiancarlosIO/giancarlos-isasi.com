@@ -1,11 +1,11 @@
 import { useTranslation } from '@/pages/Homepage/hooks';
 import { usePageContext } from '@/pages/Homepage/context';
 
-import ArticleCard from './ArticleCard';
+import PostCard from './PostCard';
 
 const ArticleList = () => {
   const { t } = useTranslation();
-  const { articles } = usePageContext();
+  const { posts } = usePageContext();
 
   return (
     <section>
@@ -13,8 +13,8 @@ const ArticleList = () => {
         {t('BLOG_SECTION_TITLE').toUpperCase()}:
       </h2>
       <div>
-        {articles.map(article => (
-          <ArticleCard key={article.id} {...article} />
+        {posts.map((post, index) => (
+          <PostCard key={index} {...post} />
         ))}
       </div>
     </section>

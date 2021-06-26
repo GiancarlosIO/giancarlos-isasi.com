@@ -1,6 +1,6 @@
-export type ArticlePreview = {
+export type PostPreview = {
   title: string;
-  url: string;
+  slug: string;
   contentPreview: string;
   id: number;
 };

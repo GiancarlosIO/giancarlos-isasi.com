@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { useTranslation } from 'next-i18next';
+import { MDXRemote } from 'next-mdx-remote';
 
 import Header from '@/components/Header';
 import Container from '@/components/Container';
 
 import { Technologies } from './components';
-import { ArticleList, Aside } from './sections';
+import { PostList, Aside } from './sections';
 import { HomepageContextProvider } from './context';
 
 const HeroSection = styled.section`
@@ -47,28 +48,23 @@ const getVariantsWithDelay = (delay: number) => ({
   },
 });
 
-const Homepage = () => {
+const Homepage = ({ postList }) => {
   const { t } = useTranslation('homepage');
 
   return (
     <HomepageContextProvider
-      articles={Array.from({ length: 20 }).map((_, index) => ({
-        id: index,
-        title: 'Demystifying styled-components',
-        contentPreview: `For so many React devs, styled-components seems kinda magical. It isn't at all clear how it uses traditional CSS features under-the-hood, and that lack of clarity can cause real problems when things go awry. In this post, we'll learn exactly how styled-components works by building our own mini-version.`,
-        url: '/blog/slug-s',
-      }))}
+      posts={postList}
       categories={Array.from({ length: 10 }).map((_, index) => ({
         id: index,
         name: 'typescript',
         url: '/blog/?categories=typescript',
       }))}
     >
-      <div className="dark:bg-gray-800">
+      <div className="text-gray-800 dark:text-white dark:bg-gray-800 ">
         <div>
           <Container>
             <Header />
-            <HeroSection className="sm:py-3 xl:py-10 mx-auto text-gray-800 dark:text-white">
+            <HeroSection className="sm:py-3 xl:py-10 mx-auto">
               <div>
                 <motion.div
                   initial="exit"
@@ -130,7 +126,7 @@ const Homepage = () => {
           >
             <Container>
               <InnerMain className="relative">
-                <ArticleList />
+                <PostList />
                 <Aside />
               </InnerMain>
             </Container>
