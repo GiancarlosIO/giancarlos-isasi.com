@@ -77,8 +77,8 @@ const Technologies = props => {
           className="p-4 w-1/2 flex justify-center"
         >
           <Image
-            width="80px"
-            height="80px"
+            width="60px"
+            height="60px"
             src={image.url}
             alt={image.alt}
             objectFit="contain"
