@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import { NextSeo } from 'next-seo';
 
@@ -33,23 +32,6 @@ const InnerMain = styled.div`
     column-gap: 96px;
   }
 `;
-
-const transition = {
-  duration: 1,
-  ease: [0.43, 0.13, 0.23, 0.96],
-};
-
-const getVariantsWithDelay = (delay: number) => ({
-  exit: { x: 100, opacity: 0, transition },
-  enter: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      delay,
-      ...transition,
-    },
-  },
-});
 
 type HomepageProps = {
   postList: PostPreview[];
@@ -96,71 +78,43 @@ const Homepage: React.FC<HomepageProps> = ({ postList }) => {
             <Header />
             <HeroSection className="sm:py-3 xl:py-10 mx-auto">
               <div>
-                <motion.div
-                  initial="exit"
-                  animate="enter"
-                  variants={getVariantsWithDelay(0)}
-                >
-                  <section className="xl:mt-12 text-lg md:text-2xl lg:text-3xl font-bold">
-                    <span>{t('GRETTINGS')}</span> <br />
-                    <span>{t('IAM')}</span>{' '}
-                    <a
-                      href="https://twitter.com/MrNexusZGT"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      <h1 className="inline-block text-blue-600">
-                        {t('FULL_NAME')}
-                      </h1>
-                    </a>
-                    {', '}
-                    <span>{t('BIO_1')}</span>
-                  </section>
-                </motion.div>
-                <motion.div
-                  initial="exit"
-                  animate="enter"
-                  variants={getVariantsWithDelay(0.3)}
-                >
-                  <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
-                    {t('DESCRIPTION_1')}
-                  </p>
-                </motion.div>
-                <motion.div
-                  initial="exit"
-                  animate="enter"
-                  variants={getVariantsWithDelay(0.5)}
-                >
-                  <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
-                    {t('DESCRIPTION_2')}
-                  </p>
-                </motion.div>
+                <section className="xl:mt-12 text-lg md:text-2xl lg:text-3xl font-bold">
+                  <span>{t('GRETTINGS')}</span> <br />
+                  <span>{t('IAM')}</span>{' '}
+                  <a
+                    href="https://twitter.com/MrNexusZGT"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <h1 className="inline-block text-blue-600">
+                      {t('FULL_NAME')}
+                    </h1>
+                  </a>
+                  {', '}
+                  <span>{t('BIO_1')}</span>
+                </section>
+
+                <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
+                  {t('DESCRIPTION_1')}
+                </p>
+
+                <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
+                  {t('DESCRIPTION_2')}
+                </p>
               </div>
               <div className="w-full hidden lg:block">
                 <Technologies />
               </div>
             </HeroSection>
           </Container>
-          <motion.main
-            initial="hide"
-            animate="show"
-            variants={{
-              hide: { opacity: 0 },
-              show: { opacity: 1 },
-            }}
-            transition={{
-              duration: 1,
-              ease: 'easeIn',
-            }}
-            className="pt-8"
-          >
+          <main>
             <Container>
               <InnerMain className="relative">
                 <PostList />
                 <Aside />
               </InnerMain>
             </Container>
-          </motion.main>
+          </main>
         </div>
       </div>
     </HomepageContextProvider>
