@@ -1,5 +1,28 @@
 import * as React from 'react';
+import { createGlobalStyle } from 'styled-components';
+
 import { ThemeProvider as ThemeProviderStyled } from 'styled-components';
+
+const GlobalCss = createGlobalStyle<{ dark: boolean }>`
+  ${props => props.theme.breakpoints.mediaLg()} {
+    ::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: ${props =>
+        props.dark ? 'rgba(31, 41, 55, .9)' : 'rgba(31, 41, 55, .1)'};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: ${props =>
+        props.dark ? 'rgba(0,0,0,1)' : '#0000005e'};
+      border-radius: 40px;
+      border: 4px solid transparent;
+      background-clip: content-box;
+    }
+  }
+`;
 
 export const createMediaRule = (pixels: string) =>
   `@media (min-width: ${pixels})`;
@@ -72,6 +95,7 @@ export const ThemeProvider: React.FC = props => {
       }}
     >
       <ThemeProviderStyled theme={theme}>
+        <GlobalCss dark={themeVariant == 'dark'} />
         {childrenMemoized}
       </ThemeProviderStyled>
     </ThemeContext.Provider>

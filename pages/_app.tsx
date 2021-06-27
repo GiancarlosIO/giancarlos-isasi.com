@@ -44,6 +44,7 @@ function MyApp({ Component, pageProps }) {
         />
         <Favicons />
       </Head>
+
       <Component {...pageProps} />
     </ThemeProvider>
   );
