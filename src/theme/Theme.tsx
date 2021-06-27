@@ -83,9 +83,6 @@ export const ThemeProvider: React.FC = props => {
     document.body.className = currentTheme || themeVariant;
   }, [themeVariant]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const childrenMemoized = React.useMemo(() => props.children, []);
-
   return (
     <ThemeContext.Provider
       value={{
@@ -96,7 +93,7 @@ export const ThemeProvider: React.FC = props => {
     >
       <ThemeProviderStyled theme={theme}>
         <GlobalCss dark={themeVariant == 'dark'} />
-        {childrenMemoized}
+        {props.children}
       </ThemeProviderStyled>
     </ThemeContext.Provider>
   );
