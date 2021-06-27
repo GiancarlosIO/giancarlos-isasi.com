@@ -8,7 +8,6 @@ export type PostPreview = {
 };
 
 export type Category = {
-  id: number;
   name: string;
   url: string;
 };
