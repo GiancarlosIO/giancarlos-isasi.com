@@ -80,6 +80,7 @@ export const getBlogContent = async ({
       title: data.title,
       contentPreview: data.contentPreview,
       slug,
+      categories: [],
     },
   };
 };
