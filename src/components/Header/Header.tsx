@@ -20,6 +20,11 @@ import { ButtonRotate } from './UI';
 
 const links = [
   {
+    onlyMobile: true,
+    url: '/',
+    label: 'Inicio',
+  },
+  {
     url: '/blog',
     label: 'Blog',
   },
@@ -77,15 +82,17 @@ const Header: React.FC = () => {
         </LinkNext>
 
         <div>
-          {links.map(link => (
-            <Link
-              key={link.url}
-              href={link.url}
-              className={`hidden lg:inline-block mr-2 ${linkClasses}`}
-            >
-              <span>{link.label}</span>
-            </Link>
-          ))}
+          {links
+            .filter(l => !l.onlyMobile)
+            .map(link => (
+              <Link
+                key={link.url}
+                href={link.url}
+                className={`hidden lg:inline-block mr-2 ${linkClasses}`}
+              >
+                <span>{link.label}</span>
+              </Link>
+            ))}
           <motion.button
             type="button"
             onClick={() => toggleTheme()}
