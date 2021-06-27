@@ -4,7 +4,7 @@ const textElementCommonClasses = 'mb-8 leading-6';
 
 export const H2: React.FC = props => {
   return (
-    <h2 className="font-bold text-3xl text-yellow-500 dark:text-yellow-300 mt-10 mb-4">
+    <h2 className="font-bold text-xl lg:text-3xl text-yellow-500 dark:text-yellow-300 mt-10 mb-4">
       {props.children}
     </h2>
   );

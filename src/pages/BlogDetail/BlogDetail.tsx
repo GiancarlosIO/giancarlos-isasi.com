@@ -31,7 +31,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
         <Header />
         <MDXProvider components={components}>
           <div className="font-medium">
-            <h1 className="font-bold text-4xl text-center my-10">
+            <h1 className="font-bold text-2xl lg:text-4xl text-center my-10">
               {data.title}
             </h1>
             <MDXRemote {...source} />
