@@ -30,8 +30,6 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
   const url = `https://mr-nexus.com/blog/${data.slug}/`;
   const title = t('SEO_TITLE', { title: data.title });
 
-  console.log({ data });
-
   return (
     <React.Fragment>
       <div className="text-gray-800 dark:text-white dark:bg-gray-800 min-h-screen pb-20">
