@@ -10,4 +10,5 @@ export type PostPreview = {
 export type Category = {
   name: string;
   url: string;
+  slug: string;
 };
