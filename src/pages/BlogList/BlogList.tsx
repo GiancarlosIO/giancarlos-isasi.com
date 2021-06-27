@@ -4,7 +4,12 @@ import { NextSeo } from 'next-seo';
 
 import { PostCard, Container, Header } from '@/components';
 
-const BlogList = ({ postList }) => {
+import { PostPreview } from '@/types';
+
+type BlogListProps = {
+  postList: PostPreview[];
+};
+const BlogList: React.FC<BlogListProps> = ({ postList }) => {
   const { t } = useTranslation('blog-list');
 
   return (

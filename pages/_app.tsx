@@ -1,5 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
+
+import { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
 import NProgress from 'nprogress';
 import { useRouter } from 'next/router';
@@ -12,7 +14,7 @@ import { ThemeProvider } from '@/theme';
 
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
 
   React.useEffect(() => {
@@ -66,6 +68,6 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
     </ThemeProvider>
   );
-}
+};
 
 export default appWithTranslation(MyApp);

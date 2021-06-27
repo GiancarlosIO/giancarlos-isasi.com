@@ -7,6 +7,8 @@ import { NextSeo } from 'next-seo';
 import Header from '@/components/Header';
 import Container from '@/components/Container';
 
+import { PostPreview } from '@/types';
+
 import { Technologies } from './components';
 import { PostList, Aside } from './sections';
 import { HomepageContextProvider } from './context';
@@ -49,7 +51,10 @@ const getVariantsWithDelay = (delay: number) => ({
   },
 });
 
-const Homepage = ({ postList }) => {
+type HomepageProps = {
+  postList: PostPreview[];
+};
+const Homepage: React.FC<HomepageProps> = ({ postList }) => {
   const { t } = useTranslation('homepage');
 
   return (

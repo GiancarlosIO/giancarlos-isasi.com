@@ -48,7 +48,7 @@ const images = [
   },
 ];
 
-const Technologies = props => {
+const Technologies = () => {
   return (
     <motion.div
       animate={{

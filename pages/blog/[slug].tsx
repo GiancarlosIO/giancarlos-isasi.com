@@ -1,6 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import { ParsedUrlQuery } from 'querystring';
+
 import { getBlogSlugs, getBlogContent } from '../../mdx-utils';
 import type { BlogDetailProps } from '@/pages/BlogDetail';
 export { default } from '@/pages/BlogDetail';
@@ -10,7 +12,8 @@ export const getStaticProps: GetStaticProps<
   {
     slug: string;
   }
-> = async ({ locale, params }) => {
+> = async ({ locale: localeProp, params }) => {
+  const locale = localeProp || 'es';
   const i18nProps = await serverSideTranslations(locale, [
     'common',
     'blog-detail',
@@ -18,7 +21,7 @@ export const getStaticProps: GetStaticProps<
 
   const content = await getBlogContent({
     locale,
-    slug: params.slug,
+    slug: params?.slug as string,
   });
 
   return {
@@ -29,7 +32,10 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+export const getStaticPaths: GetStaticPaths = async ({
+  locales: localesProp,
+}) => {
+  const locales = localesProp || ['es'];
   const slugs = getBlogSlugs();
   const paths = slugs.map(slug => ({
     params: {
@@ -37,16 +43,23 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
     },
   }));
 
-  const pathsWithLocales = locales.reduce(
-    (acc, next) => [
-      ...acc,
-      ...paths.map(path => ({
+  const pathsWithLocales: (
+    | string
+    | {
+        params: ParsedUrlQuery;
+        locale?: string | undefined;
+      }
+  )[] = [];
+
+  // we need to create a version path for each locale
+  locales.forEach(locale => {
+    paths.forEach(path => {
+      pathsWithLocales.push({
         ...path,
-        locale: next,
-      })),
-    ],
-    [],
-  );
+        locale,
+      });
+    });
+  });
 
   return {
     paths: pathsWithLocales,

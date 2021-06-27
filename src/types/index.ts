@@ -2,7 +2,6 @@ export type PostPreview = {
   title: string;
   slug: string;
   contentPreview: string;
-  id: number;
   createdAt: string;
 };
 

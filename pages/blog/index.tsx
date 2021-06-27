@@ -5,7 +5,9 @@ import { getBlogListSource } from '../../mdx-utils';
 
 export { default } from '@/pages/BlogList';
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale: _locale }) => {
+  const locale = _locale || 'es';
+
   const i18nProps = await serverSideTranslations(locale, [
     'common',
     'blog-list',

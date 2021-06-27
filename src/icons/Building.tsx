@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function Building(props) {
+const Building: React.FC<React.SVGAttributes<SVGElement>> = props => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 834 938" {...props}>
       <style>
@@ -232,6 +232,6 @@ function Building(props) {
       </g>
     </svg>
   );
-}
+};
 
 export default Building;
