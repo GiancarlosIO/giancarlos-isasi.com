@@ -48,6 +48,9 @@ const HeaderInner = styled.header`
   }
 `;
 
+const linkClasses =
+  ' font-bold duration-300 ease-in-out transition-colors text-purple-500 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300';
+
 const Header: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const { toggleTheme, theme } = useTheme();
@@ -80,7 +83,7 @@ const Header: React.FC = () => {
             <Link
               key={link.url}
               href={link.url}
-              className="hidden lg:inline-block mr-2 text-purple-500 font-bold duration-300 ease-in-out transition-colors hover:text-purple-800 dark:hover:text-purple-400"
+              className={`hidden lg:inline-block mr-2 ${linkClasses}`}
             >
               <span>{link.label}</span>
             </Link>
@@ -124,10 +127,11 @@ const Header: React.FC = () => {
           </ButtonRotate>
           <div
             className={clsx(
-              'fixed inset-0 w-screen h-screen dark:bg-gray-800 backdrop-filter backdrop-blur-xl origin-center	',
+              'fixed inset-0 w-screen h-screen bg-white dark:bg-gray-800 transition-opacity duration-350 ease-in-out',
               {
                 'pointer-events-none': !open,
-                hidden: !open,
+                'opacity-1': open,
+                'opacity-0': !open,
               },
             )}
             style={{
@@ -135,14 +139,30 @@ const Header: React.FC = () => {
             }}
           >
             <div className="w-full h-full p-8 md:p-16 lg:p-0 flex flex-col relative">
-              {links.map(link => (
-                <Link
+              {links.map((link, index) => (
+                <motion.div
+                  initial={false}
+                  animate={open ? 'open' : 'closed'}
+                  variants={{
+                    closed: {
+                      x: -300,
+                    },
+                    open: {
+                      x: 0,
+                    },
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    ease: 'easeInOut',
+                    delay: 0.05 * index,
+                  }}
                   key={link.url}
-                  href={link.url}
-                  className="mr-2 text-purple-500 font-bold duration-300 ease-in-out transition-colors hover:text-purple-800 dark:hover:text-purple-400"
+                  className="py-3"
                 >
-                  <span>{link.label}</span>
-                </Link>
+                  <Link href={link.url} className={`mr-2 ${linkClasses}`}>
+                    <span>{link.label}</span>
+                  </Link>
+                </motion.div>
               ))}
               <button type="button"></button>
             </div>
