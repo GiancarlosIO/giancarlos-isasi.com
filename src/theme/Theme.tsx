@@ -24,6 +24,18 @@ const GlobalCss = createGlobalStyle<{ dark: boolean }>`
   }
 `;
 
+// Preload the files before to play! Only initialize once!
+// just use `new Audio` once. Each time that you initialize an Audio element the mp3 file is download!
+let audioOff: HTMLAudioElement;
+let audioOn: HTMLAudioElement;
+
+if (typeof window != 'undefined') {
+  audioOff = new Audio(`/sounds/switch-off.mp3`);
+  audioOff.volume = 0.3;
+  audioOn = new Audio(`/sounds/switch-on.mp3`);
+  audioOn.volume = 0.3;
+}
+
 export const createMediaRule = (pixels: string) =>
   `@media (min-width: ${pixels})`;
 
@@ -53,10 +65,11 @@ const ThemeContext = React.createContext<State | undefined>(undefined);
 const localStorageKey = '__MRN_THEME_PAGE';
 
 const playSwitchSound = (value: Theme) => {
-  const audioType = value === 'light' ? 'switch-off' : 'switch-on';
-  const audio = new Audio(`/sounds/${audioType}.mp3`);
-  audio.volume = 0.3;
-  audio.play();
+  if (value === 'light') {
+    audioOff.play();
+  } else {
+    audioOn.play();
+  }
 };
 
 export const ThemeProvider: React.FC = props => {
