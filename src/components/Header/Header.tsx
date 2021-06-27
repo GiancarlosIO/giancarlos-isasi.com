@@ -69,7 +69,7 @@ const Header: React.FC = () => {
 
   return (
     <div className="relative">
-      <HeaderInner className="w-full flex justify-between items-center bg-white dark:bg-gray-800">
+      <HeaderInner className="w-full flex justify-between items-center">
         <LinkNext href="/">
           <span className="text-3xl rounded py-2 cursor-pointer">
             <span className="font-reggae text-purple-500">-N</span>

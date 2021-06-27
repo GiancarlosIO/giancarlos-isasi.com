@@ -73,12 +73,12 @@ const Homepage: React.FC<HomepageProps> = ({ postList }) => {
             cardType: 'summary_large_image',
           }}
         />
-        <div>
+        <main className="bg-purple-50 dark:bg-gray-700 mb-6 lg:mb-8">
           <Container>
             <Header />
-            <HeroSection className="sm:py-3 xl:py-10 mx-auto">
+            <HeroSection className="pt-2 pb-8 sm:pb-3 sm:pt-3 lg:pt-10 lg:pb-10 mx-auto">
               <div>
-                <section className="xl:mt-12 text-lg md:text-2xl lg:text-3xl font-bold">
+                <section className="text-lg md:text-2xl lg:text-3xl font-bold">
                   <span>{t('GRETTINGS')}</span> <br />
                   <span>{t('IAM')}</span>{' '}
                   <a
@@ -107,15 +107,15 @@ const Homepage: React.FC<HomepageProps> = ({ postList }) => {
               </div>
             </HeroSection>
           </Container>
-          <main>
-            <Container>
-              <InnerMain className="relative">
-                <PostList />
-                <Aside />
-              </InnerMain>
-            </Container>
-          </main>
-        </div>
+        </main>
+        <main>
+          <Container>
+            <InnerMain className="relative">
+              <PostList />
+              <Aside />
+            </InnerMain>
+          </Container>
+        </main>
       </div>
     </HomepageContextProvider>
   );
