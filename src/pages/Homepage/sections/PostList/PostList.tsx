@@ -1,7 +1,7 @@
 import { useTranslation } from '@/pages/Homepage/hooks';
 import { usePageContext } from '@/pages/Homepage/context';
 
-import PostCard from './PostCard';
+import { PostCard } from '@/components';
 
 const ArticleList = () => {
   const { t } = useTranslation();

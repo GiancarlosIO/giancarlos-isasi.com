@@ -17,7 +17,7 @@ const ArticleCard: React.FC<PostPreview> = ({
           <Link href={url}>{title}</Link>
         </h3>
         <span className="font-bold text-sm text-gray-500">{createdAt}</span>
-        <p className="mb-4 mt-3">{contentPreview}</p>
+        <p className="mb-4 mt-3 line-clamp">{contentPreview}</p>
         <Link href={url} passHref>
           <a
             href={url}
