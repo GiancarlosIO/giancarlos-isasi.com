@@ -6,7 +6,7 @@ import { NextSeo } from 'next-seo';
 import Header from '@/components/Header';
 import Container from '@/components/Container';
 
-import { PostPreview } from '@/types';
+import { PostPreview, Category } from '@/types';
 
 import { useTheme } from '@/theme';
 
@@ -63,6 +63,7 @@ const Wavy = styled.div`
 
 type HomepageProps = {
   postList: PostPreview[];
+  categories: Category[];
 };
 const Homepage: React.FC<HomepageProps> = ({ postList }) => {
   const { t } = useTranslation('homepage');

@@ -45,7 +45,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
             publishedTime: data.createdAtISO,
             modifiedTime: data.createdAtISO,
             authors: ['https://mr-nexus.com/'],
-            tags: data.categories || [],
+            tags: data.categories.map(c => c.name) || [],
           },
           images: [
             {
