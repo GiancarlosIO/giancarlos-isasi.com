@@ -32,9 +32,13 @@ export const theme = {
     sm: '640px',
     md: '768px',
     lg: '1024px',
+    xl: '1280px',
+    '2xl': '1536px',
     mediaSm: () => createMediaRule(theme.breakpoints.sm),
     mediaMd: () => createMediaRule(theme.breakpoints.md),
     mediaLg: () => createMediaRule(theme.breakpoints.lg),
+    mediaXl: () => createMediaRule(theme.breakpoints.xl),
+    media2xl: () => createMediaRule(theme.breakpoints['2xl']),
   },
 };
 
