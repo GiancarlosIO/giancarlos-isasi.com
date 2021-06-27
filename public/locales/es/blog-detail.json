@@ -1,3 +1,5 @@
 {
-  "MAIN_TITLE": "Blog Detail title"
+  "MAIN_TITLE": "Blog Detail title",
+  "SEO_TITLE": "{{title}} | Giancarlos Isasi - Mr N",
+  "SEO_SITE_NAME": "{{title}} || Giancarlos Isasi - Mr N"
 }

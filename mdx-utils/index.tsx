@@ -65,6 +65,7 @@ export const getBlogContent = async ({
     data: {
       createdAt: data.createdAt,
       title: data.title,
+      contentPreview: data.contentPreview,
       slug,
     },
   };
