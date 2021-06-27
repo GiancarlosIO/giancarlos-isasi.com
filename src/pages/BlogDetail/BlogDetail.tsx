@@ -25,7 +25,7 @@ const components: MDXProviderProps['components'] = {
 
 const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
   return (
-    <div className="text-gray-800 dark:text-white dark:bg-gray-800">
+    <div className="text-gray-800 dark:text-white dark:bg-gray-800 min-h-screen pb-20">
       <Container>
         <Header />
         <MDXProvider components={components}>
