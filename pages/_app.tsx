@@ -10,6 +10,8 @@ import { isProduction } from '@/constants/env';
 
 import Favicons from '@/components/Favicons';
 
+import { Footer } from '@/components';
+
 import { ThemeProvider } from '@/theme';
 
 import '../styles/globals.css';
@@ -66,6 +68,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
 
       <Component {...pageProps} />
+      <Footer />
     </ThemeProvider>
   );
 };
