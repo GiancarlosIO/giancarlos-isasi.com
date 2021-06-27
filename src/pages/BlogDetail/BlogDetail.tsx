@@ -4,7 +4,7 @@ import { MDXProvider, MDXProviderProps } from '@mdx-js/react';
 import { NextSeo, ArticleJsonLd } from 'next-seo';
 import { useTranslation } from 'react-i18next';
 
-import { StaticCodeSnippet, Header, Container } from '@/components';
+import { Chip, StaticCodeSnippet, Header, Container } from '@/components';
 
 import { PostPreview } from '@/types';
 
@@ -32,6 +32,26 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
 
   return (
     <React.Fragment>
+      <div className="text-gray-800 dark:text-white dark:bg-gray-800 min-h-screen pb-20">
+        <Container>
+          <Header />
+          <MDXProvider components={components}>
+            <div className="font-medium">
+              <h1 className="font-bold text-2xl lg:text-4xl text-center mt-10 mb-6">
+                {data.title}
+              </h1>
+              <div className="flex justify-center mb-10">
+                {data.categories.map(category => (
+                  <div key={category.name} className="inline-block mr-2">
+                    <Chip mini label={category.name} url={category.url} />
+                  </div>
+                ))}
+              </div>
+              <MDXRemote {...source} />
+            </div>
+          </MDXProvider>
+        </Container>
+      </div>
       <NextSeo
         title={title}
         description={data.contentPreview}
@@ -45,7 +65,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
             publishedTime: data.createdAtISO,
             modifiedTime: data.createdAtISO,
             authors: ['https://mr-nexus.com/'],
-            tags: data.categories || [],
+            tags: data.categories.map(c => c.name) || [],
           },
           images: [
             {
@@ -74,19 +94,6 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
         publisherLogo="https://mr-nexus.com/favicons/apple-icon-180x180.png"
         description={data.contentPreview}
       />
-      <div className="text-gray-800 dark:text-white dark:bg-gray-800 min-h-screen pb-20">
-        <Container>
-          <Header />
-          <MDXProvider components={components}>
-            <div className="font-medium">
-              <h1 className="font-bold text-2xl lg:text-4xl text-center my-10">
-                {data.title}
-              </h1>
-              <MDXRemote {...source} />
-            </div>
-          </MDXProvider>
-        </Container>
-      </div>
     </React.Fragment>
   );
 };

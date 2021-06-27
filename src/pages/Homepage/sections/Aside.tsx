@@ -13,7 +13,7 @@ const Aside: React.FC = () => {
           {t('CATEGORIES_SECTION_TITLE').toUpperCase()}:
         </h2>
         {categories.map(category => (
-          <div key={category.id} className="inline-block mb-2 mr-2">
+          <div key={category.name} className="inline-block mb-2 mr-2">
             <Chip label={category.name} url={category.url} />
           </div>
         ))}

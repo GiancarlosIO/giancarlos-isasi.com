@@ -6,7 +6,7 @@ import { NextSeo } from 'next-seo';
 import Header from '@/components/Header';
 import Container from '@/components/Container';
 
-import { PostPreview } from '@/types';
+import { PostPreview, Category } from '@/types';
 
 import { useTheme } from '@/theme';
 
@@ -63,20 +63,14 @@ const Wavy = styled.div`
 
 type HomepageProps = {
   postList: PostPreview[];
+  categories: Category[];
 };
-const Homepage: React.FC<HomepageProps> = ({ postList }) => {
+const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
   const { t } = useTranslation('homepage');
   const { theme } = useTheme();
 
   return (
-    <HomepageContextProvider
-      posts={postList}
-      categories={Array.from({ length: 10 }).map((_, index) => ({
-        id: index,
-        name: 'typescript',
-        url: '/blog/?categories=typescript',
-      }))}
-    >
+    <HomepageContextProvider posts={postList} categories={categories}>
       <div className="text-gray-800 dark:text-white dark:bg-gray-800 overflow-x-hidden pb-20">
         <NextSeo
           title="Giancarlos Isasi - Mr N"

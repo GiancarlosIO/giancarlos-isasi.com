@@ -3,6 +3,7 @@ import { join } from 'path';
 
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
+import slugify from 'slugify';
 
 const postDirectory = join(process.cwd(), 'posts');
 
@@ -16,9 +17,19 @@ const transformStrToDate = (str: `${string}/${string}/${string}`): Date => {
 
   return date;
 };
+const transformCategory = (c: string) => ({
+  name: c,
+  url: `/blog/categories/${slugify(c)}/`,
+});
 
 type Locale = string;
-export const getBlogListSource = async (locale: Locale) => {
+// type Category = {
+//   name: string;
+//   url: string;
+// };
+
+export const getBlogListSource = async (locale: Locale, category?: string) => {
+  const postCategories: string[] = [];
   const folders = readdirSync(postDirectory);
   const sources = folders.map(folder => {
     const file = join(postDirectory, folder, `index-${locale}.mdx`);
@@ -26,22 +37,38 @@ export const getBlogListSource = async (locale: Locale) => {
     const { data } = matter(s);
 
     const date = transformStrToDate(data.createdAt);
+    const categories = (data.categories as string).split(', ');
+
+    categories.forEach(c => {
+      if (!postCategories.includes(c)) {
+        postCategories.push(c);
+      }
+    });
 
     return {
       ...data,
       createdAt: data.createdAt,
       createdAtISO: date.toISOString(),
       slug: folder,
-      categories: [],
+      categories,
     };
   });
 
-  return sources.sort((a, b) => {
+  const categoriesFiltered = category
+    ? sources.filter(s => s.categories.includes(category))
+    : sources;
+
+  const sourcesOrdered = categoriesFiltered.sort((a, b) => {
     const date1 = transformStrToDate(a.createdAt);
     const date2 = transformStrToDate(b.createdAt);
 
     return date2.getTime() - date1.getTime();
   });
+
+  return {
+    postList: sourcesOrdered,
+    postCategories: postCategories.map(transformCategory),
+  };
 };
 
 export const getBlogSlugs = () => {
@@ -80,7 +107,7 @@ export const getBlogContent = async ({
       title: data.title,
       contentPreview: data.contentPreview,
       slug,
-      categories: [],
+      categories: data.categories.split(', ').map(transformCategory),
     },
   };
 };
