@@ -1,21 +1,18 @@
 import * as React from 'react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { MDXProvider, MDXProviderProps } from '@mdx-js/react';
-import { NextSeo } from 'next-seo';
+import { NextSeo, ArticleJsonLd } from 'next-seo';
 import { useTranslation } from 'react-i18next';
 
 import { StaticCodeSnippet, Header, Container } from '@/components';
+
+import { PostPreview } from '@/types';
 
 import { H2, P, Ul, Ol, Anchor, Blockquote } from '@/components/MDXComponents';
 
 export type BlogDetailProps = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
-  data: {
-    title: string;
-    createdAt: string;
-    slug: string;
-    contentPreview: string;
-  };
+  data: PostPreview;
 };
 
 const components: MDXProviderProps['components'] = {
@@ -31,21 +28,30 @@ const components: MDXProviderProps['components'] = {
 const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
   const { t } = useTranslation('blog-detail');
   const url = `https://mr-nexus.com/blog/${data.slug}/`;
+  const title = t('SEO_TITLE', { title: data.title });
+
   return (
     <React.Fragment>
       <NextSeo
-        title={t('SEO_TITLE', { title: data.title })}
+        title={title}
         description={data.contentPreview}
         canonical={url}
         openGraph={{
-          url,
-          title: t('SEO_TITLE', { title: data.title }),
+          title,
           description: data.contentPreview,
+          url,
+          type: 'article',
+          article: {
+            publishedTime: data.createdAtISO,
+            modifiedTime: data.createdAtISO,
+            authors: ['https://mr-nexus.com/'],
+            tags: data.categories || [],
+          },
           images: [
             {
-              url: '/favicons/apple-icon-120x120.png',
-              width: 120,
-              height: 120,
+              url: 'https://mr-nexus.com/img/og-image.jpg',
+              width: 1280,
+              height: 853,
               alt: 'Mr N',
             },
           ],
@@ -56,6 +62,17 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
           site: '@mr-nexus.com',
           cardType: 'summary_large_image',
         }}
+      />
+      <ArticleJsonLd
+        url={url}
+        title={title}
+        images={['https://mr-nexus.com/img/og-image.jpg']}
+        datePublished={data.createdAtISO}
+        dateModified={data.createdAtISO}
+        authorName={['Giancarlos Isasi - Mr N']}
+        publisherName="Giancarlos Isasi - Mr N"
+        publisherLogo="https://mr-nexus.com/favicons/apple-icon-180x180.png"
+        description={data.contentPreview}
       />
       <div className="text-gray-800 dark:text-white dark:bg-gray-800 min-h-screen pb-20">
         <Container>

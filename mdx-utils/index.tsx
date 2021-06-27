@@ -6,6 +6,17 @@ import { serialize } from 'next-mdx-remote/serialize';
 
 const postDirectory = join(process.cwd(), 'posts');
 
+const transformStrToDate = (str: `${string}/${string}/${string}`): Date => {
+  const d = str
+    .split('/')
+    .map(s => parseInt(s))
+    .reverse();
+  // Note: JavaScript counts months from 0 to 11.
+  const date = new Date(d[0], d[1] - 1, d[2]);
+
+  return date;
+};
+
 type Locale = string;
 export const getBlogListSource = async (locale: Locale) => {
   const folders = readdirSync(postDirectory);
@@ -14,19 +25,20 @@ export const getBlogListSource = async (locale: Locale) => {
     const s = readFileSync(file, 'utf-8');
     const { data } = matter(s);
 
+    const date = transformStrToDate(data.createdAt);
+
     return {
       ...data,
       createdAt: data.createdAt,
+      createdAtISO: date.toISOString(),
       slug: folder,
+      categories: [],
     };
   });
 
   return sources.sort((a, b) => {
-    const ds = a.createdAt.split('/').reverse();
-    const date1 = new Date(ds);
-
-    const ds2 = b.createdAt.split('/').reverse();
-    const date2 = new Date(ds2);
+    const date1 = transformStrToDate(a.createdAt);
+    const date2 = transformStrToDate(b.createdAt);
 
     return date2.getTime() - date1.getTime();
   });
@@ -64,6 +76,7 @@ export const getBlogContent = async ({
     source: mdxSource,
     data: {
       createdAt: data.createdAt,
+      createdAtISO: transformStrToDate(data.createdAt).toISOString(),
       title: data.title,
       contentPreview: data.contentPreview,
       slug,

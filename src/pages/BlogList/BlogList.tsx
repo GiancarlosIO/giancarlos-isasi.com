@@ -24,9 +24,9 @@ const BlogList: React.FC<BlogListProps> = ({ postList }) => {
           description: t('SEO_DESCRIPTION'),
           images: [
             {
-              url: '/favicons/apple-icon-120x120.png',
-              width: 120,
-              height: 120,
+              url: 'https://mr-nexus.com/img/og-image.jpg',
+              width: 1280,
+              height: 853,
               alt: 'Mr N',
             },
           ],
