@@ -20,6 +20,10 @@ import { ButtonRotate } from './UI';
 
 const links = [
   {
+    url: '/',
+    label: 'Inicio',
+  },
+  {
     url: '/blog',
     label: 'Blog',
   },
