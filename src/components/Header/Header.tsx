@@ -16,7 +16,7 @@ import { motion } from 'framer-motion';
 import Link from '@/components/Link';
 import { useTheme } from '@/theme';
 
-import { CircularBgAnimated, ButtonRotate } from './UI';
+import { ButtonRotate } from './UI';
 
 const links = [
   {
