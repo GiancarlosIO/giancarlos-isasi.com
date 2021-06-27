@@ -158,7 +158,14 @@ const Header: React.FC = () => {
                   className="py-3"
                 >
                   <Link href={link.url} className={`mr-2 ${linkClasses}`}>
-                    <span>{link.label}</span>
+                    <span
+                      role="button"
+                      tabIndex={index}
+                      onClick={toggleOpen}
+                      onKeyUp={toggleOpen}
+                    >
+                      {link.label}
+                    </span>
                   </Link>
                 </motion.div>
               ))}
