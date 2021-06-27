@@ -67,8 +67,6 @@ const Header: React.FC = () => {
     }
   }, [open]);
 
-  console.log({ open });
-
   return (
     <div className="relative">
       <HeaderInner className="w-full flex justify-between items-center bg-white dark:bg-gray-800">
