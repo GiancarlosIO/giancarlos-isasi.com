@@ -16,11 +16,20 @@ export const getBlogListSource = async (locale: Locale) => {
 
     return {
       ...data,
+      createdAt: data.createdAt,
       slug: folder,
     };
   });
 
-  return sources;
+  return sources.sort((a, b) => {
+    const ds = a.createdAt.split('/').reverse();
+    const date1 = new Date(ds);
+
+    const ds2 = b.createdAt.split('/').reverse();
+    const date2 = new Date(ds2);
+
+    return date2.getTime() - date1.getTime();
+  });
 };
 
 export const getBlogSlugs = () => {
