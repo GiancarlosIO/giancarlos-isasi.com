@@ -1,12 +1,43 @@
 import * as React from 'react';
 import Head from 'next/head';
+
+import { AppProps } from 'next/app';
+import { appWithTranslation } from 'next-i18next';
+import NProgress from 'nprogress';
+import { useRouter } from 'next/router';
+
 import { isProduction } from '@/constants/env';
+
+import Favicons from '@/components/Favicons';
+
+import { ThemeProvider } from '@/theme';
 
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const handleStart = () => {
+      NProgress.start();
+    };
+    const handleStop = () => {
+      NProgress.done();
+    };
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleStop);
+    router.events.on('routeChangeError', handleStop);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleStop);
+      router.events.off('routeChangeError', handleStop);
+    };
+  }, [router]);
+
   return (
-    <React.Fragment>
+    <ThemeProvider>
       <Head>
         {isProduction && (
           <React.Fragment>
@@ -31,15 +62,12 @@ function MyApp({ Component, pageProps }) {
             />
           </React.Fragment>
         )}
-        <title>Mr. -N</title>
-        <meta
-          name="description"
-          content="Hi, I'm Giancarlos Isasi (Mr N), a Frontend engineer with experience in web performance optimización and javascript tooling."
-        />
+        <Favicons />
       </Head>
-      <Component {...pageProps} />
-    </React.Fragment>
-  );
-}
 
-export default MyApp;
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
+};
+
+export default appWithTranslation(MyApp);

@@ -1,6 +1,6 @@
 {
   "extends": [
-    "react-app",
+    "next",
     "react-app/jest",
     "plugin:jsx-a11y/recommended",
     "prettier",
