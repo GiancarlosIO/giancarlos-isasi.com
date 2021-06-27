@@ -3,7 +3,7 @@ import { MDXProvider, MDXProviderProps } from '@mdx-js/react';
 
 import { StaticCodeSnippet, Header, Container } from '@/components';
 
-import { H2, P, Ul, Ol, Anchor } from '@/components/MDXComponents';
+import { H2, P, Ul, Ol, Anchor, Blockquote } from '@/components/MDXComponents';
 
 export type BlogDetailProps = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -21,6 +21,7 @@ const components: MDXProviderProps['components'] = {
   ul: Ul,
   ol: Ol,
   a: Anchor,
+  CustomQuote: Blockquote,
 };
 
 const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
