@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
 import { useTranslation } from 'next-i18next';
+import { NextSeo } from 'next-seo';
 
 import Header from '@/components/Header';
 import Container from '@/components/Container';
@@ -62,6 +62,30 @@ const Homepage = ({ postList }) => {
       }))}
     >
       <div className="text-gray-800 dark:text-white dark:bg-gray-800 overflow-x-hidden pb-20">
+        <NextSeo
+          title="Giancarlos Isasi - Mr N"
+          description={t('SEO_DESCRIPTION')}
+          canonical="https://mr-nexus.com/"
+          openGraph={{
+            url: 'https://mr-nexus.com/',
+            title: 'Giancarlos Isasi - Mr N',
+            description: t('SEO_DESCRIPTION'),
+            images: [
+              {
+                url: '/favicons/apple-icon-120x120.png',
+                width: 120,
+                height: 120,
+                alt: 'Mr N',
+              },
+            ],
+            site_name: 'Giancarlos Isasi - Mr N',
+          }}
+          twitter={{
+            handle: '@handle',
+            site: '@mr-nexus.com',
+            cardType: 'summary_large_image',
+          }}
+        />
         <div>
           <Container>
             <Header />
