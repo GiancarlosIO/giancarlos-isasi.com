@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
+import NProgress from 'nprogress';
+import { useRouter } from 'next/router';
 
 import { isProduction } from '@/constants/env';
 
@@ -11,6 +13,27 @@ import { ThemeProvider } from '@/theme';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const handleStart = () => {
+      NProgress.start();
+    };
+    const handleStop = () => {
+      NProgress.done();
+    };
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleStop);
+    router.events.on('routeChangeError', handleStop);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleStop);
+      router.events.off('routeChangeError', handleStop);
+    };
+  }, [router]);
+
   return (
     <ThemeProvider>
       <Head>
