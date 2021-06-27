@@ -65,10 +65,12 @@ const ThemeContext = React.createContext<State | undefined>(undefined);
 const localStorageKey = '__MRN_THEME_PAGE';
 
 const playSwitchSound = (value: Theme) => {
-  if (value === 'light') {
-    audioOff.play();
-  } else {
-    audioOn.play();
+  if (audioOff && audioOn) {
+    if (value === 'light') {
+      audioOff.play();
+    } else {
+      audioOn.play();
+    }
   }
 };
 
