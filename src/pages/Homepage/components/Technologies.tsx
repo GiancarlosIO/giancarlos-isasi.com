@@ -82,7 +82,6 @@ const Technologies = () => {
             src={image.url}
             alt={image.alt}
             objectFit="contain"
-            priority
           />
         </motion.div>
       ))}
