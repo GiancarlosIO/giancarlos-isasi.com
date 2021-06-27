@@ -109,7 +109,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <h1 className="inline-block text-blue-600">
+                    <h1 className="inline-block text-blue-600 hover:underline">
                       {t('FULL_NAME')}
                     </h1>
                   </a>

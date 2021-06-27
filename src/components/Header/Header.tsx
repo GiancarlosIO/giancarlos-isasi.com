@@ -18,33 +18,7 @@ import { useTheme } from '@/theme';
 
 import { ButtonRotate } from './UI';
 
-const links = [
-  {
-    onlyMobile: true,
-    url: '/',
-    label: 'Inicio',
-  },
-  {
-    url: '/blog',
-    label: 'Blog',
-  },
-  {
-    url: '/blog/categories/snippets/',
-    label: 'Snippets',
-  },
-  {
-    url: '/experiments',
-    label: 'Experimentos',
-  },
-  {
-    url: '/about',
-    label: 'Sobre mí',
-  },
-  {
-    url: '/contact',
-    label: 'Contáctame',
-  },
-];
+import { headerLinks, linkClasses } from '@/constants';
 
 const HeaderInner = styled.header`
   width: 100%;
@@ -52,9 +26,6 @@ const HeaderInner = styled.header`
     width: 1100px;
   }
 `;
-
-const linkClasses =
-  ' font-bold duration-300 ease-in-out transition-colors text-purple-500 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300';
 
 const Header: React.FC = () => {
   const [open, setOpen] = React.useState(false);
@@ -82,13 +53,14 @@ const Header: React.FC = () => {
         </LinkNext>
 
         <div>
-          {links
+          {headerLinks
             .filter(l => !l.onlyMobile)
             .map(link => (
               <Link
                 key={link.url}
                 href={link.url}
                 className={`hidden lg:inline-block mr-2 ${linkClasses}`}
+                target={link.target}
               >
                 <span>{link.label}</span>
               </Link>
@@ -144,7 +116,7 @@ const Header: React.FC = () => {
             }}
           >
             <div className="w-full h-full p-8 md:p-16 lg:p-0 flex flex-col relative">
-              {links.map((link, index) => (
+              {headerLinks.map((link, index) => (
                 <motion.div
                   initial={false}
                   animate={open ? 'open' : 'closed'}
