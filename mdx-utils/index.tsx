@@ -17,10 +17,14 @@ const transformStrToDate = (str: `${string}/${string}/${string}`): Date => {
 
   return date;
 };
-const transformCategory = (c: string) => ({
-  name: c,
-  url: `/blog/categories/${slugify(c)}/`,
-});
+const transformCategory = (c: string) => {
+  const slug = slugify(c);
+  return {
+    slug,
+    name: c,
+    url: `/blog/categories/${slug}/`,
+  };
+};
 
 type Locale = string;
 // type Category = {
@@ -58,6 +62,8 @@ export const getBlogListSource = async (locale: Locale, category?: string) => {
     ? sources.filter(s => s.categories.includes(category))
     : sources;
 
+  const categoriesTransformed = postCategories.map(transformCategory);
+
   const sourcesOrdered = categoriesFiltered.sort((a, b) => {
     const date1 = transformStrToDate(a.createdAt);
     const date2 = transformStrToDate(b.createdAt);
@@ -67,7 +73,7 @@ export const getBlogListSource = async (locale: Locale, category?: string) => {
 
   return {
     postList: sourcesOrdered,
-    postCategories: postCategories.map(transformCategory),
+    postCategories: categoriesTransformed,
   };
 };
 

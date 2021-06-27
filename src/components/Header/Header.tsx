@@ -24,8 +24,8 @@ const links = [
     label: 'Blog',
   },
   {
-    url: '/proyects',
-    label: 'Proyectos',
+    url: '/blog/categories/snippets/',
+    label: 'Snippets',
   },
   {
     url: '/experiments',
