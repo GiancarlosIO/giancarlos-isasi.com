@@ -101,7 +101,8 @@ export const ThemeProvider: React.FC = props => {
 
     const originalClassNames = document.body.className
       .replace('light', '')
-      .replace('dark', '');
+      .replace('dark', '')
+      .trim();
 
     document.body.className = `${originalClassNames} ${
       currentTheme || themeVariant
