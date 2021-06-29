@@ -1,15 +1,15 @@
 ---
 title: "¿Cómo integrar nprogress con Nextjs?"
-contentPreview: "Posiblemente hayas notado que al navegar de página en página la transición no es inmdediata. Esto debido a que Nextjs se toma
-un poco de tiempo para descargar la data que la página destino necesita. Por ello es necesario implementar un Loader que indique al usuario que la transición se está llevando acabo.
-En este post implementaremos NProgress con Nextjs"
+contentPreview: "Posiblemente hayas notado que algunas veces, al usar Nextjs, la navegación entre página y página no es inmediata. Esto es debido a que Nextjs se toma
+un tiempo para descargar la data que la página destino necesita, y por ello es necesario implementar un Loader que indique al usuario que la transición se está llevando acabo.
+Para ello podemos usar el paquete NProgress. Estos snippets muestran como integrarlo con Nextjs."
 createdAt: "27/06/2021"
 categories: "reactjs, nextjs, ux/ui, snippets"
 ---
-
-Posiblemente hayas notado que al navegar de página en página la transición no es inmdediata. Esto debido a que Nextjs se toma
-un poco de tiempo para descargar la data que la página destino necesita. Por ello es necesario implementar un Loader que indique al usuario que la transición se está llevando acabo.
-En este post implementaremos NProgress con Nextjs para mejorar la experiencia del usuario al navegar entre páginas.
+## Introducción
+Posiblemente hayas notado que algunas veces, al usar Nextjs, la navegación entre página y página no es inmediata. Esto es debido a que Nextjs se toma
+un tiempo para descargar la data que la página destino necesita, y por ello es necesario implementar un Loader que indique al usuario que la transición se está llevando acabo.
+Para ello podemos usar el paquete NProgress. Estos snippets muestran como integrarlo con Nextjs.
 
 ## Pasos
 1. Instala nprogress
@@ -53,6 +53,8 @@ En este post implementaremos NProgress con Nextjs para mejorar la experiencia de
   ```
 3. Agregamos algunas reglas de css para personalizar la barra y loader de nprogress
   ```css
+  /* globals.css */
+
   /* Make clicks pass-through */
   #nprogress {
     pointer-events: none;
@@ -136,8 +138,8 @@ En este post implementaremos NProgress con Nextjs para mejorar la experiencia de
     }
   }
   ```
-## Listo!
-Eso sería todo. Este sitio web tiene exactamente el mismo código de arriba, si navegas de página en página
+
+Listo! Eso sería todo. Este sitio web tiene exactamente el mismo código de arriba, si navegas de página en página
 podrá notar una pequeña barra de carga en la parte superior.
 
 ¡Gracias por leer!
