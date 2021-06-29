@@ -19,7 +19,7 @@ export const headerLinks = [
     label: 'Experimentos',
   },
   {
-    url: '/about',
+    url: '/about-me',
     label: 'Sobre mí',
   },
   {
