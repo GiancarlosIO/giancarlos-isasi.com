@@ -1,11 +1,178 @@
 ---
-title: "¿cómo leer y escribir carpetas y archivos en golang?"
-contentPreview: "Si alguna vez has intentado recorrer de forma recursiva varias carpetas y archivos para ejecutar alguna acción específica, este artículo podrá ayudarte."
+title: "¿Cómo leer y modificar carpetas y archivos en golang?"
+contentPreview: "Si buscas como recorrer de forma recursiva varias carpetas y archivos para ejecutar alguna acción específica, este artículo podrá ayudarte."
 createdAt: "26/06/2021"
 categories: "go"
 ---
 
-Si alguna vez has intentado recorrer de forma recursiva varias carpetas y archivos para ejecutar alguna acción específica, este artículo podrá ayudarte.
+
+## Introducción
+Hace unas semanas tuve la necesidad de recorrer miles de archivos y carpetas, leer su contenido y luego contabilizar cuántos de estos cumplían con cierto requerimiento.
+Al inicio pensaba usar nodejs pero luego de revisar la documentación de cade lenguage decidí usar golang.
+
+## ¿Cómo leer el contenido de un archivo en golang?
+Para esto usaremos el paquete `ioutil`, este contiene el método `ReadFile` con el que obtendremos el contenido de un archivo.
+```go {9}
+package main
+import (
+  "fmt"
+  "io/ioutil"
+)
+
+const filePath = "file.txt"
+func main() {
+  content, err := ioutil.ReadFile(filePath)
+  if err != nil {
+    fmt.Println(err)
+    panic("error to read the file")
+  }
+
+  text := string(content)
+  fmt.Println("The content file is: ", text)
+}
+```
+
+## ¿Cómo crear, modificar o reescribir el contenido de un archivo en golang?
+Al igual que la sección anterior, también usaremos `ioutil` para modificar o sobreescribir el contenido.
+Para ello, este contiene un método `WriteFile` .<br/>
+Recuerda que golang creará el archivo en caso este no exista.
+
+```go {15}
+package main
+import (
+  "fmt"
+  "io/ioutil"
+)
+
+const filePath = "./file.txt"
+func main() {
+  // write this to the file
+  newContent := "file was modified"
+
+  // The thrid param is the perm(ision) mode for the current system
+  // 0600 (rw) means read and write for the Owner of the file
+  // You can use this https://chmod-calculator.com to calculate the last param
+  err := ioutil.WriteFile(filePath, []byte(newContent), 0600)
+  if err != nil {
+    fmt.Println(err)
+    panic("error to write file")
+  }
+}
+```
+
+## ¿Cómo recorrer/leer de forma recursiva el contenido de una carpeta en golang?
+Para leer archivos de una carpeta en golang podemos usar la función [filepath.WalkDir](https://golang.org/pkg/path/filepath/#WalkDir).
+Como primer párametro este acepta la ruta de la carpeta y como segundo un callback que se ejecuta por cada carpeta o archivo encontrado.
+```go
+package main
+
+import (
+  "fmt"
+  "path/filepath"
+)
+
+const folderPath = "/my/folter/path"
+
+func main() {
+  filepath.WalkDir(folderPath, walkDirFunc)
+
+  fmt.Println("Number of deprecated files: ", func(path string, d fs.DirEntry, err error) error {
+    fmt.Printf("Name of the folder or file is %s", d.Name())
+  })
+}
+```
+
+## Ejemplo prático
+Demosle un uso práctico a estos 3 métodos dando solución a lo siguiente:
+
+Recorrer de forma recursiva una carpeta que contiene multiples archivos y sub-carpetas. Para cada uno de estos archivos, ejecutar lo siguiente:
+1. Leer el contenido de cada archivo y contabilizar cuantos con la extensión ".tsx" o ".tsx" contienen el texto "// @deprecated" en su primera linea.
+2. Escribir la oración "# file modified" en la primera linea de cada archivo con la extensión ".py".
+
+Como regla tenemos:
+* Ignorar todas las carpetas de nombre "tmp" (temporal).
+
+Al final, nuestro programa debería mostrar lo siguiente en la terminal:
+```text
+Total files with extension .py modified:      XXXXX
+Total files with the "@deprecated" comment:   XXXXX
+```
+
+Solución:
+
+```go {24,40,45,50,59}
+package main
+
+import (
+  "fmt"
+  "io/fs"
+  "path/filepath"
+  "os"
+)
+
+const folderPath = "/my/folter/path"
+var deprecatedFiles int = 0
+var modifiedFiles int = 0
+
+func main() {
+  filepath.WalkDir(folderPath, walkDirFunc)
+
+  fmt.Println("Total files with extension .py modified: ", modifiedFiles)
+  fmt.Println("Total files with the \"@deprecated\" comment: ", deprecatedFiles)
+}
+
+func walkDirFunc(path string, d fs.DirEntry, err error) error {
+  // ignore tmp folders
+  name := d.Name()
+  if name == "tmp" {
+    // return this constant to skip a folder/file
+    return filepath.SkipDir
+  }
+
+  fileEx := filepath.Ext(name)
+
+  // modify .py files
+  if fileEx == ".py" {
+    rawBytes, err := os.ReadFile(path)
+    if err != nil {
+      panic(err)
+    }
+
+    content := string(rawBytes)
+    newContent := "# file modified" + "\n" + string(fileContent)
+    err = ioutil.WriteFile(path, []byte(newContent), 0644)
+    if err != nil {
+      panic(err)
+    }
+
+    modifiedFiles = modifiedFiles + 1
+  }
+
+  // count files with extension .tsx or .ts that have the @deprecated comment in the top
+  if fileEx == ".ts" || fileEx == ".tsx" {
+    rawBytes, err := ioutil.ReadFile(path)
+    if err != nil {
+      panic(err)
+    }
+
+    lines := strings.Split(string(rawBytes), "\n")
+    // we only care about the first line
+    firstLine := lines[0]
+    if firstLine == "// @deprecated" {
+      deprecatedFiles = deprecatedFiles + 1
+    }
+  }
+
+  return nil
+}
+```
+
+## Conclusión
+Como vimos, golang ofrece muchos métodos para poder trabajar con archivos y carpetas. Viniendo del mundo de scripting con nodejs,
+puedo asegurar que con golang este tipo de tareas es mucho más simple. Espero esta información te sea útil.
+
+¡Gracias por leer!
+
 
 
 
