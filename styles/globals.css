@@ -96,3 +96,12 @@ html {
     transform: rotate(360deg);
   }
 }
+
+/* highlight line  */
+.highlight-line {
+  background-color: rgba(254, 243, 199, 1);
+}
+
+.highlight-line-dark {
+  background-color: rgba(249, 250, 251, 0.15);
+}

@@ -1,20 +1,20 @@
 ---
 title: "¿Cómo truncar lineas de textos usando CSS?"
-contentPreview: "Posiblemente hayas necesitado que cierto texto sea exactamente de X números de lineas ya que, de no serlo, este rompería la UI.
-El problema es que muchas veces este texto es dinámico y viene de una API por lo que necesitamos una forma de, independientemente la cantidad de texto, este siempre ocupe X lineas.
-En este post veremos como truncar cierta cantidad de lineas de texto usando solamente CSS."
+contentPreview: "En algún momento de nuestras vidas hemos necesitado que cierto texto ocupe exactamente X números de lineas ya que, de no ser así, este rompería la UI.
+El problema es que muchas veces este texto es dinámico y viene de una API por lo que necesitamos una forma de, independientemente la cantidad de texto,
+este siempre ocupe una cierta cantidad lineas. En este post veremos como truncar cierta cantidad de lineas de texto usando solamente CSS."
 createdAt: "27/06/2021"
 categories: "css, snippets"
 ---
 
-Posiblemente hayas necesitado que cierto texto sea exactamente de X números de lineas ya que, de no serlo, este rompería la UI.
-El problema es que muchas veces este texto es dinámico y viene de una API por lo que necesitamos una forma de, independientemente la cantidad de texto, este siempre ocupe X lineas.
-En este post veremos como truncar cierta cantidad de lineas de texto usando solamente CSS.
+En algún momento de nuestras vidas hemos necesitado que cierto texto ocupe exactamente X números de lineas ya que, de no ser así, este rompería la UI.
+El problema es que muchas veces este texto es dinámico y viene de una API por lo que necesitamos una forma de, independientemente la cantidad de texto,
+este siempre ocupe una cierta cantidad lineas. En este post veremos como truncar cierta cantidad de lineas de texto usando solamente CSS.
 
 <CustomQuote
   title="Nota:"
   content={`
-    <p class="mb-2 ml-4">El código usado aún no es soportado por todos los navegadores. Para evitar problemas puedes revisar estos links:</p>
+    <p class="mb-2 ml-4">Las reglas de css usadas en este post aún son soportadas por todos los navegadores. Puedes revisar el browser-support en los siguientes links:</p>
     <ul>
       <li>
         <a href="https://caniuse.com/?search=line-clamp" target="_blank">Line clamp - CanIUse</a
@@ -27,11 +27,11 @@ En este post veremos como truncar cierta cantidad de lineas de texto usando sola
 />
 
 ## Usando line-clamp y box-oriented
-
+Usando estas dos propiedades de css, podemos crear el siguiente helper:
 ```css
 .line-clamp {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 3; /* número de lineas a truncar */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -51,21 +51,14 @@ const Text = () => (
 )
 ```
 
-**Con la clase line-clamp obtenemos:**
+**Usando la clase de css creada "line-clamp", podemos hacer que el texto sea exactamente de 3 lineas:**
 <span className="line-clamp mb-8">
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-</span>
-
-
-**Sin la clase line-clamp obtenemos:**
-
-<span>
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 </span>
 
 ## Conclusión
 El truncar texto es algo que, en algún momento de tu vida como Frontend developer, necesitarás.
-Como ya vimos, no es tan complicado como parece, usando solamente css podemos lograr efecto deseado.
+Como ya vimos, no es tan complicado como parece, usando unicamente css podemos lograr efecto deseado.
 
 ¡Gracias por leer!
 
