@@ -34,6 +34,39 @@ type struct Article {
 }
 ```
 
+## Crear tablas y correr migraciones (Automigrate)
+```go
+package models
+
+import (
+	"fmt"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+type User struct {
+  gorm.Model
+  Username string
+  Email string `gorm:"unique" binding:"required"`
+}
+
+// ddbDsn = postgresql://postgres_user:postgres_pass@database:5432/my-app
+func SetupModels(dbDsn string) *gorm.DB {
+  db, err := gorm.Open(postgres.Open(dbDsn), &gorm.Config{})
+  if err != nil {
+    fmt.Println(err)
+    panic('Failed to load the database')
+  }
+
+  db.Automigrate(
+    &User{},
+  )
+
+  return db;
+}
+```
+
 ## Simple CRUD
 ```go
 package main
@@ -67,7 +100,8 @@ db.Delete(&article)
 db.Where("id = ?", "2").Delete(&article)
 ```
 
-## Agregar validaciones de campo requerido a una tabla (Validations)
+## Agregar validaciones a un campo (Validations)
+Campo requerido:
 ```go
 package models
 import (
@@ -80,6 +114,20 @@ type Article struct {
   ShortDescription string `binding:"required"`
 }
 ```
+
+Campo único:
+```go
+package models
+import (
+  "gorm.io/gorm"
+)
+
+type User struct {
+  gorm.Model
+  Email string `gorm:"unique" binding:"required"`
+}
+```
+Puedes revisar otros "field tags" [aquí](https://gorm.io/docs/models.html#Fields-Tags).
 
 ## Crear modelos con relación Many-to-Many con referencia mutua
 El nombre de la tabla intermedia será **article_categories**.
