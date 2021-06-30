@@ -1,0 +1,19 @@
+@keyframes bounce {
+  0% {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  50% {
+    transform: translateY(30px) rotate(45deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(45deg);
+  }
+}
+
+.bounce {
+  transform: translateY(0) rotate(45deg);
+  transform-origin: bottom;
+  animation: bounce 3s ease forwards infinite;
+}
