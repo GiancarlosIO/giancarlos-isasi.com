@@ -1,3 +1,4 @@
+import { TWITTER_PROFILE, INSTAGRAM_PROFILE } from './social-media';
 export const linkClasses =
   ' font-bold duration-300 ease-in-out transition-colors text-purple-500 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300';
 export const headerLinks = [
@@ -33,12 +34,12 @@ export const headerLinks = [
 export const socialMediaLinks = [
   {
     label: 'Twitter',
-    url: 'https://twitter.com/MrNexusZGT',
+    url: TWITTER_PROFILE,
     target: '_blank',
   },
   {
     label: 'Instagram',
-    url: 'https://www.instagram.com/nexuszgt/',
+    url: INSTAGRAM_PROFILE,
     target: '_blank',
   },
   {

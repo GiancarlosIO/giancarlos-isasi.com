@@ -9,6 +9,7 @@ import Container from '@/components/Container';
 import { PostPreview, Category } from '@/types';
 
 import { useTheme } from '@/theme';
+import { TWITTER_PROFILE } from '@/constants/social-media';
 
 import { Technologies } from './components';
 import { PostList, Aside } from './sections';
@@ -104,11 +105,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                 <section className="text-lg md:text-2xl lg:text-3xl font-bold">
                   <span>{t('GRETTINGS')}</span> <br />
                   <span>{t('IAM')}</span>{' '}
-                  <a
-                    href="https://twitter.com/MrNexusZGT"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
+                  <a href={TWITTER_PROFILE} rel="noreferrer" target="_blank">
                     <h1 className="inline-block text-blue-600 hover:underline">
                       {t('FULL_NAME')}
                     </h1>
@@ -117,11 +114,11 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                   <span>{t('BIO_1')}</span>
                 </section>
 
-                <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
+                <p className="mt-8 font-bold text-sm md:text-xl">
                   {t('DESCRIPTION_1')}
                 </p>
 
-                <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
+                <p className="mt-8 font-bold text-sm md:text-xl">
                   {t('DESCRIPTION_2')}
                 </p>
               </div>
