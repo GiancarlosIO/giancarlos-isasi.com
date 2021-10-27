@@ -28,7 +28,7 @@ const AboutMe = () => {
   const onClickPrev = () => {
     setRocketPosition(prev => ({
       x: prev.x >= 100 ? prev.x - 100 : 0,
-      y: prev.x === 100 ? 0 : prev.y === 100 ? -100 : 100,
+      y: prev.x <= 100 ? 0 : prev.y === 100 ? -100 : 100,
     }));
   };
 
