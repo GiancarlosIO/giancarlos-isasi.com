@@ -18,7 +18,6 @@ export const getStaticProps: GetStaticProps = async ({ locale: _locale }) => {
 
   return {
     props: {
-      hideFooter: true,
       postList,
       categories: postCategories,
       ...i18nProps,
