@@ -9,6 +9,9 @@ export const stackTech: TStack[] = [
       'React.js',
       'Next.js',
       'typescript',
+      'graphql',
+      'apollo client',
+      'react-query',
       'react-hook-form',
       'react-router',
       'material-ui',
@@ -82,5 +85,9 @@ export const stackTech: TStack[] = [
       'vercel',
       'netlify',
     ],
+  },
+  {
+    title: 'Server side',
+    items: ['nodejs', 'express', 'primsa orm', 'typeorm', 'graphql'],
   },
 ];
