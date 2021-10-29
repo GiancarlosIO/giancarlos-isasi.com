@@ -11,12 +11,16 @@ import { PostPreview, Category } from '@/types';
 
 import { useTheme } from '@/theme';
 import { TWITTER_PROFILE } from '@/constants/social-media';
+import { socialMediaLinks } from '@/constants';
 
 import { Technologies } from './components';
 import { PostList, Aside } from './sections';
 import { HomepageContextProvider } from './context';
 
-import { socialMediaLinks } from '@/constants';
+import instagramLogo from './images/instagram-logo.png';
+import gmailLogo from './images/gmail-logo.png';
+import youtubeLogo from './images/youtube-logo.png';
+import twitterLogo from './images/twitter-logo.png';
 
 const HeroSection = styled.section`
   display: grid;
@@ -64,6 +68,13 @@ const Wavy = styled.div`
     bottom: -193px;
   }
 `;
+
+const socialLogoUrls = {
+  youtube: youtubeLogo,
+  instagram: instagramLogo,
+  twitter: twitterLogo,
+  gmail: gmailLogo,
+};
 
 type HomepageProps = {
   postList: PostPreview[];
@@ -132,7 +143,11 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                       >
                         <Image
                           key={social.label}
-                          src={social.logoUrl}
+                          src={
+                            socialLogoUrls[
+                              social.type as keyof typeof socialLogoUrls
+                            ]
+                          }
                           alt={social.label}
                           width={social.widthImage}
                           height={social.heightImage}
