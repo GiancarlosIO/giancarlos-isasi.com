@@ -1,8 +1,21 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { i18n } = require('./next-i18next.config');
 
+const { ASSET_PREFIX, NODE_ENV, VERCEL_GIT_COMMIT_REF } = process.env;
+const isProduction = NODE_ENV === 'production';
+const isQAorMaster =
+  VERCEL_GIT_COMMIT_REF === 'master' || VERCEL_GIT_COMMIT_REF === 'qa';
+
 const config = {
   i18n,
+  images:
+    isProduction && isQAorMaster
+      ? {
+          loader: 'imgix',
+          path: ASSET_PREFIX,
+          domains: [ASSET_PREFIX],
+        }
+      : {},
   webpack: config => {
     config.resolve.plugins = [
       ...config.resolve.plugins,
