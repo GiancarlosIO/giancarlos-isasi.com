@@ -1,5 +1,6 @@
 import * as React from 'react';
 import LinkNext from 'next/link';
+import Image from 'next/image';
 import styled from 'styled-components';
 
 import * as bodyScrollLock from 'body-scroll-lock';
@@ -47,8 +48,20 @@ const Header: React.FC = () => {
     <div className="relative z-20">
       <HeaderInner className="w-full flex justify-between items-center">
         <LinkNext href="/" passHref>
-          <a href="/" className="text-3xl rounded py-2 cursor-pointer">
-            <span className="font-reggae text-purple-500">-N</span>
+          <a
+            href="/"
+            className="text-3xl rounded py-2 cursor-pointer"
+            style={{
+              marginLeft: -20,
+            }}
+          >
+            <Image
+              src="/img/logo_decoder_only_icon_transparency.png"
+              alt="Giancarlos Isasi"
+              priority
+              width="100px"
+              height="80px"
+            />
           </a>
         </LinkNext>
 

@@ -27,7 +27,7 @@ const BlogList: React.FC<BlogListProps> = ({ postList }) => {
               url: 'https://mr-nexus.com/img/og-image.jpg',
               width: 1280,
               height: 853,
-              alt: 'Mr N',
+              alt: 'TheDecoderJS',
             },
           ],
           site_name: t('SEO_SITE_NAME'),

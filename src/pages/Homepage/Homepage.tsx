@@ -74,22 +74,22 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
     <HomepageContextProvider posts={postList} categories={categories}>
       <div className="text-gray-800 dark:text-white dark:bg-gray-800 overflow-x-hidden pb-20">
         <NextSeo
-          title="Giancarlos Isasi - Mr N"
+          title="Giancarlos Isasi - TheDecoderJS"
           description={t('SEO_DESCRIPTION')}
           canonical="https://mr-nexus.com/"
           openGraph={{
             url: 'https://mr-nexus.com/',
-            title: 'Giancarlos Isasi - Mr N',
+            title: 'Giancarlos Isasi - TheDecoderJS',
             description: t('SEO_DESCRIPTION'),
             images: [
               {
                 url: 'https://mr-nexus.com/img/og-image.jpg',
                 width: 1280,
                 height: 853,
-                alt: 'Mr N',
+                alt: 'TheDecoderJS',
               },
             ],
-            site_name: 'Giancarlos Isasi - Mr N',
+            site_name: 'Giancarlos Isasi - TheDecoderJS',
           }}
           twitter={{
             handle: '@handle',

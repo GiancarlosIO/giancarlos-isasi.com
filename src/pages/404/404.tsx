@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <SVGCss />
-      <h1 className={styles.title}>Mr. N</h1>
+      <h1 className={styles.title}>TheDecoderJS</h1>
       <p className={styles.subtitle}>Website under construction</p>
       <Building className={styles.building} />
       <a

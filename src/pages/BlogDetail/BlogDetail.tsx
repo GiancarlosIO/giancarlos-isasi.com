@@ -72,7 +72,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
               url: 'https://mr-nexus.com/img/og-image.jpg',
               width: 1280,
               height: 853,
-              alt: 'Mr N',
+              alt: 'TheDecoderJS',
             },
           ],
           site_name: t('SEO_SITE_NAME', { title: data.title }),
@@ -89,8 +89,8 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
         images={['https://mr-nexus.com/img/og-image.jpg']}
         datePublished={data.createdAtISO}
         dateModified={data.createdAtISO}
-        authorName={['Giancarlos Isasi - Mr N']}
-        publisherName="Giancarlos Isasi - Mr N"
+        authorName={['Giancarlos Isasi - TheDecoderJS']}
+        publisherName="Giancarlos Isasi - TheDecoderJS"
         publisherLogo="https://mr-nexus.com/favicons/apple-icon-180x180.png"
         description={data.contentPreview}
       />
