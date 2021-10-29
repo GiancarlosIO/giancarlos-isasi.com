@@ -1,17 +1,27 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
+import reactLogo from '../images/react.png';
+import typescriptLogo from '../images/typescript.png';
+import nextLogo from '../images/next.png';
+import babelLogo from '../images/babel.png';
+import jestLogo from '../images/jest.png';
+import styledLogo from '../images/styled-components.png';
+import tailwindcssLogo from '../images/tailwindcss.png';
+import ginLogo from '../images/gin-golang.png';
+import gopherLogo from '../images/gopher.png';
+
 const images = [
   {
-    url: '/img/react.png',
+    url: reactLogo,
     alt: 'React',
   },
   {
-    url: '/img/typescript.png',
+    url: typescriptLogo,
     alt: 'Typescript',
   },
   {
-    url: '/img/next-js.svg',
+    url: nextLogo,
     alt: 'Nextjs, the react framework',
   },
   // {
@@ -19,11 +29,11 @@ const images = [
   //   alt: 'Webpack',
   // },
   {
-    url: '/img/babel.png',
+    url: babelLogo,
     alt: 'Babel',
   },
   {
-    url: '/img/jest.png',
+    url: jestLogo,
     alt: 'Jest',
   },
   // {
@@ -31,19 +41,19 @@ const images = [
   //   alt: 'Cypress',
   // },
   {
-    url: '/img/styled-components.png',
+    url: styledLogo,
     alt: 'Styled components',
   },
   {
-    url: '/img/tailwindcss.svg',
+    url: tailwindcssLogo,
     alt: 'Tailwindcss',
   },
   {
-    url: '/img/gin-golang.png',
+    url: ginLogo,
     alt: 'Gin Framework',
   },
   {
-    url: '/img/gopher.png',
+    url: gopherLogo,
     alt: 'Golang',
   },
 ];
@@ -73,7 +83,7 @@ const Technologies = () => {
             repeat: Infinity,
             // repeatDelay: 0.5 * index,
           }}
-          key={image.url}
+          key={image.alt}
           className="p-4 w-1/2 flex justify-center"
         >
           <Image
