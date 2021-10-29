@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Image from 'next/image';
 import styled from 'styled-components';
 import { useTranslation } from 'next-i18next';
 import { NextSeo } from 'next-seo';
@@ -14,6 +15,8 @@ import { TWITTER_PROFILE } from '@/constants/social-media';
 import { Technologies } from './components';
 import { PostList, Aside } from './sections';
 import { HomepageContextProvider } from './context';
+
+import { socialMediaLinks } from '@/constants';
 
 const HeroSection = styled.section`
   display: grid;
@@ -117,10 +120,28 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                 <p className="mt-8 font-bold text-sm md:text-xl">
                   {t('DESCRIPTION_1')}
                 </p>
-
-                <p className="mt-8 font-bold text-sm md:text-xl">
-                  {t('DESCRIPTION_2')}
-                </p>
+                <div className="mt-4 flex items-center">
+                  {socialMediaLinks.map(social => {
+                    return (
+                      <a
+                        key={social.label}
+                        className="pr-1"
+                        href={social.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Image
+                          key={social.label}
+                          src={social.logoUrl}
+                          alt={social.label}
+                          width={social.widthImage}
+                          height={social.heightImage}
+                          priority
+                        />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
               <div className="w-full hidden lg:block">
                 <Technologies />

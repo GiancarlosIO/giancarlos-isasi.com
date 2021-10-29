@@ -20,6 +20,7 @@ import { useTheme } from '@/theme';
 import { ButtonRotate } from './UI';
 
 import { headerLinks, linkClasses } from '@/constants';
+import { primary } from '@/theme/colors';
 
 const HeaderInner = styled.header`
   width: 100%;
@@ -50,16 +51,13 @@ const Header: React.FC = () => {
         <LinkNext href="/" passHref>
           <a
             href="/"
-            className="text-3xl rounded py-2 cursor-pointer"
-            style={{
-              marginLeft: -20,
-            }}
+            className="text-3xl rounded py-2 cursor-pointer mt-2 bg-primary"
           >
             <Image
-              src="/img/logo_decoder_only_icon_transparency.png"
+              src="/img/logo_decoder_white_icon.png"
               alt="Giancarlos Isasi"
               priority
-              width="100px"
+              width="90px"
               height="80px"
             />
           </a>
