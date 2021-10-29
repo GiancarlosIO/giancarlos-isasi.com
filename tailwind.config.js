@@ -9,11 +9,13 @@ module.exports = {
       primary: '#4630AB',
       'primary-dark': '#2B0548',
       'primary-light': '#6669C5',
+      'blue-light': '#F9F9FF',
+      'blue-darker': '#353353',
       ...colors,
     },
     fontFamily: {
-      reggae: [
-        'Reggae One',
+      kaushan: [
+        'Kaushan Script',
         '-apple-system',
         'BlinkMacSystemFont',
         'Segoe UI',

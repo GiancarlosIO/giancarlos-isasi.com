@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Image from 'next/image';
 import styled from 'styled-components';
 import { useTranslation } from 'next-i18next';
 import { NextSeo } from 'next-seo';
@@ -11,16 +10,11 @@ import { PostPreview, Category } from '@/types';
 
 import { useTheme } from '@/theme';
 import { TWITTER_PROFILE } from '@/constants/social-media';
-import { socialMediaLinks } from '@/constants';
+import { SocialButtons } from '@/components';
 
 import { Technologies } from './components';
 import { PostList, Aside } from './sections';
 import { HomepageContextProvider } from './context';
-
-import instagramLogo from './images/instagram-logo.png';
-import gmailLogo from './images/gmail-logo.png';
-import youtubeLogo from './images/youtube-logo.png';
-import twitterLogo from './images/twitter-logo.png';
 
 const HeroSection = styled.section`
   display: grid;
@@ -43,39 +37,6 @@ const InnerMain = styled.div`
   }
 `;
 
-const Wavy = styled.div`
-  z-index: 1;
-  bottom: -31px;
-  @media (min-width: 480px) {
-    bottom: -54px;
-  }
-  @media (min-width: 540px) {
-    bottom: -60px;
-  }
-  @media (min-width: 600px) {
-    bottom: -64px;
-  }
-  ${props => props.theme.breakpoints.mediaMd()} {
-    bottom: -84px;
-  }
-  ${props => props.theme.breakpoints.mediaLg()} {
-    bottom: -110px;
-  }
-  ${props => props.theme.breakpoints.mediaXl()} {
-    bottom: -147px;
-  }
-  ${props => props.theme.breakpoints['media2xl']()} {
-    bottom: -193px;
-  }
-`;
-
-const socialLogoUrls = {
-  youtube: youtubeLogo,
-  instagram: instagramLogo,
-  twitter: twitterLogo,
-  gmail: gmailLogo,
-};
-
 type HomepageProps = {
   postList: PostPreview[];
   categories: Category[];
@@ -86,7 +47,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
 
   return (
     <HomepageContextProvider posts={postList} categories={categories}>
-      <div className="text-gray-800 dark:text-white dark:bg-gray-800 overflow-x-hidden pb-20">
+      <div className="text-gray-800 dark:text-white overflow-x-hidden pb-20">
         <NextSeo
           title="Giancarlos Isasi - TheDecoderJS"
           description={t('SEO_DESCRIPTION')}
@@ -111,7 +72,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
             cardType: 'summary_large_image',
           }}
         />
-        <main className="relative bg-purple-50 dark:bg-gray-700 mb-6 lg:mb-8">
+        <main className="relative mb-6 lg:mb-8">
           <Container className="relative z-20">
             <Header />
             <HeroSection className="pt-2 pb-16 sm:pb-46 sm:pt-3 lg:pt-10 lg:pb-24 mx-auto">
@@ -131,39 +92,14 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                 <p className="mt-8 font-bold text-sm md:text-xl">
                   {t('DESCRIPTION_1')}
                 </p>
-                <div className="mt-4 flex items-center">
-                  {socialMediaLinks.map(social => {
-                    return (
-                      <a
-                        key={social.label}
-                        className="pr-1"
-                        href={social.url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <Image
-                          key={social.label}
-                          src={
-                            socialLogoUrls[
-                              social.type as keyof typeof socialLogoUrls
-                            ]
-                          }
-                          alt={social.label}
-                          width={social.widthImage}
-                          height={social.heightImage}
-                          priority
-                        />
-                      </a>
-                    );
-                  })}
-                </div>
+                <SocialButtons />
               </div>
               <div className="w-full hidden lg:block">
                 <Technologies />
               </div>
             </HeroSection>
           </Container>
-          <Wavy className="absolute left-0 right-0">
+          {/* <Wavy className="absolute left-0 right-0">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
               <path
                 fill={theme === 'light' ? '#ffffff' : 'rgba(31, 41, 55, 1)'}
@@ -171,7 +107,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                 d="M0,32L60,53.3C120,75,240,117,360,138.7C480,160,600,160,720,138.7C840,117,960,75,1080,69.3C1200,64,1320,96,1380,112L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
               ></path>
             </svg>
-          </Wavy>
+          </Wavy> */}
         </main>
         <main className="relative z-10">
           <Container>

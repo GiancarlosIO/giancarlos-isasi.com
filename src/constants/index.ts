@@ -4,7 +4,8 @@ import {
   YOUTUBE_CHANNEL,
 } from './social-media';
 export const linkClasses =
-  ' font-bold duration-300 ease-in-out transition-colors text-primary-light dark:text-white hover:underline';
+  ' font-bold duration-300 ease-in-out transition-colors text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white';
+
 export const headerLinks = [
   {
     onlyMobile: true,
