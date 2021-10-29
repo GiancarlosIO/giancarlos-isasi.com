@@ -7,12 +7,12 @@ const AboutMeSEO: React.FC<AboutMeSEOProps> = props => {
   return (
     <NextSeo
       title="Giancarlos Isasi - TheDecoderJS"
-      description={t('SEO_DESCRIPTION')}
+      description={t('GRETTINGS')}
       canonical="https://mr-nexus.com/about-me/"
       openGraph={{
         url: 'https://mr-nexus.com/about-me/',
         title: 'Giancarlos Isasi - TheDecoderJS',
-        description: t('SEO_DESCRIPTION'),
+        description: t('GRETTINGS'),
         images: [
           {
             url: 'https://mr-nexus.com/img/og-image.jpg',
