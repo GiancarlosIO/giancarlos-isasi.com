@@ -8,14 +8,14 @@ const AboutMeSEO: React.FC<AboutMeSEOProps> = props => {
     <NextSeo
       title="Giancarlos Isasi - TheDecoderJS"
       description={t('GRETTINGS')}
-      canonical="https://mr-nexus.com/about-me/"
+      canonical="https://giancarlos-isasi.com/about-me/"
       openGraph={{
-        url: 'https://mr-nexus.com/about-me/',
+        url: 'https://giancarlos-isasi.com/about-me/',
         title: 'Giancarlos Isasi - TheDecoderJS',
         description: t('GRETTINGS'),
         images: [
           {
-            url: 'https://mr-nexus.com/img/og-image.jpg',
+            url: 'https://giancarlos-isasi.com/img/og-image.jpg',
             width: 1280,
             height: 853,
             alt: 'TheDecoderJS',
@@ -25,7 +25,7 @@ const AboutMeSEO: React.FC<AboutMeSEOProps> = props => {
       }}
       twitter={{
         handle: '@handle',
-        site: '@mr-nexus.com',
+        site: '@giancarlos-isasi.com',
         cardType: 'summary_large_image',
       }}
     />

@@ -27,7 +27,7 @@ const components: MDXProviderProps['components'] = {
 
 const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
   const { t } = useTranslation('blog-detail');
-  const url = `https://mr-nexus.com/blog/${data.slug}/`;
+  const url = `https://giancarlos-isasi.com/blog/${data.slug}/`;
   const title = t('SEO_TITLE', { title: data.title });
 
   return (
@@ -64,12 +64,12 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
           article: {
             publishedTime: data.createdAtISO,
             modifiedTime: data.createdAtISO,
-            authors: ['https://mr-nexus.com/'],
+            authors: ['https://giancarlos-isasi.com/'],
             tags: data.categories.map(c => c.name) || [],
           },
           images: [
             {
-              url: 'https://mr-nexus.com/img/og-image.jpg',
+              url: 'https://giancarlos-isasi.com/img/og-image.jpg',
               width: 1280,
               height: 853,
               alt: 'TheDecoderJS',
@@ -79,19 +79,19 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
         }}
         twitter={{
           handle: '@handle',
-          site: '@mr-nexus.com',
+          site: '@giancarlos-isasi.com',
           cardType: 'summary_large_image',
         }}
       />
       <ArticleJsonLd
         url={url}
         title={title}
-        images={['https://mr-nexus.com/img/og-image.jpg']}
+        images={['https://giancarlos-isasi.com/img/og-image.jpg']}
         datePublished={data.createdAtISO}
         dateModified={data.createdAtISO}
         authorName={['Giancarlos Isasi - TheDecoderJS']}
         publisherName="Giancarlos Isasi - TheDecoderJS"
-        publisherLogo="https://mr-nexus.com/favicons/apple-icon-180x180.png"
+        publisherLogo="https://giancarlos-isasi.com/favicons/apple-icon-180x180.png"
         description={data.contentPreview}
       />
     </React.Fragment>

@@ -16,7 +16,7 @@ const PostsByCategory: React.FC<PostsByCategoryProps> = ({
 }) => {
   const { t } = useTranslation('posts-by-category');
 
-  const url = `https://mr-nexus.com${category.url}`;
+  const url = `https://giancarlos-isasi.com${category.url}`;
   const title =
     category.slug === 'snippets'
       ? category.name
@@ -35,7 +35,7 @@ const PostsByCategory: React.FC<PostsByCategoryProps> = ({
           description: t('SEO_DESCRIPTION'),
           images: [
             {
-              url: 'https://mr-nexus.com/img/og-image.jpg',
+              url: 'https://giancarlos-isasi.com/img/og-image.jpg',
               width: 1280,
               height: 853,
               alt: 'TheDecoderJS',
@@ -45,7 +45,7 @@ const PostsByCategory: React.FC<PostsByCategoryProps> = ({
         }}
         twitter={{
           handle: '@handle',
-          site: '@mr-nexus.com',
+          site: '@giancarlos-isasi.com',
           cardType: 'summary_large_image',
         }}
       />

@@ -79,16 +79,16 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
         <NextSeo
           title="Giancarlos Isasi - TheDecoderJS"
           description={t('SEO_DESCRIPTION')}
-          canonical="https://mr-nexus.com/"
+          canonical="https://giancarlos-isasi.com/"
           openGraph={{
-            url: 'https://mr-nexus.com/',
+            url: 'https://giancarlos-isasi.com/',
             title: 'Giancarlos Isasi - TheDecoderJS',
             description: t('SEO_DESCRIPTION'),
             images: [
               {
-                url: 'https://mr-nexus.com/img/og-image.jpg',
-                width: 1280,
-                height: 853,
+                url: 'https://giancarlos-isasi.com/img/og-image.jpg',
+                width: 1200,
+                height: 630,
                 alt: 'TheDecoderJS',
               },
             ],
@@ -96,7 +96,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
           }}
           twitter={{
             handle: '@handle',
-            site: '@mr-nexus.com',
+            site: '@giancarlos-isasi.com',
             cardType: 'summary_large_image',
           }}
         />

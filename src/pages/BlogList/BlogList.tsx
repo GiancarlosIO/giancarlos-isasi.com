@@ -17,14 +17,14 @@ const BlogList: React.FC<BlogListProps> = ({ postList }) => {
       <NextSeo
         title={t('SEO_TITLE')}
         description={t('SEO_DESCRIPTION')}
-        canonical="https://mr-nexus.com/blog/"
+        canonical="https://giancarlos-isasi.com/blog/"
         openGraph={{
-          url: 'https://mr-nexus.com/blog/',
+          url: 'https://giancarlos-isasi.com/blog/',
           title: t('SEO_TITLE'),
           description: t('SEO_DESCRIPTION'),
           images: [
             {
-              url: 'https://mr-nexus.com/img/og-image.jpg',
+              url: 'https://giancarlos-isasi.com/img/og-image.jpg',
               width: 1280,
               height: 853,
               alt: 'TheDecoderJS',
@@ -34,7 +34,7 @@ const BlogList: React.FC<BlogListProps> = ({ postList }) => {
         }}
         twitter={{
           handle: '@handle',
-          site: '@mr-nexus.com',
+          site: '@giancarlos-isasi.com',
           cardType: 'summary_large_image',
         }}
       />
