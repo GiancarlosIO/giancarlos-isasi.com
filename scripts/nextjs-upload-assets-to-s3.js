@@ -115,6 +115,6 @@ if (isProduction && isQAorMaster) {
   uploadFolderToS3(publicPath);
 } else {
   console.log(
-    'Skip upload-assets step because we are not in a production deployment.',
+    '> The upload-assets step was skipped because we are not in a production deployment.',
   );
 }
