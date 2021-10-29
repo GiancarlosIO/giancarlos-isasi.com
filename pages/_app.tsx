@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 
-import { AppProps } from 'next/app';
+import { AppProps, AppInitialProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
 import NProgress from 'nprogress';
 import { useRouter } from 'next/router';
@@ -16,7 +16,11 @@ import { ThemeProvider } from '@/theme';
 
 import '../styles/globals.css';
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+interface CustomAppProps extends AppProps {
+  pageProps: { hideFooter?: boolean; children: React.ReactNode };
+}
+
+const MyApp: React.FC<CustomAppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
 
   React.useEffect(() => {
@@ -68,7 +72,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
 
       <Component {...pageProps} />
-      <Footer />
+      {!pageProps.hideFooter && <Footer />}
     </ThemeProvider>
   );
 };

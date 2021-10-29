@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Image from 'next/image';
 import styled from 'styled-components';
 import { useTranslation } from 'next-i18next';
 import { NextSeo } from 'next-seo';
@@ -9,10 +10,13 @@ import Container from '@/components/Container';
 import { PostPreview, Category } from '@/types';
 
 import { useTheme } from '@/theme';
+import { TWITTER_PROFILE } from '@/constants/social-media';
 
 import { Technologies } from './components';
 import { PostList, Aside } from './sections';
 import { HomepageContextProvider } from './context';
+
+import { socialMediaLinks } from '@/constants';
 
 const HeroSection = styled.section`
   display: grid;
@@ -73,22 +77,22 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
     <HomepageContextProvider posts={postList} categories={categories}>
       <div className="text-gray-800 dark:text-white dark:bg-gray-800 overflow-x-hidden pb-20">
         <NextSeo
-          title="Giancarlos Isasi - Mr N"
+          title="Giancarlos Isasi - TheDecoderJS"
           description={t('SEO_DESCRIPTION')}
           canonical="https://mr-nexus.com/"
           openGraph={{
             url: 'https://mr-nexus.com/',
-            title: 'Giancarlos Isasi - Mr N',
+            title: 'Giancarlos Isasi - TheDecoderJS',
             description: t('SEO_DESCRIPTION'),
             images: [
               {
                 url: 'https://mr-nexus.com/img/og-image.jpg',
                 width: 1280,
                 height: 853,
-                alt: 'Mr N',
+                alt: 'TheDecoderJS',
               },
             ],
-            site_name: 'Giancarlos Isasi - Mr N',
+            site_name: 'Giancarlos Isasi - TheDecoderJS',
           }}
           twitter={{
             handle: '@handle',
@@ -104,11 +108,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                 <section className="text-lg md:text-2xl lg:text-3xl font-bold">
                   <span>{t('GRETTINGS')}</span> <br />
                   <span>{t('IAM')}</span>{' '}
-                  <a
-                    href="https://twitter.com/MrNexusZGT"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
+                  <a href={TWITTER_PROFILE} rel="noreferrer" target="_blank">
                     <h1 className="inline-block text-blue-600 hover:underline">
                       {t('FULL_NAME')}
                     </h1>
@@ -117,13 +117,31 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                   <span>{t('BIO_1')}</span>
                 </section>
 
-                <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
+                <p className="mt-8 font-bold text-sm md:text-xl">
                   {t('DESCRIPTION_1')}
                 </p>
-
-                <p className="mt-8 font-bold text-sm md:text-xl lg:text-2xl">
-                  {t('DESCRIPTION_2')}
-                </p>
+                <div className="mt-4 flex items-center">
+                  {socialMediaLinks.map(social => {
+                    return (
+                      <a
+                        key={social.label}
+                        className="pr-1"
+                        href={social.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Image
+                          key={social.label}
+                          src={social.logoUrl}
+                          alt={social.label}
+                          width={social.widthImage}
+                          height={social.heightImage}
+                          priority
+                        />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
               <div className="w-full hidden lg:block">
                 <Technologies />

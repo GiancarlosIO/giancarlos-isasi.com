@@ -1,8 +1,16 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
   mode: 'jit',
   darkMode: 'class', // or 'media' or 'class'
   theme: {
+    colors: {
+      primary: '#4630AB',
+      'primary-dark': '#2B0548',
+      'primary-light': '#6669C5',
+      ...colors,
+    },
     fontFamily: {
       reggae: [
         'Reggae One',
@@ -22,5 +30,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 };

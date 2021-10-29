@@ -36,10 +36,10 @@ const Footer = () => {
           </div>
         </div>
         <div className="font-medium text-center lg:text-right lg:w-1/2">
-          <h3 className="text-xl">Giancarlos Isasi - Mr. N</h3>
+          <h3 className="text-xl">Giancarlos Isasi - TheDecoderJS</h3>
           <p className="text-xs">
-            ©{new Date().getFullYear()} Giancarlos Isasi (Mr. N) - All Rights
-            Reserved.
+            ©{new Date().getFullYear()} Giancarlos Isasi (TheDecoderJS) - All
+            Rights Reserved.
           </p>
         </div>
       </Container>

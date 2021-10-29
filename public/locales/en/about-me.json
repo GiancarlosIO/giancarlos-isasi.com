@@ -1,0 +1,17 @@
+{
+  "ABOUT_ME": "Sobre mí",
+  "GRETTINGS": "Hola! Soy Giancarlos Isasi, un desarrollador web que se especializa en el lado frontend.",
+  "WORK_IN": "Actualmente trabajo como",
+  "JOB_TITLE": "Frontend Technical Expert en",
+  "TOOLS": "Puedes ver el conjuntos de tools, libs y frameworks que manejo",
+  "HERE": "aqui",
+  "BIO_1": "En los últimos años como Frontend he estado involucrado en aplicaciones de todo tipo y tamaño. Todo esto me ha permito ganar experiencia en temas no solo relacionados a la creación de UI sino también en temas como",
+  "BIO_2": "Me he encargado de definir las herramientas, workflows, libs, frameworks, monorepos, CI/CD, documentación y demas temas que giran entorno a la construcción y escalabilidad de aplicaciones javascript usadas por millones de usuarios.",
+  "WEB_PERFORMANCE_RESUME": "He trabajado en mejorar métricas core de performance (LCP, FID, CLS, etc) en aplicaciones complejas de React. El impacto de mi trabajo se ha visto reflejado en mejoras de las principales páginas ecommerce, en donde se ha llegado a pasar de 7 a 50-80 puntos en Lighthouse.",
+  "PHRASE_THAT_I_LIKE": "Una de las frases que me gusta mucho es:",
+  "JAVASCRIPT_TOOLING_1": "Tengo conocimiento sólido en configuraciones avanzadas de tools existentes dentro del ecosistema de javascript: webpack, babel, eslint, prettier, typescript, lerna, nextjs, etc.",
+  "JAVASCRIPT_TOOLING_2": "También he creado custom CLIs y scripts de node para automizar tareas repetitivas.",
+  "UI_TITLE": "Creación de components de UI con React.js",
+  "UI_TITLE_1": "Llevo usando React.js hace más de 5 años por lo que cuento con experiencia avanzada, no solo con la librería misma, sino también en todo su ecosistema.",
+  "UI_TITLE_2": "Además de estar involucrado en la creación y rediseño de páginas web, también tengo experiencia en la creación de frameworks y librerías de UI basadas en el design system de la compañia (buttons, dialogs, form fields, etc)."
+}

@@ -99,7 +99,14 @@ export const ThemeProvider: React.FC = props => {
       setTheme(currentTheme);
     }
 
-    document.body.className = currentTheme || themeVariant;
+    const originalClassNames = document.body.className
+      .replace('light', '')
+      .replace('dark', '')
+      .trim();
+
+    document.body.className = `${originalClassNames} ${
+      currentTheme || themeVariant
+    }`;
   }, [themeVariant]);
 
   return (

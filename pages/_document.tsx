@@ -43,7 +43,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        <body className="min-h-screen">
           {isProduction && (
             <noscript
               dangerouslySetInnerHTML={{
