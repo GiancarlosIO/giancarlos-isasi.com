@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && upload-to-s3",
+    "build": "next build && yarn upload-to-s3",
     "upload-to-s3": "node scripts/nextjs-upload-assets-to-s3.js",
     "start": "next start",
     "lint": "next lint",
