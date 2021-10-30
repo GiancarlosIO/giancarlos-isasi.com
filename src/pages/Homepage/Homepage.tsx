@@ -15,6 +15,8 @@ import { WorkingMan } from './components';
 import { PostList, Aside } from './sections';
 import { HomepageContextProvider } from './context';
 
+import styles from './Homepage.module.css';
+
 const HeroSection = styled.section`
   display: grid;
   grid-template-columns: auto;
@@ -98,7 +100,9 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                   <SocialButtons />
                 </section>
               </div>
-              <div className="w-full -mt-4 lg:-mt-12">
+              <div
+                className={`w-full -mt-4 lg:-mt-12 lg:h-100 ${styles.animationWrapper}`}
+              >
                 <WorkingMan />
               </div>
             </HeroSection>
