@@ -9,6 +9,7 @@ const PostCard: React.FC<PostPreview> = ({
   contentPreview,
   slug,
   createdAt,
+  coverImageUrl,
 }) => {
   const url = `/blog/${slug}`;
   return (
@@ -19,15 +20,14 @@ const PostCard: React.FC<PostPreview> = ({
       }}
     >
       <Link href={url} passHref>
-        <a href={url} className="w-full block">
+        <a href={url} className="w-full block bg-white rounded-t-3xl">
           <Image
-            src="https://via.placeholder.com/320x200"
-            loader={() => {
-              return 'https://via.placeholder.com/320x200';
-            }}
+            src={coverImageUrl}
             width={352}
             height={200}
             alt={title}
+            objectFit="contain"
+            objectPosition="center"
             className="rounded-t-3xl"
           />
         </a>
