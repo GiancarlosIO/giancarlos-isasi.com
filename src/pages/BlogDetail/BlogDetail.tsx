@@ -16,6 +16,7 @@ import {
   Ol,
   Anchor,
   Blockquote,
+  Mark,
 } from '@/components/MDXComponents';
 
 export type BlogDetailProps = {
@@ -31,6 +32,7 @@ const components: MDXProviderProps['components'] = {
   ul: Ul,
   ol: Ol,
   a: Anchor,
+  mark: Mark,
   CustomQuote: Blockquote,
 };
 

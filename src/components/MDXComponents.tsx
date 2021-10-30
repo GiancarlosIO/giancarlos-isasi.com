@@ -58,6 +58,14 @@ const BlockQuoteInner = styled.blockquote`
   }
 `;
 
+export const Mark: React.FC = ({ children }) => {
+  return (
+    <span className="font-bold text-yellow-500 dark:text-yellow-300">
+      {children}
+    </span>
+  );
+};
+
 export const Blockquote: React.FC<{ title: string; content: string }> = ({
   title,
   content,
