@@ -12,7 +12,7 @@ import { TWITTER_PROFILE } from '@/constants/social-media';
 import { SocialButtons } from '@/components';
 
 import { WorkingMan } from './components';
-import { PostList, Aside } from './sections';
+import { PostList, CategoriesList } from './sections';
 import { HomepageContextProvider } from './context';
 
 import styles from './Homepage.module.css';
@@ -114,7 +114,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
               <h2 className="font-bold text-base md:text-xl mb-4 md:mb-8">
                 {t('BLOG_SECTION_TITLE').toUpperCase()}:
               </h2>
-              <Aside />
+              <CategoriesList />
               <PostList />
             </InnerMain>
           </Container>

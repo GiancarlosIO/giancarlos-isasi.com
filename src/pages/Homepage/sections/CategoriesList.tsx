@@ -3,11 +3,11 @@ import { usePageContext } from '@/pages/Homepage/context';
 
 import Chip from '@/components/Chip';
 
-const Aside: React.FC = () => {
+const CategoriesList: React.FC = () => {
   const { t } = useTranslation();
   const { categories } = usePageContext();
   return (
-    <aside className="h-full">
+    <section className="h-full">
       <div className="sticky top-8">
         <h2 className="font-bold text-sm mb-6">
           {t('CATEGORIES_SECTION_TITLE').toUpperCase()}:
@@ -18,8 +18,8 @@ const Aside: React.FC = () => {
           </div>
         ))}
       </div>
-    </aside>
+    </section>
   );
 };
 
-export default Aside;
+export default CategoriesList;

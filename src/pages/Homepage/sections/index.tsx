@@ -1,2 +1,2 @@
 export { default as PostList } from './PostList';
-export { default as Aside } from './Aside';
+export { default as CategoriesList } from './CategoriesList';
