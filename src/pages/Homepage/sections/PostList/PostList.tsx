@@ -1,12 +1,8 @@
-import { useTranslation } from '@/pages/Homepage/hooks';
 import { usePageContext } from '@/pages/Homepage/context';
-
-import styled from 'styled-components';
 
 import { PostCardV2 } from '@/components';
 
 const ArticleList = () => {
-  const { t } = useTranslation();
   const { posts } = usePageContext();
 
   return (
