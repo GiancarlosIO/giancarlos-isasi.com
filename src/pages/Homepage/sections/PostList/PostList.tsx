@@ -9,7 +9,7 @@ const ArticleList = () => {
 
   return (
     <section>
-      <h2 className="font-bold text-sm  mb-2 lg:mb-4">
+      <h2 className="font-bold text-sm mb-2 lg:mb-4">
         {t('BLOG_SECTION_TITLE').toUpperCase()}:
       </h2>
       <div>

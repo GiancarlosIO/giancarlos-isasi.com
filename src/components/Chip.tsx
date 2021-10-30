@@ -6,17 +6,19 @@ type ChipProps = {
   mini?: boolean;
 };
 
-const Chip: React.FC<ChipProps> = props => {
-  const padding = props.mini ? 'px-2 py-1' : 'px-4 py-2';
-  const fontSize = props.mini ? 'text-xs' : 'text-sm';
+const Chip: React.FC<ChipProps> = ({ mini, url, label }) => {
+  const fontSize = mini ? 'text-xs' : 'text-sm';
 
   return (
-    <Link href={props.url} passHref>
+    <Link href={url} passHref>
       <a
-        href={props.url}
-        className={`${fontSize} font-medium text-white ${padding} inline-block rounded-lg transition-colors duration-200 ease-in-out bg-blue-400 hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700`}
+        href={url}
+        className={`${fontSize} font-medium text-gray-900 dark:text-white bg-yellow-300 dark:bg-yellow-500 rounded-2xl h-8 flex items-center justify-center px-4`}
+        style={{
+          minWidth: mini ? 46 : 60,
+        }}
       >
-        {props.label}
+        {label}
       </a>
     </Link>
   );

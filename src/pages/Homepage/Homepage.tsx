@@ -8,11 +8,10 @@ import Container from '@/components/Container';
 
 import { PostPreview, Category } from '@/types';
 
-import { useTheme } from '@/theme';
 import { TWITTER_PROFILE } from '@/constants/social-media';
 import { SocialButtons } from '@/components';
 
-import { Technologies } from './components';
+import { WorkingMan } from './components';
 import { PostList, Aside } from './sections';
 import { HomepageContextProvider } from './context';
 
@@ -43,7 +42,6 @@ type HomepageProps = {
 };
 const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
   const { t } = useTranslation('homepage');
-  const { theme } = useTheme();
 
   return (
     <HomepageContextProvider posts={postList} categories={categories}>
@@ -75,45 +73,42 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
         <main className="relative mb-6 lg:mb-8">
           <Container className="relative z-20">
             <Header />
-            <HeroSection className="pt-2 pb-16 sm:pb-46 sm:pt-3 lg:pt-10 lg:pb-24 mx-auto">
+            <HeroSection className="pt-2 sm:pt-3 lg:pt-10 lg:pb-12 mx-auto">
               <div>
                 <section className="text-lg md:text-2xl lg:text-3xl font-bold">
-                  <span>{t('GRETTINGS')}</span> <br />
-                  <span>{t('IAM')}</span>{' '}
-                  <a href={TWITTER_PROFILE} rel="noreferrer" target="_blank">
-                    <h1 className="inline-block text-blue-600 hover:underline">
-                      {t('FULL_NAME')}
-                    </h1>
-                  </a>
-                  {', '}
-                  <span>{t('BIO_1')}</span>
+                  <p>
+                    {t('GRETTINGS')}
+                    <br />
+                    {t('IAM')}{' '}
+                    <a href={TWITTER_PROFILE} rel="noreferrer" target="_blank">
+                      <h1 className="inline-block text-blue-600 hover:underline">
+                        {t('FULL_NAME')}
+                      </h1>
+                    </a>
+                    {', '}
+                    {t('BIO_1')}
+                  </p>
+                  <p className="my-4 font-medium md:text-xl">
+                    {t('DESCRIPTION_1')}
+                  </p>
+                  <SocialButtons />
                 </section>
-
-                <p className="mt-8 font-bold text-sm md:text-xl">
-                  {t('DESCRIPTION_1')}
-                </p>
-                <SocialButtons />
               </div>
-              <div className="w-full hidden lg:block">
-                <Technologies />
+              <div className="w-full -mt-4 lg:-mt-12">
+                <WorkingMan />
               </div>
             </HeroSection>
           </Container>
-          {/* <Wavy className="absolute left-0 right-0">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-              <path
-                fill={theme === 'light' ? '#ffffff' : 'rgba(31, 41, 55, 1)'}
-                fillOpacity="1"
-                d="M0,32L60,53.3C120,75,240,117,360,138.7C480,160,600,160,720,138.7C840,117,960,75,1080,69.3C1200,64,1320,96,1380,112L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-              ></path>
-            </svg>
-          </Wavy> */}
         </main>
         <main className="relative z-10">
           <Container>
             <InnerMain className="relative">
-              <PostList />
-              <Aside />
+              <div>
+                <PostList />
+              </div>
+              <div>
+                <Aside />
+              </div>
             </InnerMain>
           </Container>
         </main>
