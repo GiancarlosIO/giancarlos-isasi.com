@@ -1,23 +1,18 @@
-import { useTranslation } from '@/pages/Homepage/hooks';
 import { usePageContext } from '@/pages/Homepage/context';
 
-import { PostCard } from '@/components';
+import { PostCardV2 } from '@/components';
 
 const ArticleList = () => {
-  const { t } = useTranslation();
   const { posts } = usePageContext();
 
   return (
-    <section>
-      <h2 className="font-bold text-sm text-purple-500 mb-2 lg:mb-4">
-        {t('BLOG_SECTION_TITLE').toUpperCase()}:
-      </h2>
-      <div>
-        {posts.map((post, index) => (
-          <PostCard key={index} {...post} />
-        ))}
-      </div>
-    </section>
+    <div className="pt-10 grid md:grid-cols-3 gap-8">
+      {posts.map((post, index) => (
+        <div key={index} className="">
+          <PostCardV2 key={index} {...post} />
+        </div>
+      ))}
+    </div>
   );
 };
 

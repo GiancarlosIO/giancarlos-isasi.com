@@ -53,6 +53,7 @@ export const getBlogListSource = async (locale: Locale, category?: string) => {
       ...data,
       createdAt: data.createdAt,
       createdAtISO: date.toISOString(),
+      coverImageUrl: data.coverImageUrl,
       slug: folder,
       categories,
     };
@@ -114,6 +115,7 @@ export const getBlogContent = async ({
       contentPreview: data.contentPreview,
       slug,
       categories: data.categories.split(', ').map(transformCategory),
+      coverImageUrl: data.coverImageUrl,
     },
   };
 };

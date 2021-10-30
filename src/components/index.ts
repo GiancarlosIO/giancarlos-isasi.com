@@ -5,3 +5,5 @@ export { default as Container } from './Container';
 export { default as PostCard } from './PostCard';
 export { default as Footer } from './Footer';
 export { default as Link } from './Link';
+export { default as SocialButtons } from './SocialButtons';
+export { default as PostCardV2 } from './PostCardV2';

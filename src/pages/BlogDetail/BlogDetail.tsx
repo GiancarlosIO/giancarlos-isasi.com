@@ -32,7 +32,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
 
   return (
     <React.Fragment>
-      <div className="text-gray-800 dark:text-white dark:bg-gray-800 min-h-screen pb-20">
+      <div className="text-gray-800 dark:text-white min-h-screen pb-20">
         <Container>
           <Header />
           <MDXProvider components={components}>

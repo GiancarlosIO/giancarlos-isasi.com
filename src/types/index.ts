@@ -5,6 +5,7 @@ export type PostPreview = {
   createdAt: string;
   createdAtISO: string;
   categories: Category[];
+  coverImageUrl: string;
 };
 
 export type Category = {

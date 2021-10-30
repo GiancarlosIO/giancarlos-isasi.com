@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NextSeo } from 'next-seo';
 
-import { PostCard, Container, Header } from '@/components';
+import { PostCardV2, Container, Header } from '@/components';
 
 import { PostPreview, Category } from '@/types';
 
@@ -49,24 +49,17 @@ const PostsByCategory: React.FC<PostsByCategoryProps> = ({
           cardType: 'summary_large_image',
         }}
       />
-      <div className="text-gray-800 dark:text-white dark:bg-gray-800 overflow-x-hidden pb-20 min-h-screen">
+      <div className="text-gray-800 dark:text-white overflow-x-hidden pb-20 min-h-screen">
         <Container>
           <Header />
           <div className="pt-4 lg:pt-20">
             <h1 className="font-bold text-center text-xl lg:text-3xl mb-4 lg:mb-0 text-yellow-500 dark:text-yellow-300">
               {title.toUpperCase()}
             </h1>
-            <div
-              className="mx-auto"
-              style={{
-                maxWidth: 800,
-              }}
-            >
-              <section>
-                {postList.map((post, index) => (
-                  <PostCard key={index} {...post} />
-                ))}
-              </section>
+            <div className="pt-10 grid md:grid-cols-3 gap-8">
+              {postList.map((post, index) => (
+                <PostCardV2 key={index} {...post} />
+              ))}
             </div>
           </div>
         </Container>

@@ -16,7 +16,7 @@ const ArticleCard: React.FC<PostPreview> = ({
         <h3 className="font-bold lg:text-xl transition-colors duration-300 ease-in-out hover:text-blue-600 ">
           <Link href={url}>{title}</Link>
         </h3>
-        <span className="font-bold text-sm text-gray-500">{createdAt}</span>
+        <span className="font-bold text-sm">{createdAt}</span>
         <p className="mb-4 mt-3 line-clamp">{contentPreview}</p>
         <Link href={url} passHref>
           <a

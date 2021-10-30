@@ -47,119 +47,115 @@ const Header: React.FC = () => {
 
   return (
     <div className="relative z-20">
-      <HeaderInner className="w-full flex justify-between items-center">
+      <HeaderInner className="w-full flex justify-between items-center py-2 md:py-4">
         <LinkNext href="/" passHref>
           <a
             href="/"
-            className="text-3xl rounded py-2 cursor-pointer mt-2 bg-primary"
+            className="text-2xl md:text-3xl rounded py-2 cursor-pointer"
           >
-            <Image
-              src="/img/logo_decoder_white_icon.png"
-              alt="Giancarlos Isasi"
-              priority
-              width="90px"
-              height="80px"
-            />
+            <span className="font-kaushan font-bold">Giancarlos Isasi</span>
           </a>
         </LinkNext>
 
-        <div>
-          {headerLinks
-            .filter(l => !l.onlyMobile)
-            .map(link => (
-              <Link
-                key={link.url}
-                href={link.url}
-                className={`hidden lg:inline-block mr-2 ${linkClasses}`}
-                target={link.target}
-              >
-                <span>{link.label}</span>
-              </Link>
-            ))}
-          <motion.button
-            type="button"
-            onClick={() => toggleTheme()}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            {theme === 'light' ? (
-              <WbSunny />
-            ) : (
-              <NightsStay
-                style={{
-                  color: 'white',
-                }}
-              />
-            )}
-          </motion.button>
-        </div>
-
-        {/* Collapse */}
-        <div className="relative block lg:hidden">
-          <ButtonRotate open={open} onClick={toggleOpen}>
-            {open ? (
-              <CloseIcon
-                style={{
-                  fontSize: 40,
-                  color: theme === 'light' ? 'black' : 'white',
-                }}
-              />
-            ) : (
-              <MenuIcon
-                style={{
-                  fontSize: 40,
-                  color: theme === 'light' ? 'black' : 'white',
-                }}
-              />
-            )}
-          </ButtonRotate>
-          <div
-            className={clsx(
-              'fixed inset-0 w-screen h-screen bg-white dark:bg-gray-800 transition-opacity duration-350 ease-in-out',
-              {
-                'pointer-events-none': !open,
-                'opacity-1': open,
-                'opacity-0': !open,
-              },
-            )}
-            style={{
-              zIndex: 40,
-            }}
-          >
-            <div className="w-full h-full p-8 md:p-16 lg:p-0 flex flex-col relative">
-              {headerLinks.map((link, index) => (
-                <motion.div
-                  initial={false}
-                  animate={open ? 'open' : 'closed'}
-                  variants={{
-                    closed: {
-                      x: -300,
-                    },
-                    open: {
-                      x: 0,
-                    },
-                  }}
-                  transition={{
-                    duration: 0.3,
-                    ease: 'easeInOut',
-                    delay: 0.05 * index,
-                  }}
+        <div className="flex items-center">
+          <div className="mr-4 sm:mr-6 lg:mr-0">
+            {headerLinks
+              .filter(l => !l.onlyMobile)
+              .map(link => (
+                <Link
                   key={link.url}
-                  className="py-3"
+                  href={link.url}
+                  className={`hidden lg:inline-block mr-2 ${linkClasses}`}
+                  target={link.target}
                 >
-                  <Link href={link.url} className={`mr-2 ${linkClasses}`}>
-                    <span
-                      role="button"
-                      tabIndex={index}
-                      onClick={toggleOpen}
-                      onKeyUp={toggleOpen}
-                    >
-                      {link.label}
-                    </span>
-                  </Link>
-                </motion.div>
+                  <span>{link.label}</span>
+                </Link>
               ))}
-              <button type="button"></button>
+            <motion.button
+              type="button"
+              onClick={() => toggleTheme()}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {theme === 'light' ? (
+                <WbSunny />
+              ) : (
+                <NightsStay
+                  style={{
+                    color: 'white',
+                  }}
+                />
+              )}
+            </motion.button>
+          </div>
+
+          {/* Collapse */}
+          <div className="relative block lg:hidden">
+            <ButtonRotate open={open} onClick={toggleOpen}>
+              {open ? (
+                <CloseIcon
+                  style={{
+                    fontSize: 40,
+                    color: theme === 'light' ? 'black' : 'white',
+                  }}
+                />
+              ) : (
+                <MenuIcon
+                  style={{
+                    fontSize: 40,
+                    color: theme === 'light' ? 'black' : 'white',
+                  }}
+                />
+              )}
+            </ButtonRotate>
+            <div
+              className={clsx(
+                'fixed inset-0 w-screen h-screen bg-white transition-opacity duration-350 ease-in-out',
+                {
+                  'pointer-events-none': !open,
+                  'opacity-1': open,
+                  'opacity-0': !open,
+                },
+              )}
+              style={{
+                zIndex: 40,
+              }}
+            >
+              <div className="w-full h-full p-8 md:p-16 lg:p-0 flex flex-col relative">
+                {headerLinks.map((link, index) => (
+                  <motion.div
+                    initial={false}
+                    animate={open ? 'open' : 'closed'}
+                    variants={{
+                      closed: {
+                        x: -300,
+                      },
+                      open: {
+                        x: 0,
+                      },
+                    }}
+                    transition={{
+                      duration: 0.3,
+                      ease: 'easeInOut',
+                      delay: 0.05 * index,
+                    }}
+                    key={link.url}
+                    className="py-3"
+                  >
+                    <Link href={link.url} className={`mr-2 ${linkClasses}`}>
+                      <span
+                        role="button"
+                        tabIndex={index}
+                        onClick={toggleOpen}
+                        onKeyUp={toggleOpen}
+                      >
+                        {link.label}
+                      </span>
+                    </Link>
+                  </motion.div>
+                ))}
+                <button type="button"></button>
+              </div>
             </div>
           </div>
         </div>
