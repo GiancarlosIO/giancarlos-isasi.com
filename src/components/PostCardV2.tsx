@@ -7,9 +7,12 @@ import { PostPreview } from '@/types';
 const PostCard: React.FC<PostPreview> = ({
   title,
   slug,
-  createdAt,
   coverImageUrl,
+  readingTime,
+  createdAtHumanized,
 }) => {
+  console.log({ readingTime, createdAtHumanized });
+
   const url = `/blog/${slug}`;
   return (
     <article
@@ -45,9 +48,8 @@ const PostCard: React.FC<PostPreview> = ({
             </h3>
           </a>
         </Link>
-        {/* <p className="mb-4 mt-3 line-clamp">{contentPreview}</p> */}
         <span className="inline-block font-normal text-sm mt-4">
-          {createdAt}
+          {createdAtHumanized} - {readingTime} min
         </span>
       </div>
     </article>

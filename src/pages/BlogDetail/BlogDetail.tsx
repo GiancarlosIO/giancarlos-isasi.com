@@ -48,9 +48,12 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
           <Header />
           <MDXProvider components={components}>
             <div className="font-medium">
-              <h1 className="font-bold text-2xl lg:text-4xl text-center mt-10 mb-6">
+              <h1 className="font-bold text-2xl lg:text-4xl text-center mt-10 mb-2">
                 {data.title}
               </h1>
+              <p className="text-center text-sm mb-6">
+                {data.createdAtHumanized} - {data.readingTime} min
+              </p>
               <div className="flex justify-center mb-10">
                 {data.categories.map(category => (
                   <div key={category.name} className="inline-block mr-2">
