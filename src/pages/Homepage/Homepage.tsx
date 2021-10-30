@@ -76,18 +76,22 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
             <HeroSection className="pt-2 sm:pt-3 lg:pt-10 lg:pb-12 mx-auto">
               <div>
                 <section className="text-lg md:text-2xl lg:text-3xl font-bold">
-                  <p>
-                    {t('GRETTINGS')}
-                    <br />
-                    {t('IAM')}{' '}
-                    <a href={TWITTER_PROFILE} rel="noreferrer" target="_blank">
+                  <p>{t('GRETTINGS')}</p>
+                  <div>
+                    <span>{t('IAM')}</span>{' '}
+                    <a
+                      href={TWITTER_PROFILE}
+                      rel="noreferrer"
+                      target="_blank"
+                      className="inline-block"
+                    >
                       <h1 className="inline-block text-blue-600 hover:underline">
                         {t('FULL_NAME')}
                       </h1>
                     </a>
                     {', '}
-                    {t('BIO_1')}
-                  </p>
+                    <span>{t('BIO_1')}</span>
+                  </div>
                   <p className="my-4 font-normal text-base md:text-xl">
                     {t('DESCRIPTION_1')}
                   </p>

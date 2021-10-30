@@ -34,14 +34,18 @@ const PostCard: React.FC<PostPreview> = ({
       </Link>
 
       <div className="p-4">
-        <h3
-          className="font-bold lg:text-xl transition-colors duration-300 ease-in-out hover:text-red-500"
-          style={{
-            minHeight: '3.5rem',
-          }}
-        >
-          <Link href={url}>{title}</Link>
-        </h3>
+        <Link href={url} passHref>
+          <a href={url}>
+            <h3
+              className="font-bold lg:text-xl transition-colors duration-300 ease-in-out hover:text-red-500"
+              style={{
+                minHeight: '3.5rem',
+              }}
+            >
+              {title}
+            </h3>
+          </a>
+        </Link>
         {/* <p className="mb-4 mt-3 line-clamp">{contentPreview}</p> */}
         <span className="inline-block font-normal text-sm mt-4">
           {createdAt}
