@@ -31,7 +31,7 @@ const HeroSection = styled.section`
 const InnerMain = styled.div`
   display: grid;
   ${props => props.theme.breakpoints.mediaLg()} {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr;
     column-gap: 96px;
   }
 `;
@@ -88,7 +88,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                     {', '}
                     {t('BIO_1')}
                   </p>
-                  <p className="my-4 font-medium md:text-xl">
+                  <p className="my-4 font-normal text-base md:text-xl">
                     {t('DESCRIPTION_1')}
                   </p>
                   <SocialButtons />
@@ -103,12 +103,11 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
         <main className="relative z-10">
           <Container>
             <InnerMain className="relative">
-              <div>
-                <PostList />
-              </div>
-              <div>
-                <Aside />
-              </div>
+              <h2 className="font-bold text-base md:text-xl mb-4 md:mb-8">
+                {t('BLOG_SECTION_TITLE').toUpperCase()}:
+              </h2>
+              <Aside />
+              <PostList />
             </InnerMain>
           </Container>
         </main>

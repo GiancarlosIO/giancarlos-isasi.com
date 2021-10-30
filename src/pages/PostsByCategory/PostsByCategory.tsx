@@ -49,7 +49,7 @@ const PostsByCategory: React.FC<PostsByCategoryProps> = ({
           cardType: 'summary_large_image',
         }}
       />
-      <div className="text-gray-800 dark:text-white dark:bg-gray-800 overflow-x-hidden pb-20 min-h-screen">
+      <div className="text-gray-800 dark:text-white overflow-x-hidden pb-20 min-h-screen">
         <Container>
           <Header />
           <div className="pt-4 lg:pt-20">

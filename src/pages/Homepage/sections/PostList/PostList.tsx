@@ -9,14 +9,9 @@ const ArticleList = () => {
 
   return (
     <section>
-      <h2 className="font-bold text-sm mb-2 lg:mb-4">
-        {t('BLOG_SECTION_TITLE').toUpperCase()}:
-      </h2>
-      <div>
-        {posts.map((post, index) => (
-          <PostCard key={index} {...post} />
-        ))}
-      </div>
+      {posts.map((post, index) => (
+        <PostCard key={index} {...post} />
+      ))}
     </section>
   );
 };

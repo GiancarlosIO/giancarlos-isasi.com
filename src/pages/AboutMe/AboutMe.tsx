@@ -21,7 +21,7 @@ const AboutMe: React.FC<AboutMeProps> = () => {
   const { t } = useTranslation('about-me');
 
   return (
-    <div className="relative bg-purple-50 dark:bg-gray-700">
+    <div className="relative">
       <AboutMeSEO />
       <Container>
         <Header />

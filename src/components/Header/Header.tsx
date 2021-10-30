@@ -110,7 +110,7 @@ const Header: React.FC = () => {
             </ButtonRotate>
             <div
               className={clsx(
-                'fixed inset-0 w-screen h-screen bg-white dark:bg-gray-800 transition-opacity duration-350 ease-in-out',
+                'fixed inset-0 w-screen h-screen bg-white transition-opacity duration-350 ease-in-out',
                 {
                   'pointer-events-none': !open,
                   'opacity-1': open,

@@ -70,7 +70,7 @@ const MyApp: React.FC<CustomAppProps> = ({ Component, pageProps }) => {
         )}
         <Favicons />
       </Head>
-      <div className="bg-blue-light dark:bg-blue-darker">
+      <div className="bg-blue-light dark:bg-blue-darker text-gray-800 dark:text-white">
         <Component {...pageProps} />
         {!pageProps.hideFooter && <Footer />}
       </div>
