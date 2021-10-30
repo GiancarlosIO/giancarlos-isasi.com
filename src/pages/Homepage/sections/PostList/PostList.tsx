@@ -1,18 +1,24 @@
 import { useTranslation } from '@/pages/Homepage/hooks';
 import { usePageContext } from '@/pages/Homepage/context';
 
-import { PostCard } from '@/components';
+import styled from 'styled-components';
+
+import { PostCardV2 } from '@/components';
+
+const Section = styled.div``;
 
 const ArticleList = () => {
   const { t } = useTranslation();
   const { posts } = usePageContext();
 
   return (
-    <section>
+    <Section className="pt-10 grid md:grid-cols-3 gap-8">
       {posts.map((post, index) => (
-        <PostCard key={index} {...post} />
+        <div key={index} className="">
+          <PostCardV2 key={index} {...post} />
+        </div>
       ))}
-    </section>
+    </Section>
   );
 };
 
