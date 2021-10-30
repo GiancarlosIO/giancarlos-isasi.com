@@ -4,10 +4,29 @@ import { join } from 'path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import slugify from 'slugify';
+import readingTime from 'reading-time';
+import type { ReadTimeResults } from 'reading-time';
+import format from 'date-fns/format';
+
+import { es } from 'date-fns/locale';
 
 const postDirectory = join(process.cwd(), 'posts');
 
-const transformStrToDate = (str: `${string}/${string}/${string}`): Date => {
+type Locale = string;
+type TCreatedAtStr = `${string}/${string}/${string}`;
+type TMDData = {
+  createdAt: TCreatedAtStr;
+  title: string;
+  contentPreview: string;
+  categories: string;
+  coverImageUrl: string;
+};
+// type Category = {
+//   name: string;
+//   url: string;
+// };
+
+const transformStrToDate = (str: TCreatedAtStr): Date => {
   const d = str
     .split('/')
     .map(s => parseInt(s))
@@ -26,21 +45,39 @@ const transformCategory = (c: string) => {
   };
 };
 
-type Locale = string;
-// type Category = {
-//   name: string;
-//   url: string;
-// };
+function formatMDData(slug: string, data: TMDData, stats: ReadTimeResults) {
+  const createdAtDate = transformStrToDate(data.createdAt);
+  return {
+    createdAt: data.createdAt,
+    createdAtISO: createdAtDate.toISOString(),
+    createdAtHumanized: format(createdAtDate, "d 'de' MMMM, y", {
+      locale: es,
+    }),
+    title: data.title,
+    contentPreview: data.contentPreview,
+    slug,
+    categories: data.categories.split(', ').map(transformCategory),
+    coverImageUrl: data.coverImageUrl,
+    readingTime: Math.round(stats.minutes),
+  };
+}
 
-export const getBlogListSource = async (locale: Locale, category?: string) => {
+export const getBlogListSource = async (
+  locale: Locale,
+  categorySlug?: string,
+) => {
   const postCategories: string[] = [];
   const folders = readdirSync(postDirectory);
   const sources = folders.map(folder => {
     const file = join(postDirectory, folder, `index-${locale}.mdx`);
     const s = readFileSync(file, 'utf-8');
-    const { data } = matter(s);
 
-    const date = transformStrToDate(data.createdAt);
+    const stats = readingTime(s);
+    const { data } = matter(s) as unknown as {
+      content: string;
+      data: TMDData;
+    };
+
     const categories = (data.categories as string).split(', ');
 
     categories.forEach(c => {
@@ -51,16 +88,14 @@ export const getBlogListSource = async (locale: Locale, category?: string) => {
 
     return {
       ...data,
-      createdAt: data.createdAt,
-      createdAtISO: date.toISOString(),
-      coverImageUrl: data.coverImageUrl,
+      ...formatMDData(folder, data, stats),
       slug: folder,
-      categories,
     };
   });
 
-  const categoriesFiltered = category
-    ? sources.filter(s => s.categories.includes(category))
+  // Filter by categorySlug if the value exists
+  const categoriesFiltered = categorySlug
+    ? sources.filter(s => s.categories.find(c => c.slug === categorySlug))
     : sources;
 
   const categoriesTransformed = postCategories.map(transformCategory);
@@ -93,7 +128,13 @@ export const getBlogContent = async ({
     join(postDirectory, slug, `index-${locale}.mdx`),
     'utf-8',
   );
-  const { content, data } = matter(s);
+  const stats = readingTime(s);
+
+  const { content, data } = matter<string, any>(s) as unknown as {
+    content: string;
+    data: TMDData;
+  };
+
   const d = {
     ...data,
     slug,
@@ -108,14 +149,6 @@ export const getBlogContent = async ({
 
   return {
     source: mdxSource,
-    data: {
-      createdAt: data.createdAt,
-      createdAtISO: transformStrToDate(data.createdAt).toISOString(),
-      title: data.title,
-      contentPreview: data.contentPreview,
-      slug,
-      categories: data.categories.split(', ').map(transformCategory),
-      coverImageUrl: data.coverImageUrl,
-    },
+    data: formatMDData(slug, data, stats),
   };
 };
