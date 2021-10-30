@@ -11,8 +11,6 @@ const PostCard: React.FC<PostPreview> = ({
   readingTime,
   createdAtHumanized,
 }) => {
-  console.log({ readingTime, createdAtHumanized });
-
   const url = `/blog/${slug}`;
   return (
     <article
