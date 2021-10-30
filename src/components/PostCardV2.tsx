@@ -6,7 +6,6 @@ import { PostPreview } from '@/types';
 
 const PostCard: React.FC<PostPreview> = ({
   title,
-  contentPreview,
   slug,
   createdAt,
   coverImageUrl,
@@ -14,9 +13,9 @@ const PostCard: React.FC<PostPreview> = ({
   const url = `/blog/${slug}`;
   return (
     <article
-      className="flex flex-col dark:text-white rounded-3xl transition-transform ease-in-out duration-500 hover:-translate-y-4 w-full"
+      className="flex flex-col dark:text-white rounded-3xl transition-transform ease-in-out duration-500 hover:-translate-y-4 w-full  dark:bg-blue-super-darker"
       style={{
-        backgroundColor: '#26263d',
+        boxShadow: '0px 5px 20px 0px rgb(69 67 96 / 10%)',
       }}
     >
       <Link href={url} passHref>
@@ -33,7 +32,7 @@ const PostCard: React.FC<PostPreview> = ({
         </a>
       </Link>
 
-      <div className="p-4">
+      <div className="p-4 bg-gray-50 dark:bg-blue-super-darker rounded-b-3xl">
         <Link href={url} passHref>
           <a href={url}>
             <h3
