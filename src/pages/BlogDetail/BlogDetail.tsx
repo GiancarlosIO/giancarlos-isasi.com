@@ -8,7 +8,15 @@ import { Chip, StaticCodeSnippet, Header, Container } from '@/components';
 
 import { PostPreview } from '@/types';
 
-import { H2, P, Ul, Ol, Anchor, Blockquote } from '@/components/MDXComponents';
+import {
+  H2,
+  H3,
+  P,
+  Ul,
+  Ol,
+  Anchor,
+  Blockquote,
+} from '@/components/MDXComponents';
 
 export type BlogDetailProps = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -19,6 +27,7 @@ const components: MDXProviderProps['components'] = {
   code: StaticCodeSnippet,
   p: P,
   h2: H2,
+  h3: H3,
   ul: Ul,
   ol: Ol,
   a: Anchor,
