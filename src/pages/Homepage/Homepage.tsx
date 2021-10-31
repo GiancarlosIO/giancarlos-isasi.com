@@ -9,10 +9,10 @@ import Container from '@/components/Container';
 import { PostPreview, Category } from '@/types';
 
 import { TWITTER_PROFILE } from '@/constants/social-media';
-import { SocialButtons } from '@/components';
+import { SocialButtons, CategoriesChipList } from '@/components';
 
 import { WorkingMan } from './components';
-import { PostList, CategoriesList } from './sections';
+import { PostList } from './sections';
 import { HomepageContextProvider } from './context';
 
 import styles from './Homepage.module.css';
@@ -114,7 +114,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
               <h2 className="font-bold text-base md:text-xl mb-4 md:mb-8">
                 {t('BLOG_SECTION_TITLE').toUpperCase()}:
               </h2>
-              <CategoriesList />
+              <CategoriesChipList categories={categories} />
               <PostList />
             </InnerMain>
           </Container>

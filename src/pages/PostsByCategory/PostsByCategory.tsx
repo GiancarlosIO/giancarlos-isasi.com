@@ -2,17 +2,24 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NextSeo } from 'next-seo';
 
-import { PostCardV2, Container, Header } from '@/components';
+import {
+  PostCardV2,
+  Container,
+  Header,
+  CategoriesChipList,
+} from '@/components';
 
 import { PostPreview, Category } from '@/types';
 
-type PostsByCategoryProps = {
+export type TPostsByCategoryProps = {
   postList: PostPreview[];
   category: Category;
+  categories: Category[];
 };
-const PostsByCategory: React.FC<PostsByCategoryProps> = ({
+const PostsByCategory: React.FC<TPostsByCategoryProps> = ({
   postList,
   category,
+  categories,
 }) => {
   const { t } = useTranslation('posts-by-category');
 
@@ -56,6 +63,9 @@ const PostsByCategory: React.FC<PostsByCategoryProps> = ({
             <h1 className="font-bold text-center text-xl lg:text-3xl mb-4 lg:mb-0 text-yellow-500 dark:text-yellow-300">
               {title.toUpperCase()}
             </h1>
+            <div className="mt-4 md:mt-8">
+              <CategoriesChipList categories={categories} />
+            </div>
             <div className="pt-10 grid md:grid-cols-3 gap-8">
               {postList.map((post, index) => (
                 <PostCardV2 key={index} {...post} />

@@ -2,34 +2,43 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { SSRConfig } from 'next-i18next/dist/types/types';
 
 import { getBlogListSource } from '../../../mdx-utils';
 
 export { default } from '@/pages/PostsByCategory';
+import type { TPostsByCategoryProps } from '@/pages/PostsByCategory';
 
-export const getStaticProps: GetStaticProps = async ({
-  locale: _locale,
-  params,
-}) => {
-  const locale = _locale || 'es';
+import type { Category } from '@/types';
 
-  const i18nProps = await serverSideTranslations(locale, [
-    'common',
-    'posts-by-category',
-  ]);
+export const getStaticProps: GetStaticProps<TPostsByCategoryProps & SSRConfig> =
+  async ({ locale: _locale, params }) => {
+    const locale = _locale || 'es';
 
-  const slug = params?.slug as string;
-  const { postList, postCategories } = await getBlogListSource(locale, slug);
-  const category = postCategories.find(c => c.slug === slug);
+    const i18nProps = await serverSideTranslations(locale, [
+      'common',
+      'posts-by-category',
+    ]);
 
-  return {
-    props: {
-      category: category,
-      postList,
-      ...i18nProps,
-    },
+    const slug = params?.slug as string;
+    const { postList, postCategories } = await getBlogListSource(locale, slug);
+    const category = postCategories.find(c => c.slug === slug);
+
+    if (!category) {
+      return {
+        notFound: true,
+      };
+    }
+
+    return {
+      props: {
+        category: category,
+        postList,
+        categories: postCategories,
+        ...i18nProps,
+      },
+    };
   };
-};
 
 export const getStaticPaths: GetStaticPaths = async ({ locales: _locales }) => {
   const locales = _locales || ['es'];
