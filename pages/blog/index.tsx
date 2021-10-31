@@ -13,11 +13,12 @@ export const getStaticProps: GetStaticProps = async ({ locale: _locale }) => {
     'blog-list',
   ]);
 
-  const { postList } = await getBlogListSource(locale);
+  const { postList, postCategories } = await getBlogListSource(locale);
 
   return {
     props: {
       postList,
+      postCategories,
       ...i18nProps,
     },
   };

@@ -69,8 +69,7 @@ function uploadFile({ filePath, folderPath, bucketBasePath = '' }) {
 
   const params = {
     Bucket: s3Bucket, // The name of the bucket. For example, 'sample_bucket_101'.
-    Key:
-      s3KeyFile[0] === '/' ? s3KeyFile.slice(1, s3KeyFile.length) : s3KeyFile, // The name of the object. For example, 'sample_upload.txt'.
+    Key: s3KeyFile, // The name of the object. For example, 'sample_upload.txt'.
     Body: fs.readFileSync(filePath), // The content of the object. For example, 'Hello world!".
     ContentType: mime.lookup(filePath),
   };

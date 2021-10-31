@@ -7,3 +7,4 @@ export { default as Footer } from './Footer';
 export { default as Link } from './Link';
 export { default as SocialButtons } from './SocialButtons';
 export { default as PostCardV2 } from './PostCardV2';
+export { default as CategoriesChipList } from './CategoriesChipList';

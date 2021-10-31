@@ -9,6 +9,15 @@ export const H2: React.FC = props => {
     </h2>
   );
 };
+
+export const H3: React.FC = props => {
+  return (
+    <h3 className="font-bold text-lg lg:text-2xl text-yellow-500 dark:text-yellow-300 mt-10 mb-4">
+      {props.children}
+    </h3>
+  );
+};
+
 export const P: React.FC = props => {
   return <p className={`${textElementCommonClasses}`}>{props.children}</p>;
 };
@@ -48,6 +57,14 @@ const BlockQuoteInner = styled.blockquote`
     }
   }
 `;
+
+export const Mark: React.FC = ({ children }) => {
+  return (
+    <span className="font-bold text-yellow-500 dark:text-yellow-300">
+      {children}
+    </span>
+  );
+};
 
 export const Blockquote: React.FC<{ title: string; content: string }> = ({
   title,

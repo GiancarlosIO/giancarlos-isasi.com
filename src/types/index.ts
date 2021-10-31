@@ -6,6 +6,8 @@ export type PostPreview = {
   createdAtISO: string;
   categories: Category[];
   coverImageUrl: string;
+  readingTime: number;
+  createdAtHumanized: string;
 };
 
 export type Category = {

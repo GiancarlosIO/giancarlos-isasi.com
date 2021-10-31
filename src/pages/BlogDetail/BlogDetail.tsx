@@ -8,7 +8,16 @@ import { Chip, StaticCodeSnippet, Header, Container } from '@/components';
 
 import { PostPreview } from '@/types';
 
-import { H2, P, Ul, Ol, Anchor, Blockquote } from '@/components/MDXComponents';
+import {
+  H2,
+  H3,
+  P,
+  Ul,
+  Ol,
+  Anchor,
+  Blockquote,
+  Mark,
+} from '@/components/MDXComponents';
 
 export type BlogDetailProps = {
   source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -19,9 +28,11 @@ const components: MDXProviderProps['components'] = {
   code: StaticCodeSnippet,
   p: P,
   h2: H2,
+  h3: H3,
   ul: Ul,
   ol: Ol,
   a: Anchor,
+  mark: Mark,
   CustomQuote: Blockquote,
 };
 
@@ -37,9 +48,12 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
           <Header />
           <MDXProvider components={components}>
             <div className="font-medium">
-              <h1 className="font-bold text-2xl lg:text-4xl text-center mt-10 mb-6">
+              <h1 className="font-bold text-2xl lg:text-4xl text-center mt-10 mb-2">
                 {data.title}
               </h1>
+              <p className="text-center text-sm mb-6">
+                {data.createdAtHumanized} - {data.readingTime} min
+              </p>
               <div className="flex justify-center mb-10">
                 {data.categories.map(category => (
                   <div key={category.name} className="inline-block mr-2">

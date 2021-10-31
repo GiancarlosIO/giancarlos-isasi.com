@@ -6,3 +6,257 @@ categories: "javascript, node.js, aws, aws-s3"
 coverImageUrl: '/posts/how-to-upload-files-to-s3-using-aws-sdk.png'
 ---
 
+
+## Introducción
+En uno de mis últimos proyectos me ví con la necesidad de crear un script que te permita subir archivos estáticos a AWS S3.
+Por ciertas razones, el ambiente donde el script se ejecuta no permite instalar herramientas como aws-cli por lo que tuve que usar la librerìa @aws-sdk/client-s3 para lograr lo que necesitaba.
+
+En este post veremos como usar `@aws-sdk/client-s3` para subir carpetas y archivos a S3 así como también algunos puntos que debemos tomar en cuenta al usar esta librería.
+
+## Instalación
+Además del aws-sdk, también necesitaremos las librerías `mime-types` y `slash`. Más adelante explicaré para que sirve cada uno de ellos.
+```bash
+yarn add @aws-sdk/client-s3 mime-types slash
+```
+
+## ¿Cómo usar la librería @aws-sdk/client-s3?
+La forma en como funciona el sdk es bastante simple:
+1. Inicializas el cliente con tus credenciales de AWS.
+2. Creas un `commando` PUT con el nombre del bucket, el archivo y su contenido.
+3. Usas el cliente para `send`(ejecutar) el comando
+
+```js
+const fs = require('fs');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+// 1. Inicializas el cliente con tus credenciales de AWS.
+const {
+  AWS_REGION,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY,
+  S3_BUCKET,
+} = process.env
+const client = new S3Client({
+  region: AWS_REGION,
+  credentials: {
+    accessKeyId: AWS_ACCESS_KEY_ID,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY,
+  },
+});
+
+// 2. Creas un `commando` upload específicando del bucket, el archivo y su contenido.
+const pathFile = './my-file.txt'
+const params = {
+  Bucket: S3_BUCKET, // The name of the bucket. For example, 'sample_bucket_101'.
+  Key: 'my-file.txt', // The name of the object. For example, 'my-file.txt'.
+  Body: fs.readFileSync(pathFile), // The content of the object. For example, 'Hello world!".
+  ContentType: 'application/text', // The content type of the file
+}
+const uploadCommand = new PutObjectCommand(params);
+
+// 3. Usas el cliente para `send` (o ejecutar) el comando
+client.send(uploadCommand)
+  .then(() => {
+    console.log('Success to upload the file to S3.')
+  })
+  .catch(err => {
+    console.log('Error to upload file', err);
+  });
+```
+
+## Tener en cuenta que...
+A pesar de que la librería es bastante robusta hay ciertos puntos que o no están documentados, o simplemente no son tan intuitivos. Esta es una pequeña lista de puntos a tener en cuenta al usar @aws-sdk/client-s3, quizás alguno de ellos te ayude a no tener que gastar horas y horas de research en internet:
+
+1. A diferencia del aws cli, el @aws-sdk/client-s3 solo te permite subir un archivo a la vez. Para subir un conjunto de archivos o carpetas tendremos que escribir lógica extra con javascript (veremos un ejemplo en la siguiente sección).
+
+2. Debes especificar el ContentType para cada archivo o de lo contrario `@aws-sdk/client-s3` usará por defecto `"application/octet-stream"`. Para esto puedes la librería `mime-types` que cuenta con utilitarios para trabajar con content-types.
+  Puedes revisar el issue relacionado a esto [aquí](https://github.com/aws/aws-sdk-js/issues/3085).
+  ```js {4}
+  const mime = require('mime-types');
+  const uploadCommand = new PutObjectCommand({
+    ...,
+    ContentType: mime.lookup(filePath),
+  });
+  client.send(uploadCommand)
+  ```
+
+3. Si el `Key` del archivo tiene la forma de una ruta, `@aws-sdk/client-s3` creará esas mismas carpetas en el bucket de S3.
+
+  Tomando como ejemplo `static/js/app.js`
+  ```js {3}
+  const uploadCommand = new PutObjectCommand({
+    ...,
+    Key: 'static/js/app.js',
+  });
+  client.send(uploadCommand)
+  ```
+  Esta sería la estructura de carpetas que se crearían en el bucket de S3:
+  ```text
+    my-bucket-s3/
+    └── static/
+      └── js/
+        └── app.js
+  ```
+4. Relacionado a lo anterior, si el `Key` del archivo tiene un '/' al inicio `@aws-sdk/client-s3` subirá el archivo a una carpeta con el nombre ´/´.
+  Tomando como ejemplo `/app.js`
+  ```js {3}
+  const uploadCommand = new PutObjectCommand({
+    ...,
+    Key: '/app.js',
+  });
+  client.send(uploadCommand)
+  ```
+  Esta sería la estructura se crearía en el bucket de S3:
+  ```text
+    my-bucket-s3/
+    └── /
+      └── app.js
+  ```
+5. Si deseas usar una ruta como `Key` del archivo recuerda convertir los Windows-backslash a slash. Para esto podemos usar la librería `slash`.
+  ```js {6}
+  const slash = require('slash');
+
+  const filePath = 'folder\\dist\\app.js'
+  const uploadCommand = new PutObjectCommand({
+    ...,
+    Key: slash(filePath), // from 'folder\\dist\\app.js' to 'folder/dist/app.js'
+  });
+  client.send(uploadCommand)
+  ```
+
+
+## Subir una carpeta de archivos a S3 usando @aws-sdk/client-s3
+A diferencia del aws-cli, el `@aws-sdk/client-s3` solo te permite subir un único archivo. Debido a esto, necesitaremos crear algunos utilitarios para poder subir cada uno de los archivos a S3.
+Específicamente, los utilitarios que necesitaremos serán:
+1. `walk`, para obtener cada uno de los archivos de una carpeta de forma recursiva.
+2. `uploadFile`, para enviar cada uno de los archivos obtenidos por `walk` a S3.
+
+Tengamos en cuenta que la carpeta de archivos que tenemos que subir a S3 es <mark>my-app/dist</mark>. Esta contiene todos los estáticos que nuestra app necesita para funcionar correctamente.
+La carpeta dentro del bucket donde queremos que estén todos estos estáticos es <mark>static</mark>.<br />
+Al final lo que se quiere lograr es poder acceder a los archivos por la url <mark>url-publica-de-s3.com/static/</mark>
+
+
+```text
+my-app/
+└── dist/ <== upload this to S3
+  └── app.js
+  └── manifest.json
+  ├── chunks/
+    └── app.js
+    └── chunk-1.js
+    └── chunk-2.js
+    └── chunk-3.js
+    ├── images/
+      └── background.png
+└── src/
+```
+
+
+### `Walk` util
+Esta función nos ayudará a recorrer de forma recursiva toda una carpeta. Con `"recursiva"` me refiero a que el utilitario también recorrerá los archivos de las sub carpetas que puedan existir.
+Como segundo parámetro este acepta un callback para ser ejecutado en cada archivo encontrado.
+
+```js
+const path = require('path');
+const fs = require('fs');
+
+function walk(dir, callback) {
+  const files = fs.readdirSync(dir);
+
+  files.forEach(file => {
+    const filePath = path.join(dir, file);
+
+    // if the current item is a ´directory´ run the walk function over this.
+    if (fs.statSync(filePath).isDirectory()) {
+      walk(filePath, callback);
+    } else {
+      // run the callback in each file found
+      callback(filePath);
+    }
+  });
+}
+```
+
+### `uploadFile` util
+Este util nos permitira subir un archivo específico a S3.
+Aquí usaremos las librerías `mime-types` y `slash`
+
+```js
+const fs = require('fs');
+const path = require('path');
+
+const mime = require('mime-types');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const slash = require('slash');
+
+const {
+  AWS_REGION,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY,
+  S3_BUCKET,
+} = process.env
+const client = new S3Client({
+  region: AWS_REGION,
+  credentials: {
+    accessKeyId: AWS_ACCESS_KEY_ID,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY,
+  },
+});
+
+function uploadFile({ filePath, folderPath, bucketBasePath = '' }) {
+  /**
+   * remove folder path to get only the relative url based on the folderPath
+   * from `/project/my-app/dist/chunks/app.js` to => `chunks/app.js`
+   */
+  const filename = filePath.replace(folderPath, '');
+  /**
+   * append the folder to upload
+   * from 'chunks/chunk-1.js' to => 'static/js/chunks/chunk-1.js'
+   */
+  const s3File = slash(path.join(bucketBasePath, filename));
+  /**
+   * remove the '/' at the start of the string if it exists
+   * some files are in the format '/image.png', this is a problem because it'll upload the file to a folder '/'
+   */
+  const s3KeyFile = s3File[0] === '/' ? s3File.slice(1, s3File.length) : s3File;
+
+  const params = {
+    Bucket: s3Bucket, // The name of the bucket. For example, 'sample_bucket_101'.
+    Key: s3KeyFile, // The name of the object. For example, 'sample_upload.txt'.
+    Body: fs.readFileSync(filePath), // The content of the object. For example, 'Hello world!".
+    ContentType: mime.lookup(filePath),
+  };
+
+  console.log('Uploading file: ', s3KeyFile);
+  const uploadCommand = new PutObjectCommand(params);
+  return client.send(uploadCommand).catch(err => {
+    console.log('Error to upload file', err);
+    process.exit(1);
+  });
+}
+```
+
+Finalmente, utilizamos estos dos utils para crear la función que nos permitirá subir la carpeta de archivos a S3:
+```js
+async function uploadFolderToS3(folderPath, bucketBasePath) {
+  const filesArr = [];
+
+  // get all files
+  walk(folderPath, filePath => {
+    filesArr.push(filePath);
+  });
+
+  // upload each file to S3
+  filesArr.reduce((p, filePath) => {
+    return p.then(_ => uploadFile({ filePath, folderPath, bucketBasePath }));
+  }, Promise.resolve());
+}
+
+const distFolderPath = path.join(process.cwd(), './dist');
+// `static` is the folder in the bucket where we want to upload the files
+uploadFolderToS3(distFolderPath, 'static')
+```
+
+## Conclusión
+Como vimos, usar @aws-sdk/client-s3 no es tan complicado. Lo difícil es escribir toda la lógica necesaria para cumplir con el caso de uso que se nos presente, que en este caso era subida de una carpeta de archivos a S3.
+
+¡Gracias por leer!
