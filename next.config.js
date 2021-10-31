@@ -16,6 +16,7 @@ const config = {
           domains: [CDN_DOMAIN],
         }
       : {},
+  swcMinify: true,
   webpack: config => {
     config.resolve.plugins = [
       ...config.resolve.plugins,
