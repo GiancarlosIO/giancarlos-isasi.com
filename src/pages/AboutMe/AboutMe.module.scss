@@ -17,3 +17,11 @@
   transform-origin: bottom;
   animation: bounce 3s ease forwards infinite;
 }
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  @screen xl {
+    grid-template-columns: 6fr 4fr;
+  }
+}

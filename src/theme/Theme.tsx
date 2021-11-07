@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { ThemeProvider as ThemeProviderStyled } from 'styled-components';
-
 // Preload the files before to play! Only initialize once!
 // just use `new Audio` once. Each time that you initialize an Audio element the mp3 file is download!
 let audioOff: HTMLAudioElement;
@@ -95,7 +93,7 @@ export const ThemeProvider: React.FC = props => {
         toggleTheme,
       }}
     >
-      <ThemeProviderStyled theme={theme}>{props.children}</ThemeProviderStyled>
+      {props.children}
     </ThemeContext.Provider>
   );
 };

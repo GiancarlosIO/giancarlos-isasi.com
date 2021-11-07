@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'next-i18next';
 
 import Header from '@/components/Header';
@@ -7,14 +6,7 @@ import Container from '@/components/Container';
 
 import { stackTech } from './constants';
 import AboutMeSEO from './AboutMe.seo';
-
-const Inner = styled.div`
-  display: grid;
-  grid-template-columns: 1;
-  ${props => props.theme.breakpoints.mediaMd()} {
-    grid-template-columns: 6fr 4fr;
-  }
-`;
+import styles from './AboutMe.module.scss';
 
 type AboutMeProps = {};
 const AboutMe: React.FC<AboutMeProps> = () => {
@@ -25,7 +17,7 @@ const AboutMe: React.FC<AboutMeProps> = () => {
       <AboutMeSEO />
       <Container>
         <Header />
-        <Inner className="min-h-screen dark:text-white">
+        <div className={`min-h-screen dark:text-white ${styles.inner}`}>
           <div className="py-20">
             <h1 className="text-2xl font-bold mb-4">{t('ABOUT_ME')}</h1>
             <main>
@@ -122,7 +114,7 @@ const AboutMe: React.FC<AboutMeProps> = () => {
               </section>
             </div>
           </div>
-        </Inner>
+        </div>
       </Container>
     </div>
   );

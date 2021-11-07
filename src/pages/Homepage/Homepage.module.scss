@@ -1,0 +1,30 @@
+@media (min-width: 1440px) {
+  .animationWrapper {
+    min-height: 418px;
+  }
+}
+
+.animationWrapper {
+  min-height: 288px;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  justify-items: center;
+
+  @screen lg {
+    grid-template-columns: 650px auto;
+    column-gap: 2rem;
+    justify-items: start;
+  }
+}
+
+.inner-main {
+  display: grid;
+  @screen lg {
+    grid-template-columns: 1fr;
+    column-gap: 96px;
+  }
+}
