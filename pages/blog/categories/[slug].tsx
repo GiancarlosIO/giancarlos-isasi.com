@@ -6,8 +6,8 @@ import { SSRConfig } from 'next-i18next/dist/types/types';
 
 import { getBlogListSource } from '../../../mdx-utils';
 
-export { default } from '@/pages/PostsByCategory';
-import type { TPostsByCategoryProps } from '@/pages/PostsByCategory';
+export { default } from '@/views/PostsByCategory';
+import type { TPostsByCategoryProps } from '@/views/PostsByCategory';
 
 import type { Category } from '@/types';
 

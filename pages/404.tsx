@@ -1,3 +1,3 @@
-import NotFound from '@/pages/404';
+import NotFound from '@/views/404';
 
 export default NotFound;

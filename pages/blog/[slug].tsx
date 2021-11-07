@@ -4,8 +4,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { ParsedUrlQuery } from 'querystring';
 
 import { getBlogSlugs, getBlogContent } from '../../mdx-utils';
-import type { BlogDetailProps } from '@/pages/BlogDetail';
-export { default } from '@/pages/BlogDetail';
+import type { BlogDetailProps } from '@/views/BlogDetail';
+export { default } from '@/views/BlogDetail';
 
 export const getStaticProps: GetStaticProps<
   BlogDetailProps,
