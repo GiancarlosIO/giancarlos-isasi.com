@@ -1,7 +1,5 @@
 import * as React from 'react';
 import LinkNext from 'next/link';
-import Image from 'next/image';
-import styled from 'styled-components';
 
 import * as bodyScrollLock from 'body-scroll-lock';
 
@@ -20,14 +18,7 @@ import { useTheme } from '@/theme';
 import { ButtonRotate } from './UI';
 
 import { headerLinks, linkClasses } from '@/constants';
-import { primary } from '@/theme/colors';
-
-const HeaderInner = styled.header`
-  width: 100%;
-  @media (min-width: 1200px) {
-    width: 1100px;
-  }
-`;
+import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
   const [open, setOpen] = React.useState(false);
@@ -47,7 +38,9 @@ const Header: React.FC = () => {
 
   return (
     <div className="relative z-20">
-      <HeaderInner className="w-full flex justify-between items-center py-2 md:py-4">
+      <header
+        className={`w-full flex justify-between items-center py-2 md:py-4 ${styles['header-inner']}`}
+      >
         <LinkNext href="/" passHref>
           <a
             href="/"
@@ -159,7 +152,7 @@ const Header: React.FC = () => {
             </div>
           </div>
         </div>
-      </HeaderInner>
+      </header>
     </div>
   );
 };

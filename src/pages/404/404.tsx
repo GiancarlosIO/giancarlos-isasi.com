@@ -1,12 +1,9 @@
-import styles from './NotFound.module.css';
 import Building from '@/icons/Building';
-
-import { SVGCss } from './404.styles';
+import styles from './NotFound.module.scss';
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <SVGCss />
       <h1 className={styles.title}>TheDecoderJS</h1>
       <p className={styles.subtitle}>Website under construction</p>
       <Building className={styles.building} />

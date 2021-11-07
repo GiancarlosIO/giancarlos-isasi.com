@@ -1,0 +1,109 @@
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: white;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+
+  :global {
+    #ConeLight {
+      fill: orange !important;
+      animation: 0.6s infinite coneCycle;
+    }
+
+    @keyframes coneCycle {
+      50% {
+        fill: white;
+      }
+      100% {
+        fill: #d62209;
+      }
+    }
+
+    /* Crane Light Animation */
+
+    #CraneLight :local {
+      fill: white;
+      animation: 0.6s infinite coneCycle;
+    }
+
+    /* Crane Whinch Animation  */
+
+    #Winch :local {
+      transform: translateX(88px);
+      animation: 4s linear infinite winchCycle;
+      animation-direction: alternate-reverse;
+    }
+
+    @keyframes winchCycle {
+      0% {
+        transform: translateX(88px);
+      }
+      100% {
+        transform: translateX(4px);
+      }
+    }
+
+    /* Paint Roller Animation */
+
+    #PaintRoller :local {
+      animation: 0.7s ease infinite paintRoller;
+      transform: translateY(-1px);
+      animation-direction: alternate-reverse;
+    }
+
+    @keyframes paintRoller {
+      0% {
+        transform: translateY(-7px);
+      }
+      100% {
+        transform: translateY(21px);
+      }
+    }
+  }
+}
+
+.title {
+  font-size: 40px;
+  margin: 0px;
+}
+
+.subtitle {
+  margin-top: 0px;
+  font-size: 14px;
+}
+
+.building {
+  width: 90vw;
+}
+
+@media (min-width: 768px) {
+  .building {
+    width: 500px;
+  }
+}
+
+.link {
+  text-align: center;
+  opacity: 0.8;
+  font-size: 8px;
+}

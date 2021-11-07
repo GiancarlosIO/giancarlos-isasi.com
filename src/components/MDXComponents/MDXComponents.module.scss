@@ -1,0 +1,17 @@
+.blockquote {
+  p {
+    margin-bottom: 8px;
+  }
+  ul {
+    list-style: disc;
+    margin-left: 16px;
+    li {
+      margin-bottom: 8px;
+    }
+  }
+  a {
+    &:hover {
+      color: rgba(59, 130, 246, 1);
+    }
+  }
+}
