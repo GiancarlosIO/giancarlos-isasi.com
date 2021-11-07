@@ -69,6 +69,7 @@ const Header: React.FC = () => {
               onClick={() => toggleTheme()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              className="w-6 h-6"
             >
               {theme === 'light' ? (
                 <WbSunny />
