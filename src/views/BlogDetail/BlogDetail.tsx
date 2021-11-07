@@ -3,10 +3,14 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { MDXProvider, MDXProviderProps } from '@mdx-js/react';
 import { NextSeo, ArticleJsonLd } from 'next-seo';
 import { useTranslation } from 'react-i18next';
+import TwitterICon from '@material-ui/icons/Twitter';
+
+import { iconNormalizedStyled } from '@/constants/styles';
 
 import { Chip, StaticCodeSnippet, Header, Container } from '@/components';
 
 import { PostPreview } from '@/types';
+import styles from './BlogDetail.module.scss';
 
 import {
   H2,
@@ -36,10 +40,22 @@ const components: MDXProviderProps['components'] = {
   CustomQuote: Blockquote,
 };
 
+const encodeUri =
+  typeof window === 'undefined'
+    ? global.encodeURIComponent
+    : window.encodeURIComponent;
+
 const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
   const { t } = useTranslation('blog-detail');
   const url = `https://giancarlos-isasi.com/blog/${data.slug}/`;
   const title = t('SEO_TITLE', { title: data.title });
+
+  const tweetText = encodeUri(
+    `I just read "${data.title}" by @TheDecoderJS\n\n`,
+  );
+  const tweetUrl = encodeUri(url);
+
+  console.log({ tweetUrl, url });
 
   return (
     <React.Fragment>
@@ -62,6 +78,17 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
                 ))}
               </div>
               <MDXRemote {...source} />
+              <p className="mt-16">
+                <span className="">Comparte este artículo:</span>
+                <a
+                  className={`${styles['twitter-button']} dark:text-white p-2`}
+                  href={`https://twitter.com/intent/tweet?url=${tweetUrl}&text=${tweetText}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <TwitterICon style={iconNormalizedStyled} />
+                </a>
+              </p>
             </div>
           </MDXProvider>
         </Container>
@@ -83,7 +110,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
           },
           images: [
             {
-              url: 'https://giancarlos-isasi.com/img/og-image.jpg',
+              url: data.coverImageUrl,
               width: 1280,
               height: 853,
               alt: 'TheDecoderJS',
@@ -100,7 +127,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
       <ArticleJsonLd
         url={url}
         title={title}
-        images={['https://giancarlos-isasi.com/img/og-image.jpg']}
+        images={[data.coverImageUrl]}
         datePublished={data.createdAtISO}
         dateModified={data.createdAtISO}
         authorName={['Giancarlos Isasi - TheDecoderJS']}
