@@ -55,8 +55,6 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
   );
   const tweetUrl = encodeUri(url);
 
-  console.log({ tweetUrl, url });
-
   return (
     <React.Fragment>
       <div className="text-gray-800 dark:text-white min-h-screen pb-20">
