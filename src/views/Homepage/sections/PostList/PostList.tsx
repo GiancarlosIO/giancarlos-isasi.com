@@ -1,4 +1,4 @@
-import { usePageContext } from '@/pages/Homepage/context';
+import { usePageContext } from '@/views/Homepage/context';
 
 import { PostCardV2 } from '@/components';
 
