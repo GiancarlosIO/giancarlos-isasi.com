@@ -9,9 +9,9 @@ import WbSunny from '@material-ui/icons/WbSunny';
 import NightsStay from '@material-ui/icons/NightsStay';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-
 import { motion } from 'framer-motion';
 
+import { iconNormalizedStyled } from '@/constants/styles';
 import Link from '@/components/Link';
 import { useTheme } from '@/theme';
 
@@ -72,10 +72,11 @@ const Header: React.FC = () => {
               className="w-6 h-6"
             >
               {theme === 'light' ? (
-                <WbSunny />
+                <WbSunny style={iconNormalizedStyled} />
               ) : (
                 <NightsStay
                   style={{
+                    ...iconNormalizedStyled,
                     color: 'white',
                   }}
                 />
@@ -89,6 +90,7 @@ const Header: React.FC = () => {
               {open ? (
                 <CloseIcon
                   style={{
+                    ...iconNormalizedStyled,
                     fontSize: 40,
                     color: theme === 'light' ? 'black' : 'white',
                   }}
@@ -96,6 +98,7 @@ const Header: React.FC = () => {
               ) : (
                 <MenuIcon
                   style={{
+                    ...iconNormalizedStyled,
                     fontSize: 40,
                     color: theme === 'light' ? 'black' : 'white',
                   }}

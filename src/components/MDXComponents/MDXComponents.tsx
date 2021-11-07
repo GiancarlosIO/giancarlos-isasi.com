@@ -1,4 +1,7 @@
 import WarningIcon from '@material-ui/icons/Warning';
+
+import { iconNormalizedStyled } from '@/constants/styles';
+
 const textElementCommonClasses = 'mb-8 leading-6';
 
 import styles from './MDXComponents.module.scss';
@@ -65,6 +68,7 @@ export const Blockquote: React.FC<{ title: string; content: string }> = ({
     >
       <WarningIcon
         style={{
+          ...iconNormalizedStyled,
           fontSize: 40,
         }}
       />

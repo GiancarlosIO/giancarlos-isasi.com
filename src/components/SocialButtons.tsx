@@ -4,12 +4,14 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterICon from '@material-ui/icons/Twitter';
 
 import { socialMediaLinks } from '@/constants';
+import { iconNormalizedStyled } from '@/constants/styles';
 
 const icons = {
   youtube: (
     <YouTubeIcon
       style={{
         fontSize: 36,
+        ...iconNormalizedStyled,
       }}
     />
   ),
@@ -17,6 +19,7 @@ const icons = {
     <InstagramIcon
       style={{
         fontSize: 28,
+        ...iconNormalizedStyled,
       }}
     />
   ),
@@ -24,6 +27,7 @@ const icons = {
     <TwitterICon
       style={{
         fontSize: 32,
+        ...iconNormalizedStyled,
       }}
     />
   ),
@@ -31,6 +35,7 @@ const icons = {
     <EmailIcon
       style={{
         fontSize: 32,
+        ...iconNormalizedStyled,
       }}
     />
   ),
