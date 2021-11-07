@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { getBlogListSource } from '../../mdx-utils';
 
-export { default } from '@/pages/BlogList';
+export { default } from '@/views/BlogList';
 
 export const getStaticProps: GetStaticProps = async ({ locale: _locale }) => {
   const locale = _locale || 'es';

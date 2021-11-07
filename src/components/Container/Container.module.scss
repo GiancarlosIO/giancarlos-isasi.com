@@ -1,0 +1,7 @@
+
+.container-wrapper {
+  width: calc(100% - 32px);
+  @screen sm {
+    max-width: 1100px;
+  }
+}

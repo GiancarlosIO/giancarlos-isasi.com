@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'next-i18next';
 import { NextSeo } from 'next-seo';
 
@@ -15,28 +14,7 @@ import { WorkingMan } from './components';
 import { PostList } from './sections';
 import { HomepageContextProvider } from './context';
 
-import styles from './Homepage.module.css';
-
-const HeroSection = styled.section`
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto;
-  justify-items: center;
-
-  ${props => props.theme.breakpoints.mediaLg()} {
-    grid-template-columns: 650px auto;
-    column-gap: 2rem;
-    justify-items: start;
-  }
-`;
-
-const InnerMain = styled.div`
-  display: grid;
-  ${props => props.theme.breakpoints.mediaLg()} {
-    grid-template-columns: 1fr;
-    column-gap: 96px;
-  }
-`;
+import styles from './Homepage.module.scss';
 
 type HomepageProps = {
   postList: PostPreview[];
@@ -75,7 +53,9 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
         <main className="relative mb-6 lg:mb-8">
           <Container className="relative z-20">
             <Header />
-            <HeroSection className="pt-2 sm:pt-3 lg:pt-10 lg:pb-12 mx-auto">
+            <div
+              className={`pt-2 sm:pt-3 lg:pt-10 lg:pb-12 mx-auto ${styles['hero-section']}`}
+            >
               <div>
                 <section className="text-lg md:text-2xl lg:text-3xl font-bold">
                   <p>{t('GRETTINGS')}</p>
@@ -105,18 +85,18 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
               >
                 <WorkingMan />
               </div>
-            </HeroSection>
+            </div>
           </Container>
         </main>
         <main className="relative z-10">
           <Container>
-            <InnerMain className="relative">
+            <div className={`relative ${styles['inner-main']}`}>
               <h2 className="font-bold text-base md:text-xl mb-4 md:mb-8">
                 {t('BLOG_SECTION_TITLE').toUpperCase()}:
               </h2>
               <CategoriesChipList categories={categories} />
               <PostList />
-            </InnerMain>
+            </div>
           </Container>
         </main>
       </div>

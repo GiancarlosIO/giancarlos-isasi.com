@@ -1,6 +1,10 @@
-import styled from 'styled-components';
 import WarningIcon from '@material-ui/icons/Warning';
+
+import { iconNormalizedStyled } from '@/constants/styles';
+
 const textElementCommonClasses = 'mb-8 leading-6';
+
+import styles from './MDXComponents.module.scss';
 
 export const H2: React.FC = props => {
   return (
@@ -40,24 +44,6 @@ export const Anchor: React.FC = props => (
   </a>
 );
 
-const BlockQuoteInner = styled.blockquote`
-  p {
-    margin-bottom: 8px;
-  }
-  ul {
-    list-style: disc;
-    margin-left: 16px;
-    li {
-      margin-bottom: 8px;
-    }
-  }
-  a {
-    &:hover {
-      color: rgba(59, 130, 246, 1);
-    }
-  }
-`;
-
 export const Mark: React.FC = ({ children }) => {
   return (
     <span className="font-bold text-yellow-500 dark:text-yellow-300">
@@ -70,7 +56,9 @@ export const Blockquote: React.FC<{ title: string; content: string }> = ({
   title,
   content,
 }) => (
-  <BlockQuoteInner className="relative bg-gray-600 text-white p-4 pt-8 mb-8 rounded">
+  <blockquote
+    className={`relative bg-gray-600 text-white p-4 pt-8 mb-8 rounded${styles.blockquote}`}
+  >
     <span
       className="absolute text-yellow-500 dark:text-yellow-300 bg-gray-600 rounded-full p-2"
       style={{
@@ -80,6 +68,7 @@ export const Blockquote: React.FC<{ title: string; content: string }> = ({
     >
       <WarningIcon
         style={{
+          ...iconNormalizedStyled,
           fontSize: 40,
         }}
       />
@@ -94,5 +83,5 @@ export const Blockquote: React.FC<{ title: string; content: string }> = ({
         __html: content,
       }}
     />
-  </BlockQuoteInner>
+  </blockquote>
 );

@@ -1,7 +1,5 @@
 import * as React from 'react';
 import LinkNext from 'next/link';
-import Image from 'next/image';
-import styled from 'styled-components';
 
 import * as bodyScrollLock from 'body-scroll-lock';
 
@@ -11,23 +9,16 @@ import WbSunny from '@material-ui/icons/WbSunny';
 import NightsStay from '@material-ui/icons/NightsStay';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-
 import { motion } from 'framer-motion';
 
+import { iconNormalizedStyled } from '@/constants/styles';
 import Link from '@/components/Link';
 import { useTheme } from '@/theme';
 
 import { ButtonRotate } from './UI';
 
 import { headerLinks, linkClasses } from '@/constants';
-import { primary } from '@/theme/colors';
-
-const HeaderInner = styled.header`
-  width: 100%;
-  @media (min-width: 1200px) {
-    width: 1100px;
-  }
-`;
+import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
   const [open, setOpen] = React.useState(false);
@@ -47,7 +38,9 @@ const Header: React.FC = () => {
 
   return (
     <div className="relative z-20">
-      <HeaderInner className="w-full flex justify-between items-center py-2 md:py-4">
+      <header
+        className={`w-full flex justify-between items-center py-2 md:py-4 ${styles['header-inner']}`}
+      >
         <LinkNext href="/" passHref>
           <a
             href="/"
@@ -76,12 +69,14 @@ const Header: React.FC = () => {
               onClick={() => toggleTheme()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              className="w-6 h-6"
             >
               {theme === 'light' ? (
-                <WbSunny />
+                <WbSunny style={iconNormalizedStyled} />
               ) : (
                 <NightsStay
                   style={{
+                    ...iconNormalizedStyled,
                     color: 'white',
                   }}
                 />
@@ -95,6 +90,7 @@ const Header: React.FC = () => {
               {open ? (
                 <CloseIcon
                   style={{
+                    ...iconNormalizedStyled,
                     fontSize: 40,
                     color: theme === 'light' ? 'black' : 'white',
                   }}
@@ -102,6 +98,7 @@ const Header: React.FC = () => {
               ) : (
                 <MenuIcon
                   style={{
+                    ...iconNormalizedStyled,
                     fontSize: 40,
                     color: theme === 'light' ? 'black' : 'white',
                   }}
@@ -159,7 +156,7 @@ const Header: React.FC = () => {
             </div>
           </div>
         </div>
-      </HeaderInner>
+      </header>
     </div>
   );
 };
