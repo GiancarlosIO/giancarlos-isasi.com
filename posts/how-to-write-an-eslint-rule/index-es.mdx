@@ -1,0 +1,315 @@
+---
+title: "¿Cómo escribir una regla de Eslint?"
+contentPreview: "En este post veremos como podemos crear una regla de eslint."
+createdAt: "07/11/2021"
+categories: "javascript, eslint, tooling"
+coverImageUrl: '/posts/how-to-write-an-eslint-rule/cover.jpeg'
+---
+Recientemente en @crehana tuvimos la necesidad de prohibir el uso de un tag de html. Esto porque tenemos un componente, llamado CustomNextImage, que usa el next/image internamente y agrega ciertas optimizaciones y mejoras a la imagen usada.
+
+El componente es algo como:
+
+```tsx
+import * as React from 'react';
+import Image from 'next/image';
+
+const CustomNextImage = ({ src, ...rest }) => {
+ /**
+  * code for extra features and optimizations...
+  *
+  */
+
+ return (
+   <Image src={src} />
+ );
+};
+
+export default CustomNextImage;
+```
+
+En este artículo describiré lo que hice para crear una regla de eslint que ayudó al equipo a usar el componente correcto.
+
+## Objetivo
+
+Escribir una regla de eslint que muestre un error cuando se esté usando el componente Image de nextjs.
+
+## Setup del proyecto
+
+Lo primero es entender que una regla de eslint no se puede usar directamente en el archivo de configuración de eslint (.eslintrc.js). Para probar nuestra nueva regla necesitaremos crear un eslint-plugin, luego este plugin será configurado con la regla de eslint que crearemos.
+
+Lo ideal es que este plugin sea desplegado como un package a npm y luego sea instalado en el proyecto donde queremos usarlo, pero por cuestiones de simplicidad, lo que haremos en este artículo será hacer una instalación local.
+
+1. Crearemos una carpeta que contendrá nuestro eslint plugin
+
+    ```bash
+    mkdir eslint-plugin-custom
+    yarn init --yes # or npm init -y
+    ```
+
+2. Luego cambiaremos el campo `main` y `name`  en el package.json. Usaremos `eslint-plugin-custom` como package name.
+
+    ```json
+    {
+      "name": "eslint-plugin-custom", // <== change the field name to `eslint-plugin-custom`
+      "main": "src/index.js", // <= this
+      "version": "1.0.0",
+      "main": "index.js",
+      "license": "MIT"
+    }
+    ```
+
+3. Luego, dentro del proyecto `eslint-plugin-custom` , crearemos una carpeta `src` con la siguiente estructura:
+
+    ```
+    eslint-plugin-custom/
+    	└── src/
+        └── rules/
+          └── no-next-image-component.js
+    		└── index.js
+      └── package.json
+
+    ```
+
+4. Vamos a la carpeta del proyecto web y hacemos una instalación local del eslint plugin. Para ello editaremos el package.json agregando manualmente el nombre del plugin y la ruta donde este se encuentra.
+
+    Suponiendo que la estructura de carpetas es la siguiente
+
+    ```
+    eslint-plugin-custom/
+      └── src
+      └── package.json
+
+    my-web-project/
+      └── package.json
+      └── .eslintrc.js
+    ```
+
+    El package.json del proyecto web debería quedar:
+
+    ```json
+    {
+      "name": "my-web-project",
+      "version": "1.0.0",
+      "main": "index.js",
+      "license": "MIT",
+      "dependencies": {
+        "eslint-plugin-custom": "../eslint-plugin-custom"
+      }
+    }
+    ```
+
+    Luego ejecuta `yarn install` o `npm install` para instalar la nueva dependencia local.
+
+1. Usamos el `eslint-plugin-custom` en la config de eslint de nuestro proyecto web
+
+    Vamos al `.eslintrc.js` de nuestro proyecto web e implementamos el `eslint-plugin-custom`
+
+    ```jsx
+    // my-web-project/.eslintrc.js
+    module.exports = {
+      extends: [
+        'plugin:eslint-plugin-custom/recommended'
+      ],
+    };
+    ```
+
+    El `/recommended` es porque nuestro plugin expondrá una configuración 'recomendada' con las reglas activadas por defecto.
+
+    Si quisiéramos activar manualmente cada una de las reglas de nuestro plugin tendríamos que hacer lo siguiente:
+
+    ```jsx
+    // my-web-project/.eslintrc.js
+    module.exports = {
+    	plugins: ['eslint-plugin-custom'],
+      rules: {
+        'eslint-plugin-custom/no-next-image-component': 2,
+      },
+    };
+    ```
+
+
+## Analizando el AST e identificando el tipo de `nodo`  a usa
+
+Antes de pasar a escribir la regla debemos entender como es que eslint funciona.
+
+De forma resumida, eslint analiza todo el código fuente y crea un objeto gigante llamado AST (Abstract Syntax Tree). Este AST contiene información precisa sobre lo que el código escrito.
+
+Usaremos [astexplorer-example](https://astexplorer.net/) para revisar el AST generado por el código de nuestro CustomNextImage.
+
+Configuraremos el parser con @typescript-eslint/parser. Puedes usar el @babel/parser en caso no estés usando typescript.
+
+![astexplorer-example-2](/posts/how-to-write-an-eslint-rule/astexplorer-parser.png)
+
+Y luego pegaremos el código de nuestro CustomNextImage
+
+![astexplorer-example-3](/posts/how-to-write-an-eslint-rule/astexplorer-identifier.png)
+
+Una vez el AST ha sido generado, Eslint ejecutara una función para cada `type` que exista en el AST.
+
+Antes de escribir la regla de eslint es necesario identificar el tipo de elemento que queremos analizar. Al usar [astexplorer](https://astexplorer.net/), podemos hacer click sobre el tag de jsx `Image` y este hará focus en el objeto al que este tag representa en el AST.
+
+Al hacer click en al inicio de `<Image ..` podemos ver que este hace focus en el nodo de tipo `JSXOpeningElement`
+
+![Untitled](/posts/how-to-write-an-eslint-rule/astexplorer-jsxopeningelement.png)
+
+Extrayendo la parte del json que nos interesa, tenemos lo siguiente:
+
+```json
+{
+	...,
+	"openingElement": {
+    "type": "JSXOpeningElement",
+    "selfClosing": true,
+    "name": {
+      "type": "JSXIdentifier",
+      "name": "Image",
+      "range": [
+        176,
+        181
+      ]
+    },
+	},
+	...,
+}
+```
+
+Este nodo de tipo `JSXOpeningElement` tiene una propiedad name y este a su vez tiene una propiedad también llamada name. Usaremos esta información al momento de escribir la regla de eslint para identificar el uso del next/image component y tronar un error avisando al desarrollador que use nuestro componente `CustomNextImage`
+
+## Estructura de una regla de eslint
+
+Una regla de eslint es un objeto que consta de dos propiedades: `meta` y `create`
+
+`meta` contiene metada como el link a la documentación, tipo de regla, etc.
+
+`create` es una función que retorna un objeto con los métodos que se ejecutarán para cada tipo de nodo 'visitado' o recorrido. Es aquí, en `create` , donde colocaremos nuestra función que tendrá la lógica para prohibir el uso del Image component de nextjs.
+
+```jsx
+// rule example
+module.exports = {
+  meta: {
+		docs: {
+      description: '',
+      category: '',
+      recommended: true,
+      url: 'https://url-to-the-docs-of-the-rule.com/',
+    },
+    fixable: 'code',
+  },
+
+  create(context) {
+    return {
+      // this function will run in each node of type JSXOpeningElement
+      JSXOpeningElement: (node) => { },
+      // this function will run in each node of type ImportDeclaration
+      ImportDeclaration: (node) => { },
+    };
+  },
+};
+```
+
+Puedes ver todas las opciones disponibles [aquí](https://eslint.org/docs/developer-guide/working-with-rules#rule-basics).
+
+## Escribiendo la regla de eslint
+
+Finalmente, creamos la regla de eslint siguiendo su estructura y especificamos el método `JSXOpeningElement` en el objeto retornado por la función create. Tengamos en cuenta que el parámetro `node` de esta función es exactamente el mismo objeto que vimos cuando estábamos analizando el AST.
+
+```jsx
+// JSXOpeningElement node param
+{
+"type": "JSXOpeningElement",
+"selfClosing": true,
+"name": {
+  "type": "JSXIdentifier",
+  "name": "Image",
+  "range": [
+    176,
+    181
+  ]
+}
+```
+
+Teniendo en cuenta esto, la regla de eslint quedaría de la siguiente manera:
+
+```jsx
+// eslint-plugin-custom/src/rules/no-next-image-component.js
+module.exports = {
+  meta: {
+		docs: {
+      description: 'Prohibit usage of next/image <Image /> component',
+      category: 'HTML',
+      recommended: true,
+      url: 'https://url-to-the-docs-of-the-rule.com/',
+    },
+    fixable: 'code',
+  },
+
+  create(context) {
+    return {
+      // this function will run in each node of type JSXOpeningElement
+      JSXOpeningElement: (node) => {
+        // just return if the current tag is not an 'Image'
+        if (node.name.name !== 'Image') {
+          return;
+        }
+
+        // report the error
+        context.report({
+          node,
+          message:
+            "Do not use next <Image /> component, instead use the <CustomNextImage /> component because ...",
+        });
+      },
+    };
+  },
+};
+```
+
+El código de la función `JSXOpeningElement` no es nada de otro mundo. Simplemente verifica que el `name` del tag sea `Image` para retornar un error avisando que debemos usar el componente `CustomNextImage`
+
+## Configurando el plugin de eslint con la nueva regla creada
+
+El paso final sería configurar la regla creada en el `eslint-plugin-custom` para
+
+```jsx
+// eslint-plugin-custo/src/index.js
+module.exports = {
+  rules: {
+    'no-next-image-component': require('./rules/no-next-image-component'),
+  },
+  /**
+   * expose a recommended configuration to be used like
+	 * extends: ['plugin:eslint-plugin-custom/recommended'],
+   */
+  configs: {
+    recommended: {
+      plugins: ['eslint-plugin-custom'],
+      rules: {
+        'eslint-plugin-custom/no-next-image-component': 2,
+      },
+    },
+  },
+};
+```
+
+Una vez hagamos esto, el cli de Eslint mostrará un error cada vez que un `<Image />` component sea usado.
+
+Si en caso tuvieras problemas o la regla no tiene efecto en tu código, sugiero hacer lo siguiente:
+
+- Ejecutar `yarn install` o `npm install` otra vez en el proyecto web. Puede pasar que los cambios que hicimos no esten solo en el proyecto de `eslint-plugin-custom` y no se estén replicando en el proyecto web.
+- Hacer un full reload de tu editor o IDE. Algunas extensiones pueden tener problemas en detectar cambios en la configuración de los archivos de configuración de eslint.
+
+## Next steps
+
+Como mejora de la regla creada, podríamos implementar una que valide los imports a next/image. Esta debería mostrar un error en cada:
+
+```tsx
+import Image from 'next/image';
+```
+
+De esta forma el desarrollador sabrá desde un inicio que ese componente está prohibido. Para lograrlo puedes usar el AST explorer y ver que tipo de nodo es creado para los imports.
+
+## Conclusión
+
+Espero esto te pueda servir como una breve introducción a la creación de reglas con eslint. Si bien la regla que nosotros creamos es bastante sencilla, eslint ofrece muchas opciones para que puedas crear reglas complejas que incluso sean `auto-fixable` por si mismas.
+
+**¡Gracias por leer!**
