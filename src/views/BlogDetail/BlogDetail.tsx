@@ -1,4 +1,6 @@
+/* eslint-disable react/display-name */
 import * as React from 'react';
+import Image from 'next/image';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { MDXProvider, MDXProviderProps } from '@mdx-js/react';
 import { NextSeo, ArticleJsonLd } from 'next-seo';
@@ -38,6 +40,19 @@ const components: MDXProviderProps['components'] = {
   a: Anchor,
   mark: Mark,
   CustomQuote: Blockquote,
+  img: ({ src, alt, ...rest }) => (
+    <a
+      href={src}
+      target="_blank"
+      rel="noreferrer"
+      className="block w-full relative"
+      style={{
+        paddingBottom: '45%',
+      }}
+    >
+      <Image alt={alt} src={src} {...rest} layout="fill" />
+    </a>
+  ),
 };
 
 const encodeUri =
@@ -54,8 +69,6 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ source, data }) => {
     `I just read "${data.title}" by @TheDecoderJS\n\n`,
   );
   const tweetUrl = encodeUri(url);
-
-  console.log({ tweetUrl, url });
 
   return (
     <React.Fragment>

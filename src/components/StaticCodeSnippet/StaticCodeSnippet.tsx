@@ -28,8 +28,9 @@ const StaticCodeSnippet: React.FC<{
   children: string;
   className: string;
   metastring: string;
-}> = ({ children, className: classNameProp, metastring }) => {
+}> = ({ children, className: _classNameProp, metastring }) => {
   const { theme } = useTheme();
+  const classNameProp = _classNameProp || 'language-text';
   const language = classNameProp.replace(/language-/, '') as Language;
   const themeEditor = theme === 'light' ? themeLight : themeDark;
   const highlightLine =
