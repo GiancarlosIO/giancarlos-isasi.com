@@ -38,9 +38,9 @@ const AboutMe: React.FC<AboutMeProps> = () => {
               </p>
               <p className="mb-4">
                 {t('BIO_1')} Frontend Infraestructure, web performance,
-                javascript tooling, testing
-                (unit/functional/integration/snapshot/E2E/TDD/BDD/ATDD),
-                best-practices, scalability, documentation, etc.
+                javascript tooling, testing (unit, functional, integration,
+                snapshot, E2E, TDD/BDD/ATDD), best-practices, scalability,
+                documentation, etc.
                 <br />
                 <br />
                 {t('TOOLS')}{' '}
@@ -54,14 +54,14 @@ const AboutMe: React.FC<AboutMeProps> = () => {
               <br />
               <p>{t('I_HAVE_EXPERIENCE_WITH')}</p>
               <section className="mt-4">
-                <h3 className="font-bold">
+                <h3 className="font-bold text-purple-500">
                   Infraestructura y Arquitectura Frontend
                 </h3>
                 <p>{t('BIO_2')}</p>
               </section>
               <br />
               <section>
-                <h3 className="font-bold">Web performance</h3>
+                <h3 className="font-bold text-yellow-500">Web performance</h3>
                 <p>
                   {t('WEB_PERFORMANCE_RESUME')}
                   <br />
@@ -76,7 +76,7 @@ const AboutMe: React.FC<AboutMeProps> = () => {
               </section>
               <br />
               <section>
-                <h3 className="font-bold">Javascript tooling</h3>
+                <h3 className="font-bold text-blue-500">Javascript tooling</h3>
                 <p>
                   {t('JAVASCRIPT_TOOLING_1')}
                   <br />
@@ -85,7 +85,7 @@ const AboutMe: React.FC<AboutMeProps> = () => {
               </section>
               <br />
               <section>
-                <h3 className="font-bold">{t('UI_TITLE')}</h3>
+                <h3 className="font-bold text-green-500">{t('UI_TITLE')}</h3>
                 <p>
                   {t('UI_TITLE_1')}
                   <br />

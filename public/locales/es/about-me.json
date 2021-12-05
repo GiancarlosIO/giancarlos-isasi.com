@@ -10,7 +10,7 @@
   "I_HAVE_EXPERIENCE_WITH": "Cuento con experiencia sólida en:",
   "BIO_2": "Me he encargado de definir las herramientas, workflows, libs, frameworks, monorepos, CI/CD, documentación y demas temas que giran entorno a la construcción y escalabilidad de aplicaciones javascript usadas por millones de usuarios.",
   "WEB_PERFORMANCE_RESUME": "He trabajado en mejorar métricas core de performance (LCP, FID, CLS, etc) en aplicaciones complejas de React. El impacto de mi trabajo se ha visto reflejado en mejoras de las principales páginas ecommerce, en donde se ha llegado a pasar de 7 a 50-80 puntos en Lighthouse.",
-  "PHRASE_THAT_I_LIKE": "Una de las frases que me gusta mucho es:",
+  "PHRASE_THAT_I_LIKE": "Una de las frases que más me gusta es:",
   "JAVASCRIPT_TOOLING_1": "Tengo conocimiento sólido en configuraciones avanzadas de tools existentes dentro del ecosistema de javascript: webpack, babel, eslint, prettier, typescript, lerna, nextjs, etc.",
   "JAVASCRIPT_TOOLING_2": "También he creado custom CLIs y scripts de node para automizar tareas repetitivas.",
   "UI_TITLE": "Creación de components de UI con React.js",
