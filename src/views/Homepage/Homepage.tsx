@@ -66,7 +66,7 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
           <Container className="relative z-20">
             <Header />
             <div
-              className={`pt-2 sm:pt-3 lg:pt-10 lg:pb-12 mx-auto ${styles['hero-section']}`}
+              className={`pt-2 sm:pt-3 lg:pt-10 lg:pb-12 mx-auto ${styles['hero-section']} ${styles.wrapper}`}
             >
               <div>
                 <section className="text-lg md:text-2xl lg:text-3xl font-bold">
@@ -106,12 +106,12 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                     <React.Fragment>
                       {matches.desktop ? (
                         <div
-                          className={`hidden md:block w-full -mt-4 lg:-mt-12 lg:h-100 ${styles.animationWrapper}`}
+                          className={`hidden lg:block w-full -mt-4 lg:-mt-12 lg:h-100 ${styles.animationWrapper}`}
                         >
                           <WorkingManDynamic />
                         </div>
                       ) : (
-                        <div className="block md:hidden mt-8 mb-4">
+                        <div className="block lg:hidden mt-8 mb-4">
                           <ManCoding width="100%" height="100%" />
                         </div>
                       )}
