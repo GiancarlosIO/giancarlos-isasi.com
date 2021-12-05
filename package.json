@@ -14,7 +14,7 @@
     "lint-staged-files": "eslint ./ --ext .ts,.tsx --fix"
   },
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.39.0",
