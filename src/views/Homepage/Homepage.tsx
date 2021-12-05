@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useTranslation } from 'next-i18next';
 import { NextSeo } from 'next-seo';
+import dynamic from 'next/dynamic';
+import Media from 'react-media';
 
 import Header from '@/components/Header';
 import Container from '@/components/Container';
@@ -10,9 +12,19 @@ import { PostPreview, Category } from '@/types';
 import { TWITTER_PROFILE } from '@/constants/social-media';
 import { SocialButtons, CategoriesChipList } from '@/components';
 
-import { WorkingMan } from './components';
+import { ManCoding } from './components';
 import { PostList } from './sections';
 import { HomepageContextProvider } from './context';
+
+const WorkingManDynamic = dynamic(
+  () =>
+    import(
+      /* webpackChunkName: "working-main" */ './components/LottieAnimations/WorkingMan'
+    ),
+  {
+    ssr: false,
+  },
+);
 
 import styles from './Homepage.module.scss';
 
@@ -80,11 +92,33 @@ const Homepage: React.FC<HomepageProps> = ({ postList, categories }) => {
                   <SocialButtons />
                 </section>
               </div>
-              <div
-                className={`w-full -mt-4 lg:-mt-12 lg:h-100 ${styles.animationWrapper}`}
+              <Media
+                queries={{
+                  desktop: '(min-width: 1024px)',
+                }}
+                // set false for ssr
+                defaultMatches={{
+                  desktop: false,
+                }}
               >
-                <WorkingMan />
-              </div>
+                {matches => {
+                  return (
+                    <React.Fragment>
+                      {matches.desktop ? (
+                        <div
+                          className={`hidden md:block w-full -mt-4 lg:-mt-12 lg:h-100 ${styles.animationWrapper}`}
+                        >
+                          <WorkingManDynamic />
+                        </div>
+                      ) : (
+                        <div className="block md:hidden mt-8 mb-4">
+                          <ManCoding width="100%" height="100%" />
+                        </div>
+                      )}
+                    </React.Fragment>
+                  );
+                }}
+              </Media>
             </div>
           </Container>
         </main>
