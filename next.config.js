@@ -9,7 +9,7 @@ const isQAorMaster =
 const config = {
   i18n,
   images:
-    isProduction && isQAorMaster
+    isProduction && isQAorMaster && CDN_DOMAIN
       ? {
           loader: 'imgix',
           path: CDN_DOMAIN,
